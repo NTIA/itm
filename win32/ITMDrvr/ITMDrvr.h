@@ -25,6 +25,7 @@ using namespace std;
 ///////////////////////////////////////////////
 
 #define     NOT_SET                                 -1
+#define     ERROR                                   -1
 #define     SUCCESS                                 0
 #define     SUCCESS_WITH_WARNINGS                   1
 #define     DRVR__RETURN_SUCCESS                    1000

@@ -79,7 +79,7 @@ int main(int argc, char** argv) {
         fprintf_s(fp, "itm.dll Version          v%i.%i\n", dllVerMajor, dllVerMinor);
         fprintf_s(fp, "ITMDrvr.exe Version      v%i.%i.%i\n", drvrVerMajor, drvrVerMinor, drvrVerDrvr);
         fwprintf_s(fp, L"Date Generated           %s", buf);
-        fprintf_s(fp, "Input Arguments         ");
+        fprintf_s(fp, "Input Arguments          ");
         for (int i = 1; i < argc; i++) {
             fprintf_s(fp, "%s ", argv[i]);
         }
