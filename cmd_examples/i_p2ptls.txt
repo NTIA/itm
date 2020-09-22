@@ -1,0 +1,12 @@
+h_tx__meter,15
+h_rx__meter,3
+climate,5
+N_0,301
+f__mhz,3500
+pol,1
+epsilon,15
+sigma,0.005
+mdvar,1
+time,50
+location,50
+situation,50

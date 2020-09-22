@@ -1,0 +1,15 @@
+h_tx__meter,3
+h_rx__meter,3
+tx_site_criteria,0
+rx_site_criteria,0
+d__km,10,100,10,1000,100
+delta_h__meter,0
+climate,5
+N_0,301
+f__mhz,10000
+pol,1
+epsilon,15
+sigma,0.005
+mdvar,3
+reliability,90
+confidence,50,75,90
