@@ -1,6 +1,6 @@
 # ITM Commandline Driver #
 
-This readme explains the usage of the ITM commandline driver.  This is a supplemental software tool to allow a user to call the ITM DLL from the commandline with inputs specified in supporting file formats.
+This readme explains the use of the ITM commandline driver.  This is a supplemental software tool to allow a user to call the ITM DLL from the commandline with inputs specified in supporting file formats.
 
 ## Input Files ##
 
@@ -8,7 +8,7 @@ Inputs to the commandline driver are specified in an ASCII text file using the c
 
 ## Output Files ##
 
-After parsing the inputs and calling ITM, the commandline driver will generate an output report file containing the results.  This results file contains inputs params, output params, as well as human-readable supporting documentation.
+After parsing the inputs and calling ITM, the commandline driver will generate an output report file containing the results.  This results file contains inputs params, output params, and human-readable supporting documentation.
 
 ## Execution ##
 
@@ -41,7 +41,7 @@ ITMDrvr.exe -i <input_file> -t <terrain_file> -o <output_file> -mode P2P
 
 ## Commandline Driver Errors ##
 
-In addition to the ITM DLL [errors](ERRORS_AND_WARNINGS.md), the ITM commandline driver defines the following additional list of return codes.
+In addition to the ITM DLL [errors](ERRORS_AND_WARNINGS.md), the ITM commandline driver defines the following list of return codes.
 
 ### General Errors ###
 

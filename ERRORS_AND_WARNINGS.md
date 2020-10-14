@@ -1,7 +1,5 @@
 # Return Codes and Warning Flags #
 
-The below documents the comprehensive set of return codes and warning flags that can be returned by ITM.
-
 ## Return Codes ##
 
 ITM supports the following list of return codes.
@@ -18,7 +16,7 @@ ITM supports the following list of return codes.
 |  1005 | `ERROR__INVALID_SITUATION`       | Situation percentage is out of range |
 |  1006 | `ERROR__INVALID_CONFIDENCE`      | Confidence percentage is out of range |
 |  1007 | `ERROR__INVALID_RELIABILITY`     | Reliability percentage is out of range |
-|  1008 | `ERROR__REFRACTIVITY`            | Refractivtiy is out of range |
+|  1008 | `ERROR__REFRACTIVITY`            | Refractivity is out of range |
 |  1009 | `ERROR__FREQUENCY`               | Frequency is out of range |
 |  1010 | `ERROR__POLARIZATION`            | Invalid value for polarization |
 |  1011 | `ERROR__EPSILON`                 | Epsilon is out of range |

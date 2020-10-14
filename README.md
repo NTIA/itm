@@ -1,12 +1,12 @@
 # ITS Irregular Terrain Model (ITM) #
 
-This code repository contains the ITS Irregular Terrain Model (ITM).  ITM is a general purpose propagation model operating at radio frequencies from about 0.2 to 20 GHz for terrestial propagation predictions.  This model is also known by its historical name of Longley-Rice.
+This code repository contains the ITS Irregular Terrain Model (ITM). ITM predicts terrestrial radiowave propagation for frequencies between 20 MHz and 20 GHz based on electromagnetic theory and empirical models developed by Anita Longley and Phil Rice. Specifically, ITM predicts the attenuation of a radio signal due to free space loss, diffraction, and troposcatter.
 
-**Note**: Verion 1.3 of this code base is functionally identical to version 1.2.2 of the FORTRAN source that used to be found [here](https://www.its.bldrdoc.gov/resources/radio-propagation-software/itm/itm.aspx), but which has now been migrated [here](https://github.com/NTIA/itm-longley-rice) for archival purposes.  The differences are the code has been refactored and the error and warning handling has been updated.  While the legacy code will continue to be supported, all future updates to the model will only be applied to this code base.
+**Note**: Verion 1.3 of this code base is functionally identical to version 1.2.2 of the FORTRAN source, which has been archived [here](https://github.com/NTIA/itm-longley-rice).  ITS plans to apply all future ITM updates to this C++ code base.
 
 ## Inputs ##
 
-ITM can be called in both Area Prediction Mode or Point-to-Point Prediction Mode.  Additionally, variabilities can be defined by either time/location/situation or by confidence/reliability.  The below inputs are organized accordingly.
+ITM can be called in either Area Prediction Mode or Point-to-Point Prediction Mode.  Additionally, variabilities can be defined by either time/location/situation or confidence/reliability.  The below inputs are organized accordingly.
 
 ### Common Inputs ###
 
@@ -74,7 +74,7 @@ Internal intermediate values can be extracted from ITM via functions that are su
 
 ## Error Codes and Warning Flags ##
 
-ITM can supports a defined list of error codes and warning flags.  A complete list can be found [here](ERRORS_AND_WARNINGS.md).
+ITM supports a defined list of error codes and warning flags.  A complete list can be found [here](ERRORS_AND_WARNINGS.md).
 
 ## Example Values ##
 
@@ -105,7 +105,7 @@ The .NET support of PITM consists of a simple pass-through wrapper around the na
 * G.A. Hufford, A.G. Longley, W.A. Kissick, [A Guide to the Use of the ITS Irregular Terrain Model in the Area Prediction Mode](https://www.its.bldrdoc.gov/publications/details.aspx?pub=2091), NTIA Technical Report TR-82-100, April 1982.
 * G.A. Hufford, [The ITS Irregular Terrain Model, version 1.2.2 Algorithm](https://www.its.bldrdoc.gov/media/50676/itm_alg.pdf).
 * G.A. Hufford, [1985 ITM Memo](https://www.its.bldrdoc.gov/media/50675/Hufford_1985_Memo.pdf), Dr. George Hufford's 1985 Memo describing the changes to ITM version 1.2.1 (dated April, 1979) in ITM version 1.2.2 (dated September, 1984)
-* G.A. Hufford, [The Irregular Terrain Model](https://www.its.bldrdoc.gov/media/50674/itm.pdf), The "definitive" representation of the ITS Irregular Terrain Model. It contains both the source code and a rather extensive documentation.
+* G.A. Hufford, [The Irregular Terrain Model](https://www.its.bldrdoc.gov/media/50674/itm.pdf), The "definitive" representation of the ITS Irregular Terrain Model. It contains both the source code and rather extensive documentation.
 * A.G. Longley and P.L. Rice, [Prediction of Tropospheric Radio Transmission Loss Over Irregular Terrain: A Computer Method - 1968](https://www.its.bldrdoc.gov/publications/details.aspx?pub=2784), NTIA Technical Report ERL 79-ITS 67, July 1968.
 
 ## Contact ##
