@@ -1,8 +1,26 @@
 # ITS Irregular Terrain Model (ITM) #
 
-This code repository contains the ITS Irregular Terrain Model (ITM). ITM predicts terrestrial radiowave propagation for frequencies between 20 MHz and 20 GHz based on electromagnetic theory and empirical models developed by Anita Longley and Phil Rice. Specifically, ITM predicts the attenuation of a radio signal due to free space loss, diffraction, and troposcatter.
+This code repository contains the ITS Irregular Terrain Model (ITM). ITM predicts terrestrial radiowave propagation for frequencies between 20 MHz and 20 GHz based on electromagnetic theory and empirical models developed by Anita Longley and Phil Rice. Specifically, ITM predicts attenuation of a radio signal for paths greater than 1 km as a function of distance, terminal heights, meteorological conditions, terrain effects, and the variability of the signal in time and in space.  ITM predictions also include free space loss, diffraction, and troposcatter.
 
 **Note**: Verion 1.3 of this code base is functionally identical to version 1.2.2 of the FORTRAN source, which has been archived [here](https://github.com/NTIA/itm-longley-rice).  ITS plans to apply all future ITM updates to this C++ code base.
+
+## Quick Start ##
+
+Users of ITM have two options to immediately begin using ITM.
+
+### Precompiled DLLs ###
+
+The ITM software is made available to the user as a precombiled DLL in the [Release](https://github.com/NTIA/itm/releases) page.  A user can add this DLL to their own software project as a dependency and call ITM through its function definitions.
+
+Additionally, a C#/.NET software wrapper is provided.  Distribution and updates of this wrapper code are provided through the published [NuGet package](https://github.com/NTIA/itm/packages).
+
+### Commandline Driver ###
+
+A supporting commandline driver is also included in this repository, with its own corresponding [readme](cmdREADME.md).  This tool allows a user to call ITM without any programming required through the use of ASCII input/output files.
+
+### Example Values ###
+
+A select set of example inputs and outputs are provide for testing purposes.  This is not a comprehensive validation test set.  For ITM in Point-to-Point Prediction Mode, [p2p.csv](p2p.csv) defines the set of inputs and outputs with [pfls.csv](pfls.csv) containing the corresponding set of terrain profiles.  For Area Prediction Mode, inputs and outputs are defined in [area.csv](area.csv). 
 
 ## Inputs ##
 
@@ -76,29 +94,21 @@ Internal intermediate values can be extracted from ITM via functions that are su
 
 ITM supports a defined list of error codes and warning flags.  A complete list can be found [here](ERRORS_AND_WARNINGS.md).
 
-## Example Values ##
-
-A select set of example inputs and outputs are provide for testing purposes.  This is not a comprehensive validation test set.  For ITM in Point-to-Point Prediction Mode, [p2p.csv](p2p.csv) defines the set of inputs and outputs with [pfls.csv](pfls.csv) containing the corresponding set of terrain profiles.  For Area Prediction Mode, inputs and outputs are defined in [area.csv](area.csv).
-
 ## Notes on Code Style ##
 
 * In general, variables follow the naming convention in which a single underscore denotes a subscript (pseudo-LaTeX format), and where a double underscore is followed by the units, i.e. h_tx__meter.
 * Variables are named to match their corresponding mathematical variables in the underlying references.
 * Wherever possible, equation numbers and source documentation are provided.
 
-## Commandline Driver ##
-
-A supporting commandline driver is also included in this repository, with its own corresponding [readme](cmdREADME.md).
-
 ## Configure and Build ##
 
-### C++ Software
+### C++ Software ###
 
 The software is designed to be built into a DLL (or corresponding library for non-Windows systems).  The source code can be built for any OS that supports the standard C++ libraries.  A Visual Studio 2019 project file is provided for Windows users to support the build process and configuration.
 
-### C#/.NET Wrapper Software
+### C#/.NET Wrapper Software ###
 
-The .NET support of PITM consists of a simple pass-through wrapper around the native DLL.  It is compiled to target .NET Framework 4.7.2.  Distribution and updates are provided through the published [NuGet package](https://github.com/NTIA/itm/packages).
+The .NET support of ITM consists of a simple pass-through wrapper around the native DLL.  It is compiled to target .NET Framework 4.7.2.
 
 ## References ##
 
