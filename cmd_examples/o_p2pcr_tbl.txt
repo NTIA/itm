@@ -1,0 +1,44 @@
+itm.dll Version          v1.3
+ITMDrvr.exe Version      v1.3.0
+Date Generated           Mon Sep 21 22:01:12 2020
+Input Arguments          -i i_p2pcr_tbl.txt -t pfl.txt -o o_p2pcr_tbl.txt -mode p2p -dbg 
+
+Inputs
+h_tx__meter              15           (meters)
+h_rx__meter              3            (meters)
+climate                  5            [Continental Temperate]
+N_0                      301.00       (N-Units)
+f__mhz                   3500.00      (MHz)
+pol                      1            [Vertical]
+epsilon                  15
+sigma                    0.005
+mdvar                    1            [Accidental Mode]
+confidence               10,60,90
+reliability              10,65,90
+Mode                     Point-to-Point
+Terrain File             pfl.txt
+
+Results
+ITM Warning Flags        0x0000       [No Warnings]
+ITM Return Code          0            [Success - No Errors]
+
+Basic Transmission Loss Results (dB)
+Reliability    with Confidence
+               10        60        90        
+10             110.9     117.2     129.1     
+65             110.9     117.4     129.2     
+90             110.9     117.5     129.3     
+
+Intermediate Values
+Free Space               114.5        (dB)
+d__km                    3.635        (km)
+theta_hzn_tx             -1.949       (mrad)
+theta_hzn_rx             -0.856       (mrad)
+d_hzn_tx__meter          14868        (meters)
+d_hzn_rx__meter          6494         (meters)
+h_e_tx__meter            15.0         (meters)
+h_e_rx__meter            3.0          (meters)
+N_s                      251.5        (N-Units)
+delta_h__meter           3.2          (meters)
+A_ref__db                0.0          (dB)
+Mode of Propagation      1            [Line of Sight]

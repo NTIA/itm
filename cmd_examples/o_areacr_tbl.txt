@@ -1,0 +1,49 @@
+itm.dll Version          v1.3
+ITMDrvr.exe Version      v1.3.0
+Date Generated           Mon Sep 21 22:01:35 2020
+Input Arguments          -i i_areacr_tbl.txt -o o_areacr_tbl.txt -mode area 
+
+Inputs
+h_tx__meter              3            (meters)
+h_rx__meter              3            (meters)
+tx_site_criteria         0            [Random]
+rx_site_criteria         0            [Random]
+d__km                    10,100,10,1000,100
+delta_h__meter           0            (meters)
+climate                  5            [Continental Temperate]
+N_0                      301.00       (N-Units)
+f__mhz                   10000.00     (MHz)
+pol                      1            [Vertical]
+epsilon                  15
+sigma                    0.005
+mdvar                    3            [Broadcast Mode]
+confidence               50,75,90
+reliability              90
+Mode                     Area
+
+Results
+ITM Warning Flags        0x0000       [No Warnings]
+ITM Return Code          0            [Success - No Errors]
+
+Basic Transmission Loss Results (dB)
+Distance     Free      with Confidence
+  (km)       Space     50        75        90        
+10           132.4     147.0     151.7     155.9     
+20           138.5     174.9     179.2     183.1     
+30           142.0     198.7     202.9     206.7     
+40           144.5     213.0     217.3     221.0     
+50           146.4     215.8     220.0     223.8     
+60           148.0     218.1     222.4     226.1     
+70           149.4     220.1     224.4     228.1     
+80           150.5     221.9     226.1     229.9     
+90           151.5     223.4     227.7     231.4     
+100          152.4     224.8     229.0     232.7     
+200          158.5     234.6     238.5     241.9     
+300          162.0     243.6     247.2     250.4     
+400          164.5     252.0     255.6     258.7     
+500          166.4     260.0     263.5     266.6     
+600          168.0     267.5     271.0     274.1     
+700          169.4     274.8     278.3     281.4     
+800          170.5     281.9     285.3     288.4     
+900          171.5     288.8     292.3     295.4     
+1000         172.4     295.6     299.1     302.2     
