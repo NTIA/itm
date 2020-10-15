@@ -1,18 +1,18 @@
-# ITM Commandline Driver #
+# ITM Command-line Driver #
 
-This readme explains the use of the ITM commandline driver.  This is a supplemental software tool to allow a user to call the ITM DLL from the commandline with inputs specified in supporting file formats.
+This readme explains the use of the ITM command-line driver.  This is a supplemental software tool to allow a user to call the ITM DLL from the command-line with inputs specified in supporting file formats.
 
 ## Input Files ##
 
-Inputs to the commandline driver are specified in an ASCII text file using the common `key,value` format.  Each line holds a single `key,value` combination, with the `key` representing the model input variable name and the `value` representing its value.  The driver will automatically detect whether ITM should be called specifying variability in time/location/situation or confidence/reliability based on the input parameters specified.
+Inputs to the command-line driver are specified in an ASCII text file using the common `key,value` format.  Each line holds a single `key,value` combination, with the `key` representing the model input variable name and the `value` representing its value.  The driver will automatically detect whether ITM should be called specifying variability in time/location/situation or confidence/reliability based on the input parameters specified.
 
 ## Output Files ##
 
-After parsing the inputs and calling ITM, the commandline driver will generate an output report file containing the results.  This results file contains inputs params, output params, and human-readable supporting documentation.
+After parsing the inputs and calling ITM, the command-line driver will generate an output report file containing the results.  This results file contains inputs params, output params, and human-readable supporting documentation.
 
 ## Execution ##
 
-Executing the ITM commandline driver requires specifying input arguments, defined in the below table:
+Executing the ITM command-line driver requires specifying input arguments, defined in the below table:
 
 | Flag    | Type   | Required? | Description  |
 |---------|--------|-----------|--------------|
@@ -22,7 +22,7 @@ Executing the ITM commandline driver requires specifying input arguments, define
 | `-t`    | string | False     | File containing terrain information in PFL format.  Only needed if using point-to-point mode |
 | `-dbg`  |        | False     | If flag is specified, the intermediate data structure values will be written to the output file |
 
-Input arguments are not case sensitive and do not have to be specified in a certain order.  A generic example of calling the ITM commandline driver is:
+Input arguments are not case sensitive and do not have to be specified in a certain order.  A generic example of calling the ITM command-line driver is:
 
 ```
 ITMDrvr.exe -i <input_file> -t <terrain_file> -o <output_file> -mode P2P
@@ -39,9 +39,9 @@ ITMDrvr.exe -i <input_file> -t <terrain_file> -o <output_file> -mode P2P
 | [`i_areacr.txt`](/cmd_examples/i_areacr.txt) |          | [`o_areacr.txt`](/cmd_examples/o_areacr.txt) | `-i i_areacr.txt -o i_areacr.txt -mode AREA -dbg` |
 | [`i_areacr_tbl.txt`](/cmd_examples/i_areacr_tbl.txt) |      | [`o_areacr_tbl.txt`](/cmd_examples/o_areacr_tbl.txt) | `-i i_areacr_tbl.txt -o o_areacr_tbl.txt -mode AREA` |
 
-## Commandline Driver Errors ##
+## Command-line Driver Errors ##
 
-In addition to the ITM DLL [errors](ERRORS_AND_WARNINGS.md), the ITM commandline driver defines the following list of return codes.
+In addition to the ITM DLL [errors](ERRORS_AND_WARNINGS.md), the ITM command-line driver defines the following list of return codes.
 
 ### General Errors ###
 
