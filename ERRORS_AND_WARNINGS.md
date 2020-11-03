@@ -23,7 +23,6 @@ ITM supports the following list of return codes.
 |  1012 | `ERROR__SIGMA`                   | Sigma is out of range |
 |  1013 | `ERROR__GROUND_IMPEDANCE`        | The imaginary portion of the complex impedance is larger than the real portion |
 |  1014 | `ERROR__MDVAR`                   | Invalid value for mode of variability |
-|  1015 | `ERROR__MDVAR_BROADCAST_MODE`    | Broadcast variability modes are not supported in confidence/reliability functions |
 |  1016 | `ERROR__EFFECTIVE_EARTH`         | Internally computed effective earth radius is invalid |
 |  1017 | `ERROR__PATH_DISTANCE`           | Path distance is out of range |
 |  1018 | `ERROR__DELTA_H`                 | Delta H (terrain irregularity parameter) is out of range |
