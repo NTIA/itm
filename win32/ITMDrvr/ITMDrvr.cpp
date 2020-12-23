@@ -426,7 +426,7 @@ int LoadDLL() {
 
 /*=============================================================================
  |
- |  Description:  Get the version information of the P.528 DLL
+ |  Description:  Get the version information of the ITM DLL
  |
  |        Input:  [void]
  |
