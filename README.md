@@ -8,7 +8,7 @@ This code repository contains the ITS Irregular Terrain Model (ITM). ITM predict
 
 Users of ITM have two options to immediately begin using ITM:
 
-1. The ITM software is made available to the user as a precombiled DLL in the [Release](https://github.com/NTIA/itm/releases) page.  A user can add this DLL to their own software project as a dependency and call ITM through its function definitions.  Additionally, a C#/.NET software wrapper is provided.  Distribution and updates of this wrapper code are provided through the published [NuGet package](https://github.com/NTIA/itm/packages).
+1. The ITM software is made available to the user as a precompiled DLL in the [Release](https://github.com/NTIA/itm/releases) page.  A user can add this DLL to their own software project as a dependency and call ITM through its function definitions.  Additionally, a C#/.NET software wrapper is provided.  Distribution and updates of this wrapper code are provided through the published [NuGet package](https://github.com/NTIA/itm/packages).
 
 2. A supporting command-line driver is also included in this repository, with its own corresponding [readme](cmdREADME.md).  This tool allows a user to call ITM without any programming required through the use of ASCII input/output files.
 
