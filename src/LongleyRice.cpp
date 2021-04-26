@@ -209,12 +209,12 @@ int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double 
         if (d__meter > d_x__meter)
         {
             *A_ref__db = M_s * d__meter + A_s0__db;
-            *propmode = MODE__DIFFRACTION;
+            *propmode = MODE__TROPOSCATTER;
         }
         else
         {
             *A_ref__db = M_d * d__meter + A_d0__db;
-            *propmode = MODE__TROPOSCATTER;
+            *propmode = MODE__DIFFRACTION;
         }
     }
 
