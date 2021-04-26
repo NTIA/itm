@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ITM</id>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
     <authors>The Institute for Telecommunication Sciences</authors>
     <owners>The Institute for Telecommunication Sciences</owners>
     <license type="file">LICENSE.md</license>
