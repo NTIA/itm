@@ -2,7 +2,7 @@
 
 This code repository contains the ITS Irregular Terrain Model (ITM). ITM predicts terrestrial radiowave propagation for frequencies between 20 MHz and 20 GHz based on electromagnetic theory and empirical models developed by Anita Longley and Phil Rice. Propagation mechanisms considered include free space loss, diffraction, and troposcatter. Specifically, ITM predicts attenuation as a function of distance (greater than 1 km), terminal heights, meteorological conditions, terrain effects, and the variability of the signal in time and in space.
 
-**Note**: Verion 1.3 of this code base is functionally identical to version 1.2.2 of the FORTRAN source, which has been archived [here](https://github.com/NTIA/itm-longley-rice).  ITS plans to apply all future ITM updates to this C++ code base.
+**Note**: Version 1.3 of this code base is functionally identical to version 1.2.2 of the FORTRAN source, which has been archived [here](https://github.com/NTIA/itm-longley-rice).  ITS plans to apply all future ITM updates to this C++ code base.
 
 ## Quick Start ##
 
@@ -12,7 +12,7 @@ Users of ITM have two options to immediately begin using ITM:
 
 2. A supporting command-line driver is also included in this repository, with its own corresponding [readme](cmdREADME.md).  This tool allows a user to call ITM without any programming required through the use of ASCII input/output files.
 
-A select set of example inputs and outputs are provide for testing purposes.  This is not a comprehensive validation test set.  For ITM in Point-to-Point Prediction Mode, [p2p.csv](p2p.csv) defines the set of inputs and outputs with [pfls.csv](pfls.csv) containing the corresponding set of terrain profiles.  For Area Prediction Mode, inputs and outputs are defined in [area.csv](area.csv). 
+A select set of example inputs and outputs are provided for testing purposes.  This is not a comprehensive validation test set.  For ITM in Point-to-Point Prediction Mode, [p2p.csv](p2p.csv) defines the set of inputs and outputs with [pfls.csv](pfls.csv) containing the corresponding set of terrain profiles.  For Area Prediction Mode, inputs and outputs are defined in [area.csv](area.csv). 
 
 ## Inputs ##
 
