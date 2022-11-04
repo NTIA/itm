@@ -80,7 +80,7 @@ Internal intermediate values can be extracted from ITM via functions that are su
 | `A_ref__db`      | double    | dB          | Reference attenuation |
 | `A_fs__db`       | double    | dB          | Free space basic transmission loss |
 | `d__km`          | double    | km          | Path distance |
-| `mode`           | int       |             | Mode of propagation <ul><li>1 = Line of Sight</li><li>2 = Diffraction</li><li>3 = Troposcatter</li></ul>|
+| `mode`           | int       |             | Mode of propagation <ul><li>1 = Line of Sight</li><li>20 = Diffraction, Single Horizon</li><li>21 = Diffraction, Double Horizon</li><li>30 = Troposcatter, Single Horizon</li><li>31 = Troposcatter, Double Horizon</li></ul>|
 
 ## Error Codes and Warning Flags ##
 
