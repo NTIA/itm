@@ -184,17 +184,27 @@ namespace ITS.Propagation
             /// <summary>
             /// Line of Sight
             /// </summary>
-            LineOfSight = 1,
+            LineOfSight = 10,
 
             /// <summary>
-            /// Diffraction
+            /// Diffraction, Single Horizon
             /// </summary>
-            Diffraction = 2,
+            DiffractionSingleHorizon = 20,
 
             /// <summary>
-            /// Troposcatter
+            /// Diffraction, Double Horizon
             /// </summary>
-            Troposcatter = 3
+            DiffractionDoubleHorizon = 21,
+
+            /// <summary>
+            /// Troposcatter, Single Horizon
+            /// </summary>
+            TroposcatterSingleHorizon = 30,
+
+            /// <summary>
+            /// Troposcatter, Double Horizon
+            /// </summary>
+            TroposcatterDoubleHorizon = 31
         }
     }
 }
