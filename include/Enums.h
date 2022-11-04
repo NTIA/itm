@@ -28,9 +28,11 @@
 
 // List of valid modes of propagation
 #define MODE__NOT_SET                           0
-#define MODE__LINE_OF_SIGHT                     1
-#define MODE__DIFFRACTION                       2
-#define MODE__TROPOSCATTER                      3
+#define MODE__LINE_OF_SIGHT                     10
+#define MODE__DIFFRACTION_SINGLE_HORIZON        20
+#define MODE__DIFFRACTION_DOUBLE_HORIZON        21
+#define MODE__TROPOSCATTER_SINGLE_HORIZON       30
+#define MODE__TROPOSCATTER_DOUBLE_HORIZON       31
 
 // List of modes of variability
 #define MDVAR__SINGLE_MESSAGE_MODE              0

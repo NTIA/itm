@@ -20,6 +20,14 @@ using namespace std;
 #define     VARY_CR                                 1
 #define     TIME_SIZE                               26
 
+// List of valid modes of propagation
+#define MODE__NOT_SET                               0
+#define MODE__LINE_OF_SIGHT                         10
+#define MODE__DIFFRACTION_SINGLE_HORIZON            20
+#define MODE__DIFFRACTION_DOUBLE_HORIZON            21
+#define MODE__TROPOSCATTER_SINGLE_HORIZON           30
+#define MODE__TROPOSCATTER_DOUBLE_HORIZON           31
+
 //
 // GENERAL ERRORS AND RETURN VALUES
 ///////////////////////////////////////////////
