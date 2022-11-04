@@ -36,7 +36,7 @@ ITM can be called in either Area Prediction Mode or Point-to-Point Prediction Mo
 
 | Variable          | Type   | Units | Limits       | Description  |
 |-------------------|--------|-------|--------------|--------------|
-| `pfl`             | double[] |     |              | Terrain profile data in PFL format, from TX to RX <ul><li>`pfl[0]` : Number of elevation points - 1</li><li>`pfl[1]` : Resolution, in meters</li><li>`pfl[i]` : Elevation above sea level, in meters</li></ul> |
+| `pfl`             | double[] | meter |              | Terrain profile data in PFL format, from TX to RX <ul><li>`pfl[0]` : Number of elevation points - 1</li><li>`pfl[1]` : Resolution, in meters</li><li>`pfl[i]` : Elevation above sea level, in meters</li></ul> |
 
 ### Area Mode Inputs ###
 
