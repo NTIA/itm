@@ -14,7 +14,7 @@
     <tags>Propagation</tags>
     <repository type="git" url="https://github.com/NTIA/itm.git" branch="master"/>
     <dependencies>
-      <group targetFramework=".NETFramework4.7.2" />
+      <group targetFramework=".NETFramework4.8" />
     </dependencies>
   </metadata>
   <files>
