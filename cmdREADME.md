@@ -36,7 +36,7 @@ ITMDrvr.exe -i <input_file> -t <terrain_file> -o <output_file> -mode P2P
 | [`i_p2pcr.txt`](/cmd_examples/i_p2pcr.txt) | [`pfl.txt`](/cmd_examples/pfl.txt) | [`o_p2pcr.txt`](/cmd_examples/o_p2pcr.txt) | `-i i_p2pcr.txt -t pfl.txt -o o_p2pcr.txt -mode P2P -dbg` |
 | [`i_p2pcr_tbl.txt`](/cmd_examples/i_p2pcr_tbl.txt) | [`pfl.txt`](/cmd_examples/pfl.txt) | [`o_p2pcr_tbl.txt`](/cmd_examples/o_p2pcr_tbl.txt) | `-i i_p2pcr_tbl.txt -t pfl.txt -o o_p2pcr_tbl.txt -mode P2P -dbg` |
 | [`i_areatls.txt`](/cmd_examples/i_areatls.txt) |         | [`o_areatls.txt`](/cmd_examples/o_areatls.txt) | `-i i_areatls.txt -o o_areatls.txt -mode AREA -dbg` |
-| [`i_areacr.txt`](/cmd_examples/i_areacr.txt) |          | [`o_areacr.txt`](/cmd_examples/o_areacr.txt) | `-i i_areacr.txt -o i_areacr.txt -mode AREA -dbg` |
+| [`i_areacr.txt`](/cmd_examples/i_areacr.txt) |          | [`o_areacr.txt`](/cmd_examples/o_areacr.txt) | `-i i_areacr.txt -o 0_areacr.txt -mode AREA -dbg` |
 | [`i_areacr_tbl.txt`](/cmd_examples/i_areacr_tbl.txt) |      | [`o_areacr_tbl.txt`](/cmd_examples/o_areacr_tbl.txt) | `-i i_areacr_tbl.txt -o o_areacr_tbl.txt -mode AREA` |
 
 ## Command-line Driver Errors ##

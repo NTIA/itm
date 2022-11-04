@@ -1,6 +1,6 @@
-itm.dll Version          v1.3
-ITMDrvr.exe Version      v1.3.0
-Date Generated           Mon Sep 21 22:00:35 2020
+itm.dll Version          v1.5
+ITMDrvr.exe Version      v1.5.0
+Date Generated           Fri Nov  4 10:12:04 2022
 Input Arguments          -i i_p2ptls.txt -t pfl.txt -o o_p2ptls.txt -mode p2p -dbg 
 
 Inputs
@@ -36,4 +36,4 @@ h_e_rx__meter            3.0          (meters)
 N_s                      251.5        (N-Units)
 delta_h__meter           3.2          (meters)
 A_ref__db                0.0          (dB)
-Mode of Propagation      1            [Line of Sight]
+Mode of Propagation      10           [Line of Sight]
