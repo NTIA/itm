@@ -28,6 +28,9 @@ extern int ITM_AREA_TLS_Ex(double h_tx__meter, double h_rx__meter,
  |
  *===========================================================================*/
 void CallITM_AREA_TLS_Ex(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
+    // validate inputs
+    CallITM_AREA_VALIDATION(nrhs, prhs, "MATLAB:ITM:CallITM_AREA_TLS_Ex", AREA_MODE_TLS);
+
     // parse inputs
     double h_tx__meter = mxGetScalar(prhs[1]);
     double h_rx__meter = mxGetScalar(prhs[2]);
@@ -51,12 +54,12 @@ void CallITM_AREA_TLS_Ex(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prh
     long warnings;
     struct IntermediateValues iValues;
     int rtn = ITM_AREA_TLS_Ex(h_tx__meter, h_rx__meter, 
-                        tx_site_criteria, rx_site_criteria, 
-                        d__km, delta_h__meter, climate, 
-                        N_0, f__mhz, pol, epsilon, 
-                        sigma, mdvar, time, 
-                        location, situation, &A__db, 
-                        &warnings, &iValues);
+                              tx_site_criteria, rx_site_criteria, 
+                              d__km, delta_h__meter, climate, 
+                              N_0, f__mhz, pol, epsilon, 
+                              sigma, mdvar, time, 
+                              location, situation, &A__db, 
+                              &warnings, &iValues);
     
     // record result
     plhs[0] = mxCreateDoubleScalar(rtn);
