@@ -56,7 +56,7 @@ target_include_directories(itmlib PRIVATE include)
 include(GNUInstallDirs)
 install(TARGETS itmlib
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/imtlib
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/itmlib
     )
 
 # pkg_check_modules()
