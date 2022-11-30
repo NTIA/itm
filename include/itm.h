@@ -7,7 +7,11 @@
 using namespace std;
 
 // Export the DLL functions as "C" and not C++
-#define DLLEXPORT extern "C" __declspec(dllexport)
+#ifdef _WIN32
+#  define DLLEXPORT extern "C" __declspec(dllexport)
+#else
+#  define DLLEXPORT extern "C"
+#endif
 #define MAX(x, y) (((x) > (y)) ? (x) : (y))
 #define MIN(x, y) (((x) < (y)) ? (x) : (y))
 #define DIM(x, y) (((x) > (y)) ? (x - y) : (0))
