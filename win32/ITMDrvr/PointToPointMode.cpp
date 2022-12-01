@@ -123,7 +123,7 @@ int LoadP2PFunctions(HINSTANCE hLib) {
     return SUCCESS;
 }
 #else 
-int LoadP2PFunctions() {
+int LoadP2PFunctions(void *) {
     itm_p2p_tls_ex = (itm_p2p_tls_ex_func) &ITM_P2P_TLS_Ex;
     itm_p2p_cr_ex = (itm_p2p_cr_ex_func) &ITM_P2P_CR_Ex;
     return SUCCESS;

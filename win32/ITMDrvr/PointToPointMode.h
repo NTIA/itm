@@ -13,6 +13,6 @@ void ParseTerrainFile(const char* terrain_file, vector<double>* pfl);
 #ifdef _WIN32
 int LoadP2PFunctions(HINSTANCE hLib);
 #else
-int LoadP2PFunctions(void* hLib);
+int LoadP2PFunctions(void *);
 #endif
 

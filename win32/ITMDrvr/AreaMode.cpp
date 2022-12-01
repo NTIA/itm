@@ -143,7 +143,7 @@ int LoadAreaFunctions(HINSTANCE hLib) {
     return SUCCESS;
 }
 #else
-int LoadAreaFunctions() {
+int LoadAreaFunctions(void *) {
     itm_area_tls_ex = (itm_area_tls_ex_func) &ITM_AREA_TLS_Ex;
     itm_area_cr_ex = (itm_area_cr_ex_func) &ITM_AREA_CR_Ex;
     return SUCCESS;

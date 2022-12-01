@@ -12,5 +12,5 @@ void WriteAreaInputs(FILE* fp, AreaParams* area_params);
 #ifdef _WIN32
 int LoadAreaFunctions(HINSTANCE hLib);
 #else
-int LoadAreaFunctions(void* hLib);
+int LoadAreaFunctions(void *);
 #endif
