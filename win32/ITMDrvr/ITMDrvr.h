@@ -87,10 +87,11 @@ using namespace std;
 // DATA STRUCTURES
 ///////////////////////////////////////////////
 
+#define DRVR_PARAMS_SIZE 256
 struct DrvrParams {
-    char terrain_file[256]  = { 0 };    // Terrain file
-    char in_file[256]       = { 0 };    // Input file
-    char out_file[256]      = { 0 };    // Output file
+    char terrain_file[DRVR_PARAMS_SIZE]  = { 0 };    // Terrain file
+    char in_file[DRVR_PARAMS_SIZE]       = { 0 };    // Input file
+    char out_file[DRVR_PARAMS_SIZE]      = { 0 };    // Output file
 
     int mode                = NOT_SET;  // Mode (P2P, AREA)
     bool DBG                = false;    // Dump intermediate values to file?

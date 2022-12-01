@@ -13,4 +13,8 @@ add_executable(itmdrvr ${ITMDRVR_SRC})
 target_include_directories(itmdrvr PRIVATE 
     ${itminclude}
 )
+
+# Use C++14
+set_property(TARGET itmdrvr PROPERTY CXX_STANDARD 14)
+
 target_link_libraries(itmdrvr itmlib)

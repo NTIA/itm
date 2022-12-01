@@ -220,15 +220,15 @@ int ParseArguments(int argc, char** argv, DrvrParams* params) {
         Lowercase(argv[i]);
 
         if (Match("-i", argv[i])) {
-            sprintf_s(params->in_file, "%s", argv[i + 1]);
+	    snprintf_s(params->in_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-o", argv[i])) {
-            sprintf_s(params->out_file, "%s", argv[i + 1]);
+	    snprintf_s(params->out_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-t", argv[i])) {
-            sprintf_s(params->terrain_file, "%s", argv[i + 1]);
+	    snprintf_s(params->terrain_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-mode", argv[i]))
