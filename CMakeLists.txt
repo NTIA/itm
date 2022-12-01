@@ -39,8 +39,9 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS YES CACHE BOOL "Export all symbols")
 add_library(itmlib ${itmlib_SRC})
 
 set_target_properties(itmlib PROPERTIES VERSION ${PROJECT_VERSION})
-set_target_properties(itmlib PROPERTIES SOVERSION 1)
-add_compile_definitions(ITMLIB_VERSION=${PROJECT_VERSION})
+set_target_properties(itmlib PROPERTIES SOVERSION 0)
+add_compile_definitions(
+    ITMLIB_VERSION="${PROJECT_VERSION}.0")
 
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/itm.h)
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/Enums.h)

@@ -16,8 +16,7 @@ int drvrVerMajor = NOT_SET;
 int drvrVerMinor = NOT_SET;
 int drvrVerDrvr = NOT_SET;
 
-wchar_t buf[TIME_SIZE];
-
+char timebuf[TIME_SIZE];
 /*=============================================================================
  |
  |  Description:  Main function of the ITM driver executable
@@ -29,10 +28,21 @@ int main(int argc, char** argv) {
 
     // Get the time
     time_t t = time(NULL);
+
 #ifdef _WIN32
+        //
+        // According to https://stackoverflow.com/questions/34343181/no-output-when-using-fprintf-after-fwprintf
+        // you can not mix wide/narrow output in the same file.
+        // Because of this, on Linux/MacOS a fwprintf produces
+        // no output. Thus, we convert to narrow for both platforms.
+        //
+    wchar_t buf[TIME_SIZE];
     _wctime_s(buf, TIME_SIZE, &t);
-#else 
-    strncpy((char*) buf, ctime(&t), TIME_SIZE);
+    std::mbstate_t state = std::mbstate_t();
+    const wchar_t *bufptr = buf;
+    wcsrtombs(timebuf, &bufptr, TIME_SIZE, &state);
+#else
+    strncpy(timebuf, ctime(&t), TIME_SIZE);
 #endif
 
     rtn = ParseArguments(argc, argv, &params);
@@ -89,7 +99,8 @@ int main(int argc, char** argv) {
     else {
         fprintf_s(fp, "itm.dll Version          v%i.%i\n", dllVerMajor, dllVerMinor);
         fprintf_s(fp, "ITMDrvr.exe Version      v%i.%i.%i\n", drvrVerMajor, drvrVerMinor, drvrVerDrvr);
-        fwprintf_s(fp, L"Date Generated           %s", buf);
+        fprintf(fp, "Date Generated           %s", timebuf);
+
         fprintf_s(fp, "Input Arguments          ");
         for (int i = 1; i < argc; i++) {
             fprintf_s(fp, "%s ", argv[i]);
@@ -321,7 +332,7 @@ void Version() {
     printf_s("Institute for Telecommunications Sciences - Boulder, CO\n");
     printf_s("\tITM Driver Version: %i.%i\n", drvrVerMajor, drvrVerMinor);
     printf_s("\tITM DLL Version: %i.%i\n", dllVerMajor, dllVerMinor);
-    wprintf_s(L"Time: %s", buf);
+    printf_s("Time: %s", timebuf);
     printf_s("*******************************************************\n");
 }
 
@@ -414,12 +425,13 @@ int Validate_RequiredErrMsgHelper(const char* opt, int err) {
  *===========================================================================*/
 int LoadDLL() {
 #ifndef _WIN32
-    // empty
+    void *hLib = NULL;
 #else
     HINSTANCE hLib = LoadLibrary(TEXT("itm.dll"));
 
     if (hLib == NULL)
         return DRVRERR__DLL_LOADING;
+#endif
 
     GetDLLVersionInfo();
     GetDrvrVersionInfo();
@@ -434,7 +446,7 @@ int LoadDLL() {
     rtn = LoadAreaFunctions(hLib);
     if (rtn != SUCCESS)
         return rtn;
-#endif
+
     return SUCCESS;
 }
 
@@ -449,9 +461,8 @@ int LoadDLL() {
  *===========================================================================*/
 void GetDLLVersionInfo() {
 #ifndef _WIN32
-    float version = ITMLIB_VERSION;
-    dllVerMajor = int(version);
-    dllVerMinor = ( version - int(version)) * 100;
+    sscanf(ITMLIB_VERSION, "%d.%d",
+        &dllVerMajor, &dllVerMinor);
 #else
     DWORD  verHandle = NULL;
     UINT   size = 0;
@@ -496,7 +507,8 @@ void GetDLLVersionInfo() {
 void GetDrvrVersionInfo()
 {
 #ifndef _WIN32 
-    // empty
+    sscanf(ITMLIB_VERSION, "%d.%d.%d",
+        &drvrVerMajor, &drvrVerMinor, &drvrVerDrvr);
 #else
     DWORD  verHandle = NULL;
     UINT   size = 0;
