@@ -5,13 +5,13 @@
 #include "Common.h"
 
 // ITM DLL Functions
-typedef int(__stdcall *itm_area_tls_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_area_tls_ex_func)(double h_tx__meter, double h_rx__meter,
     int tx_site_criteria, int rx_site_criteria, double d__km, double delta_h__meter,
     int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma,
     int mdvar, double time, double location, double situation, double *A__db,
     long *warnings, struct IntermediateValues *interValues);
 
-typedef int(__stdcall *itm_area_cr_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_area_cr_ex_func)(double h_tx__meter, double h_rx__meter,
     int tx_site_criteria, int rx_site_criteria, double d__km, double delta_h__meter,
     int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma,
     int mdvar, double confidence, double reliability, double *A__db,
@@ -130,6 +130,7 @@ int CallAreaMode(DrvrParams* params, AreaParams* area_params, IntermediateValues
  |      Returns:  rtn           - Return error code
  |
  *===========================================================================*/
+ #ifdef _WIN32
 int LoadAreaFunctions(HINSTANCE hLib) {
     itm_area_tls_ex = (itm_area_tls_ex_func)GetProcAddress((HMODULE)hLib, "ITM_AREA_TLS_Ex");
     if (itm_area_tls_ex == nullptr)
@@ -141,6 +142,13 @@ int LoadAreaFunctions(HINSTANCE hLib) {
 
     return SUCCESS;
 }
+#else
+int LoadAreaFunctions() {
+    itm_area_tls_ex = (itm_area_tls_ex_func) &ITM_AREA_TLS_Ex;
+    itm_area_cr_ex = (itm_area_cr_ex_func) &ITM_AREA_CR_Ex;
+    return SUCCESS;
+}
+#endif
 
 /*=============================================================================
  |

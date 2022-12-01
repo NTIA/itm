@@ -2,7 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include <Windows.h>
+#ifdef _WIN32
+#  include <Windows.h>
+#else
+#  define DLLEXPORT extern "C"
+#endif
 #include <string>
 #include <algorithm>
 #include <vector>
@@ -138,6 +142,11 @@ struct AreaParams {
     int mode                = NOT_SET;
 };
 
+#ifdef _WIN32
+//
+// Duplicates specification in itm.h
+// and that version is used in non-WIN32 builds
+//
 struct IntermediateValues
 {
     double theta_hzn[2];        // Terminal horizon angles
@@ -150,6 +159,9 @@ struct IntermediateValues
     double d__km;               // Path distance, in km
     int mode;                   // Mode of propagation value
 };
+#else
+#  include "itm.h"
+#endif
 
 //
 // FUNCTIONS

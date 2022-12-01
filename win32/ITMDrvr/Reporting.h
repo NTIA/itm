@@ -2,7 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
-#include <Windows.h>
+#ifdef _WIN32
+#  include <Windows.h>
+#else
+#  define DLLEXPORT extern "C"
+#endif
 #include <string>
 #include <algorithm>
 #include <vector>

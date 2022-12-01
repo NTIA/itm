@@ -3,7 +3,7 @@
 #
 cmake_minimum_required(VERSION 3.9)
 
-project(itmlib VERSION 1.0.1 DESCRIPTION "NTIA Irregular Terrain Model library")
+project(itmlib VERSION 1.3 DESCRIPTION "NTIA Irregular Terrain Model library")
 
 SET(itmlib_SRC
     src/ComputeDeltaH.cpp
@@ -40,18 +40,19 @@ add_library(itmlib ${itmlib_SRC})
 
 set_target_properties(itmlib PROPERTIES VERSION ${PROJECT_VERSION})
 set_target_properties(itmlib PROPERTIES SOVERSION 1)
-
+add_compile_definitions(ITMLIB_VERSION=${PROJECT_VERSION})
 
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/itm.h)
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/Enums.h)
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/Errors.h)
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/Warnigns.h)
 
+cmake_path(APPEND itminclude "${CMAKE_SOURCE_DIR}" "include")
 
 #
 # inclue the include directory
 #
-target_include_directories(itmlib PRIVATE include)
+target_include_directories(itmlib PRIVATE ${itminclude})
 
 include(GNUInstallDirs)
 install(TARGETS itmlib
@@ -64,3 +65,5 @@ install(TARGETS itmlib
 configure_file(itmlib.pc.in itmlib.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/itmlib.pc DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
+
+add_subdirectory(win32/ITMDrvr)

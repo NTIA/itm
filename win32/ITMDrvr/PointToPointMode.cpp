@@ -5,12 +5,12 @@
 #include "Common.h"
 
 // ITM DLL Functions
-typedef int(__stdcall *itm_p2p_tls_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_p2p_tls_ex_func)(double h_tx__meter, double h_rx__meter,
     double pfl[], int climate, double N_0, double f__mhz, int pol, double epsilon,
     double sigma, int mdvar, double time, double location, double situation,
     double *A__db, long *warnings, struct IntermediateValues *interValues);
 
-typedef int(__stdcall *itm_p2p_cr_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_p2p_cr_ex_func)(double h_tx__meter, double h_rx__meter,
     double pfl[], int climate, double N_0, double f__mhz, int pol, double epsilon,
     double sigma, int mdvar, double confidence, double reliability,
     double *A__db, long *warnings, struct IntermediateValues *interValues);
@@ -111,6 +111,7 @@ int CallP2PMode(DrvrParams* params, P2PParams* p2p_params, IntermediateValues* i
  |      Returns:  rtn           - Return error code
  |
  *===========================================================================*/
+ #ifdef _WIN32
 int LoadP2PFunctions(HINSTANCE hLib) {
     itm_p2p_tls_ex = (itm_p2p_tls_ex_func)GetProcAddress((HMODULE)hLib, "ITM_P2P_TLS_Ex");
     if (itm_p2p_tls_ex == nullptr)
@@ -119,9 +120,15 @@ int LoadP2PFunctions(HINSTANCE hLib) {
     itm_p2p_cr_ex = (itm_p2p_cr_ex_func)GetProcAddress((HMODULE)hLib, "ITM_P2P_CR_Ex");
     if (itm_p2p_cr_ex == nullptr)
         return DRVRERR__GET_P2P_CR_FUNC_LOADING;
-
     return SUCCESS;
 }
+#else 
+int LoadP2PFunctions() {
+    itm_p2p_tls_ex = (itm_p2p_tls_ex_func) &ITM_P2P_TLS_Ex;
+    itm_p2p_cr_ex = (itm_p2p_cr_ex_func) &ITM_P2P_CR_Ex;
+    return SUCCESS;
+}
+#endif
 
 /*=============================================================================
  |

@@ -4,9 +4,11 @@
 #include "Labels.h"
 #include "Tags.h"
 #include "Reporting.h"
-#include "..\..\include\Enums.h"
-#include "..\..\include\Errors.h"
-#include "..\..\include\Warnings.h"
+#include "Common.h"
+
+#include "Enums.h"
+#include "Errors.h"
+#include "Warnings.h"
 
 int dllVerMajor = NOT_SET;
 int dllVerMinor = NOT_SET;
@@ -27,7 +29,11 @@ int main(int argc, char** argv) {
 
     // Get the time
     time_t t = time(NULL);
+#ifdef _WIN32
     _wctime_s(buf, TIME_SIZE, &t);
+#else 
+    strncpy((char*) buf, ctime(&t), TIME_SIZE);
+#endif
 
     rtn = ParseArguments(argc, argv, &params);
     if (rtn == DRVR__RETURN_SUCCESS)
@@ -70,7 +76,12 @@ int main(int argc, char** argv) {
     
     // print results to file
     FILE* fp;
+#ifdef _WIN32
     int err = fopen_s(&fp, params.out_file, "w");
+#else
+    fp = fopen(params.out_file, "w");
+    int err = errno;
+#endif
     if (err != 0) {
         printf_s("Error opening output file.  Exiting.\n");
         return err;
@@ -103,7 +114,7 @@ int main(int argc, char** argv) {
         }
         else {
             fprintf_s(fp, "Results\n");
-            fprintf_s(fp, "ITM Warning Flags        0x%.4X       ", warnings);
+            fprintf_s(fp, "ITM Warning Flags        0x%.4X       ", (int) warnings);
             PrintWarningMessages(fp, warnings);
             fprintf_s(fp, "ITM Return Code          %-12i ", rtn);
             PrintErrorMsgLabel(fp, rtn);
@@ -402,6 +413,9 @@ int Validate_RequiredErrMsgHelper(const char* opt, int err) {
  |
  *===========================================================================*/
 int LoadDLL() {
+#ifndef _WIN32
+    // empty
+#else
     HINSTANCE hLib = LoadLibrary(TEXT("itm.dll"));
 
     if (hLib == NULL)
@@ -420,7 +434,7 @@ int LoadDLL() {
     rtn = LoadAreaFunctions(hLib);
     if (rtn != SUCCESS)
         return rtn;
-
+#endif
     return SUCCESS;
 }
 
@@ -434,6 +448,11 @@ int LoadDLL() {
  |
  *===========================================================================*/
 void GetDLLVersionInfo() {
+#ifndef _WIN32
+    float version = ITMLIB_VERSION;
+    dllVerMajor = int(version);
+    dllVerMinor = ( version - int(version)) * 100;
+#else
     DWORD  verHandle = NULL;
     UINT   size = 0;
     LPBYTE lpBuffer = NULL;
@@ -461,7 +480,7 @@ void GetDLLVersionInfo() {
 
         delete[] verData;
     }
-
+#endif
     return;
 }
 
@@ -476,6 +495,9 @@ void GetDLLVersionInfo() {
  *===========================================================================*/
 void GetDrvrVersionInfo()
 {
+#ifndef _WIN32 
+    // empty
+#else
     DWORD  verHandle = NULL;
     UINT   size = 0;
     LPBYTE lpBuffer = NULL;
@@ -507,6 +529,6 @@ void GetDrvrVersionInfo()
 
         delete[] verData;
     }
-
+#endif
     return;
 }
