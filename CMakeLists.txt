@@ -1,7 +1,7 @@
 #
 # Cmake for a shared library using directions at https://stackoverflow.com/questions/17511496/how-to-create-a-shared-library-with-cmake
 #
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.16)
 
 project(itmlib VERSION 1.3 DESCRIPTION "NTIA Irregular Terrain Model library")
 
@@ -51,7 +51,12 @@ set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/Enums.h)
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/Errors.h)
 set_target_properties(itmlib PROPERTIES PUBLIC_HEADER include/Warnigns.h)
 
-cmake_path(APPEND itminclude "${CMAKE_SOURCE_DIR}" "include")
+# Only Cmake 3.20+ provides platform independent way to construct paths
+IF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER_EQUAL 3.20)
+    cmake_path(APPEND itminclude "${CMAKE_SOURCE_DIR}" "include")
+ELSE (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER_EQUAL 3.20)
+    set(itminclude "${CMAKE_SOURCE_DIR}/include")
+ENDIF (${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION} GREATER_EQUAL 3.20)
 
 #
 # inclue the include directory
