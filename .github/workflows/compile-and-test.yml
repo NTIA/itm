@@ -54,7 +54,6 @@ jobs:
         uses: microsoft/setup-msbuild@v1.0.2
 
       - name: Compile for Windows
-        uses: lukka/get-cmake@latest
         if: ${{ matrix.os == 'windows-latest' }}
         run: mkdir -p build ; cd build ; \
           cmake -G "Visual Studio 16 2019" .. ; \
