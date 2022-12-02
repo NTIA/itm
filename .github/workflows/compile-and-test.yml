@@ -30,23 +30,20 @@ jobs:
             target: Linux
           # - os: macos-latest
           #   target: Macos
-          - os: windows-latest
-            compiler: cl
-            target: Windows
-            build: Release
           # - os: windows-latest
+          #   compiler: cl
+          #   target: Windows
+          #   build: Release
+          # # - os: windows-latest
           #   compiler: cl
           #   target: Windows
           #   build: Debug
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Setup cmake
+        uses: actions/checkout@v3
 
       - name: Linux/MacOS compile
-        uses: lukka/get-cmake@latest
         if: ${{ matrix.os != 'windows-latest' }}
         run: mkdir -p build ; cd build ; \
           cmake .. ; \
