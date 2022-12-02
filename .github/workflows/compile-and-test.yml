@@ -17,14 +17,14 @@ defaults:
 jobs:
   build_and_test:
     name: >
-      Build and test a ${{ matrix.build }} version of Lamscript on
+      Build and test a ${{ matrix.build }} version of ITM on
       ${{ matrix.os }} with ${{ matrix.compiler }}.
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
         compiler: [ g++-10 ]
-        build: [Release, Debug]
+        build: [Release]
         include:
           - os: ubuntu-latest
             target: Linux
@@ -42,6 +42,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Setup cmake
+        uses: lukka/get-cmake@latest
 
       - name: Linux/MacOS compile
         if: ${{ matrix.os != 'windows-latest' }}
