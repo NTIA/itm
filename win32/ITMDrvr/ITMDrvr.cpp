@@ -31,13 +31,18 @@ int main(int argc, char** argv) {
 
 #ifdef _WIN32
         //
+        // Originally, this code use _wctime_s to get the time in a wchar
+        // format. There are two problems:
+        //
         // According to https://stackoverflow.com/questions/34343181/no-output-when-using-fprintf-after-fwprintf
         // you can not mix wide/narrow output in the same file.
         // Because of this, on Linux/MacOS a fwprintf produces
         // no output. Thus, we convert to narrow for both platforms.
         //
+        // second, _wctime_s is are wrappers for 
+        // 
     wchar_t buf[TIME_SIZE];
-    _wctime_s(buf, TIME_SIZE, &t);
+    _wctime64_s(buf, TIME_SIZE, &t);
     std::mbstate_t state = std::mbstate_t();
     const wchar_t *bufptr = buf;
     wcsrtombs(timebuf, &bufptr, TIME_SIZE, &state);
@@ -220,15 +225,15 @@ int ParseArguments(int argc, char** argv, DrvrParams* params) {
         Lowercase(argv[i]);
 
         if (Match("-i", argv[i])) {
-	    snprintf_s(params->in_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
+	    snprintf(params->in_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-o", argv[i])) {
-	    snprintf_s(params->out_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
+	    snprintf(params->out_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-t", argv[i])) {
-	    snprintf_s(params->terrain_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
+	    snprintf(params->terrain_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-mode", argv[i]))

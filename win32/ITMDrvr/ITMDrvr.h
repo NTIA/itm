@@ -10,6 +10,9 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <stdio.h> // snprintf in Windows
+#include <time.h> // _wctime_s in Windows
+#include <wchar.h> // for _wctime_s in Windows
 
 using namespace std;
 
@@ -29,7 +32,7 @@ using namespace std;
 ///////////////////////////////////////////////
 
 #define     NOT_SET                                 -1
-#define     ERROR                                   -1
+#define     ITM_ERROR                               -1 // disambiguage for windows wingdi.h
 #define     SUCCESS                                 0
 #define     SUCCESS_WITH_WARNINGS                   1
 #define     DRVR__RETURN_SUCCESS                    1000

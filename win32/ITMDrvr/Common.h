@@ -11,6 +11,5 @@ int ParsingErrorHelper(int err, const char* msg);
 #  define fprintf_s fprintf
 #  define printf_s printf
 #  define fwprintf_s fwprintf
-#  define snprintf_s snprintf
 #  define wprintf_s wprintf
 #endif
