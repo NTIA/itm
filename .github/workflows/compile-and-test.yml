@@ -30,10 +30,10 @@ jobs:
             target: Linux
           # - os: macos-latest
           #   target: Macos
-          # - os: windows-latest
-          #   compiler: cl
-          #   target: Windows
-          #   build: Release
+          - os: windows-latest
+            compiler: cl
+            target: Windows
+            build: Release
           # # - os: windows-latest
           #   compiler: cl
           #   target: Windows
