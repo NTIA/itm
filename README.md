@@ -36,7 +36,7 @@ ITM can be called in either Area Prediction Mode or Point-to-Point Prediction Mo
 
 | Variable          | Type   | Units | Limits       | Description  |
 |-------------------|--------|-------|--------------|--------------|
-| `pfl`             | double[] |     |              | Terrain profile data in PFL format, from TX to RX <ul><li>`pfl[0]` : Number of elevation points - 1</li><li>`pfl[1]` : Resolution, in meters</li><li>`pfl[i]` : Elevation above sea level, in meters</li></ul> |
+| `pfl`             | double[] | meter |              | Terrain profile data in PFL format, from TX to RX <ul><li>`pfl[0]` : Number of elevation points - 1</li><li>`pfl[1]` : Resolution, in meters</li><li>`pfl[i]` : Elevation above sea level, in meters</li></ul> |
 
 ### Area Mode Inputs ###
 
@@ -80,7 +80,7 @@ Internal intermediate values can be extracted from ITM via functions that are su
 | `A_ref__db`      | double    | dB          | Reference attenuation |
 | `A_fs__db`       | double    | dB          | Free space basic transmission loss |
 | `d__km`          | double    | km          | Path distance |
-| `mode`           | int       |             | Mode of propagation <ul><li>1 = Line of Sight</li><li>2 = Diffraction</li><li>3 = Troposcatter</li></ul>|
+| `mode`           | int       |             | Mode of propagation <ul><li>10 = Line of Sight</li><li>20 = Diffraction, Single Horizon</li><li>21 = Diffraction, Double Horizon</li><li>30 = Troposcatter, Single Horizon</li><li>31 = Troposcatter, Double Horizon</li></ul>|
 
 ## Error Codes and Warning Flags ##
 

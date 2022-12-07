@@ -31,6 +31,8 @@ int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double 
     double h_e__meter[2], double gamma_e, double N_s, double delta_h__meter, double h__meter[2], 
     double d__meter, int mode, double *A_ref__db, long *warnings, int *propmode)
 {
+    double d_x__meter = 0;
+
     // effective earth radius
     double a_e__meter = 1 / gamma_e;
 
@@ -170,7 +172,6 @@ int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double 
 
         // [ERL 79-ITS 67, Eqn 3.19]
         *A_ref__db = A_o__db + kHat_1__db_per_meter * d__meter + kHat_2__db_per_meter * log(d__meter);
-        *propmode = MODE__LINE_OF_SIGHT;
     }
     else // this is a trans-horizon path
     {
@@ -183,7 +184,7 @@ int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double 
         double A_6__db = TroposcatterLoss(d_6__meter, theta_hzn, d_hzn__meter, h_e__meter, a_e__meter, N_s, f__mhz, theta_los, &h0);
         double A_5__db = TroposcatterLoss(d_5__meter, theta_hzn, d_hzn__meter, h_e__meter, a_e__meter, N_s, f__mhz, theta_los, &h0);
 
-        double M_s, A_s0__db, d_x__meter;
+        double M_s, A_s0__db;
 
         // if we got a reasonable prediction value back...
         if (A_5__db < 1000.0)
@@ -207,15 +208,21 @@ int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double 
 
         // Determine if its diffraction or troposcatter and compute the loss
         if (d__meter > d_x__meter)
-        {
             *A_ref__db = M_s * d__meter + A_s0__db;
-            *propmode = MODE__TROPOSCATTER;
-        }
         else
-        {
             *A_ref__db = M_d * d__meter + A_d0__db;
-            *propmode = MODE__DIFFRACTION;
-        }
+    }
+
+    // set mode of propagation
+    double delta__meter = d__meter - d_ML__meter;
+    if (int(delta__meter) < 0)
+        *propmode = MODE__LINE_OF_SIGHT;
+    else
+    {
+        if (d__meter <= d_sML__meter || d__meter <= d_x__meter)
+            *propmode = (int(delta__meter) == 0) ? MODE__DIFFRACTION_SINGLE_HORIZON : MODE__DIFFRACTION_DOUBLE_HORIZON;
+        else
+            *propmode = (int(delta__meter) == 0) ? MODE__TROPOSCATTER_SINGLE_HORIZON : MODE__TROPOSCATTER_DOUBLE_HORIZON;
     }
 
     // Don't allow a negative loss

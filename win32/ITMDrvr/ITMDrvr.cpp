@@ -167,11 +167,20 @@ int main(int argc, char** argv) {
                 fprintf_s(fp, "A_ref__db                %-12.1f %s\n", inter_vals.A_ref__db, UNITS__DB);
                 fprintf_s(fp, "Mode of Propagation      %-12i ", inter_vals.mode);
                 switch (inter_vals.mode) {
-                case 1: fprintf_s(fp, "[%s]\n", LBL__LINE_OF_SITE);
+                case MODE__LINE_OF_SIGHT: 
+                    fprintf_s(fp, "[%s]\n", LBL__LINE_OF_SITE);
                     break;
-                case 2: fprintf_s(fp, "[%s]\n", LBL__DIFFRACTION);
+                case MODE__DIFFRACTION_SINGLE_HORIZON:
+                    fprintf_s(fp, "[%s]\n", LBL__DIFFRACTION_SINGLE_HORIZON);
                     break;
-                case 3: fprintf_s(fp, "[%s]\n", LBL__TROPOSCATTER);
+                case MODE__DIFFRACTION_DOUBLE_HORIZON:
+                    fprintf_s(fp, "[%s]\n", LBL__DIFFRACTION_DOUBLE_HORIZON);
+                    break;
+                case MODE__TROPOSCATTER_SINGLE_HORIZON:
+                    fprintf_s(fp, "[%s]\n", LBL__TROPOSCATTER_SINGLE_HORIZON);
+                    break;
+                case MODE__TROPOSCATTER_DOUBLE_HORIZON:
+                    fprintf_s(fp, "[%s]\n", LBL__TROPOSCATTER_DOUBLE_HORIZON);
                     break;
                 }
             }

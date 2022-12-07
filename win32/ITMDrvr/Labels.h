@@ -8,8 +8,10 @@
 
 // Modes of propagation
 #define LBL__LINE_OF_SITE                           "Line of Sight"
-#define LBL__DIFFRACTION                            "Diffraction"
-#define LBL__TROPOSCATTER                           "Troposcatter"
+#define LBL__DIFFRACTION_SINGLE_HORIZON             "Diffraction, Single Horizon"
+#define LBL__DIFFRACTION_DOUBLE_HORIZON             "Diffraction, Double Horizon"
+#define LBL__TROPOSCATTER_SINGLE_HORIZON            "Troposcatter, Single Horizon"
+#define LBL__TROPOSCATTER_DOUBLE_HORIZON            "Troposcatter, Double Horizon"
 
 // Polarization
 #define LBL__POLARIZATION_HORIZONTAL                "Horizontal"

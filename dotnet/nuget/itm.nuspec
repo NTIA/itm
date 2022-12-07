@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>ITM</id>
-    <version>1.4.0</version>
+    <version>1.5.0</version>
     <authors>The Institute for Telecommunication Sciences</authors>
     <owners>The Institute for Telecommunication Sciences</owners>
     <license type="file">LICENSE.md</license>
@@ -14,17 +14,17 @@
     <tags>Propagation</tags>
     <repository type="git" url="https://github.com/NTIA/itm.git" branch="master"/>
     <dependencies>
-      <group targetFramework=".NETFramework4.7.2" />
+      <group targetFramework=".NETFramework4.8" />
     </dependencies>
   </metadata>
   <files>
     <file src="..\..\LICENSE.md" target=""/>
     <file src="build\native\itm_x64.dll" target="build\native\itm_x64.dll"/>
     <file src="build\native\itm_x86.dll" target="build\native\itm_x86.dll"/>
-    <file src="build\net472\itm.targets" target="build\net472\itm.targets"/>
-    <file src="lib\net472\ITS.Propagation.ITM.dll" target="lib\net472\ITS.Propagation.ITM.dll"/>
-    <file src="lib\net472\ITS.Propagation.ITM.pdb" target="lib\net472\ITS.Propagation.ITM.pdb"/>
-    <file src="lib\net472\ITS.Propagation.ITM.xml" target="lib\net472\ITS.Propagation.ITM.xml"/>
+    <file src="build\net48\itm.targets" target="build\net48\itm.targets"/>
+    <file src="lib\net48\ITS.Propagation.ITM.dll" target="lib\net48\ITS.Propagation.ITM.dll"/>
+    <file src="lib\net48\ITS.Propagation.ITM.pdb" target="lib\net48\ITS.Propagation.ITM.pdb"/>
+    <file src="lib\net48\ITS.Propagation.ITM.xml" target="lib\net48\ITS.Propagation.ITM.xml"/>
 	<file src="images\itslogo.png" target="images\itslogo.png"/>
   </files>
 </package>

@@ -1,6 +1,6 @@
-itm.dll Version          v1.3
-ITMDrvr.exe Version      v1.3.0
-Date Generated           Mon Sep 21 22:01:21 2020
+itm.dll Version          v1.5
+ITMDrvr.exe Version      v1.5.0
+Date Generated           Fri Nov  4 10:12:31 2022
 Input Arguments          -i i_areatls.txt -o o_areatls.txt -mode area -dbg 
 
 Inputs
@@ -39,4 +39,4 @@ h_e_rx__meter            3.0          (meters)
 N_s                      301.0        (N-Units)
 delta_h__meter           20.0         (meters)
 A_ref__db                11.2         (dB)
-Mode of Propagation      1            [Line of Sight]
+Mode of Propagation      10           [Line of Sight]
