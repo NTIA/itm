@@ -14,9 +14,9 @@
 double FFunction(double td)
 {
     // constants from [Algorithm, 6.9]
-    double a[] = { 133.4, 104.6, 71.8 };
-    double b[] = { 0.332e-3, 0.212e-3, 0.157e-3 };
-    double c[] = { -10, -2.5, 5 };
+    const double a[] = { 133.4, 104.6, 71.8 };
+    const double b[] = { 0.332e-3, 0.212e-3, 0.157e-3 };
+    const double c[] = { -10, -2.5, 5 };
 
     int i;
 
@@ -51,7 +51,7 @@ double FFunction(double td)
  |      Returns:  F()               - in dB
  |
  *===========================================================================*/
-double TroposcatterLoss(double d__meter, double theta_hzn[2], double d_hzn__meter[2], double h_e__meter[2], 
+double TroposcatterLoss(double d__meter, const double theta_hzn[2], const double d_hzn__meter[2], const double h_e__meter[2], 
     double a_e__meter, double N_s, double f__mhz, double theta_los, double *h0)
 {
     double H_0;

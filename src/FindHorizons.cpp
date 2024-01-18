@@ -14,7 +14,7 @@
  |      Returns:  [None]
  |
  *===========================================================================*/
-void FindHorizons(double pfl[], double a_e__meter, double h__meter[2], double theta_hzn[2], double d_hzn__meter[2])
+void FindHorizons(const double pfl[], double a_e__meter, const double h__meter[2], double theta_hzn[2], double d_hzn__meter[2])
 {
     int np = int(pfl[0]);
     double xi = pfl[1];

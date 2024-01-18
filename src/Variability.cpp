@@ -46,13 +46,13 @@ double Curve(double c1, double c2, double x1, double x2, double x3, double d_e__
  |      Returns:  F()            - in dB
  |
  *===========================================================================*/
-double Variability(double time, double location, double situation, double h_e__meter[2], double delta_h__meter, 
+double Variability(double time, double location, double situation, const double h_e__meter[2], double delta_h__meter, 
     double f__mhz, double d__meter, double A_ref__db, int climate, int mdvar, long *warnings)
 {
     // Asymptotic values from TN101, Fig 10.13
     // -> approximate to TN101v2 Eqn III.69 & III.70
     // -> to describe the curves for each climate
-    double all_year[5][7] =
+    const double all_year[5][7] =
     {
         {  -9.67,   -0.62,    1.26,   -9.21,   -0.62,   -0.39,      3.15 },
         {  12.7,     9.19,   15.5,     9.05,    9.19,    2.86,   857.9   },
@@ -61,28 +61,28 @@ double Variability(double time, double location, double situation, double h_e__m
         { 133.8e3, 143.6e3,  99.8e3,  98.6e3, 143.6e3, 167.4e3,  116.3e3 }
     };
 
-    double bsm1[] = { 2.13,      2.66,    6.11,     1.98,   2.68,    6.86,    8.51 };
-    double bsm2[] = { 159.5,     7.67,    6.65,    13.11,   7.16,   10.38,  169.8 };
-    double xsm1[] = { 762.2e3, 100.4e3, 138.2e3, 139.1e3,  93.7e3, 187.8e3, 609.8e3 };
-    double xsm2[] = { 123.6e3, 172.5e3, 242.2e3, 132.7e3, 186.8e3, 169.6e3, 119.9e3 };
-    double xsm3[] = { 94.5e3,  136.4e3, 178.6e3, 193.5e3, 133.5e3, 108.9e3, 106.6e3 };
+    const double bsm1[] = { 2.13,      2.66,    6.11,     1.98,   2.68,    6.86,    8.51 };
+    const double bsm2[] = { 159.5,     7.67,    6.65,    13.11,   7.16,   10.38,  169.8 };
+    const double xsm1[] = { 762.2e3, 100.4e3, 138.2e3, 139.1e3,  93.7e3, 187.8e3, 609.8e3 };
+    const double xsm2[] = { 123.6e3, 172.5e3, 242.2e3, 132.7e3, 186.8e3, 169.6e3, 119.9e3 };
+    const double xsm3[] = { 94.5e3,  136.4e3, 178.6e3, 193.5e3, 133.5e3, 108.9e3, 106.6e3 };
 
-    double bsp1[] = { 2.11, 6.87, 10.08, 3.68, 4.75, 8.58, 8.43 };
-    double bsp2[] = { 102.3, 15.53, 9.60, 159.3, 8.12, 13.97, 8.19 };
-    double xsp1[] = { 636.9e3, 138.7e3, 165.3e3, 464.4e3, 93.2e3, 216.0e3, 136.2e3 };
-    double xsp2[] = { 134.8e3, 143.7e3, 225.7e3, 93.1e3, 135.9e3, 152.0e3, 188.5e3 };
-    double xsp3[] = { 95.6e3, 98.6e3, 129.7e3, 94.2e3, 113.4e3, 122.7e3, 122.9e3 };
+    const double bsp1[] = { 2.11, 6.87, 10.08, 3.68, 4.75, 8.58, 8.43 };
+    const double bsp2[] = { 102.3, 15.53, 9.60, 159.3, 8.12, 13.97, 8.19 };
+    const double xsp1[] = { 636.9e3, 138.7e3, 165.3e3, 464.4e3, 93.2e3, 216.0e3, 136.2e3 };
+    const double xsp2[] = { 134.8e3, 143.7e3, 225.7e3, 93.1e3, 135.9e3, 152.0e3, 188.5e3 };
+    const double xsp3[] = { 95.6e3, 98.6e3, 129.7e3, 94.2e3, 113.4e3, 122.7e3, 122.9e3 };
 
-    double C_D[] = { 1.224, 0.801, 1.380, 1.000, 1.224, 1.518, 1.518 };	    // [Algorithm, Table 5.1], C_d
-    double z_D[] = { 1.282, 2.161, 1.282, 20.0, 1.282, 1.282, 1.282 };		// [Algorithm, Table 5.1], z_d
+    const double C_D[] = { 1.224, 0.801, 1.380, 1.000, 1.224, 1.518, 1.518 };	    // [Algorithm, Table 5.1], C_d
+    const double z_D[] = { 1.282, 2.161, 1.282, 20.0, 1.282, 1.282, 1.282 };		// [Algorithm, Table 5.1], z_d
 
-    double bfm1[] = { 1.0, 1.0, 1.0, 1.0, 0.92, 1.0, 1.0 };
-    double bfm2[] = { 0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 0.0 };
-    double bfm3[] = { 0.0, 0.0, 0.0, 0.0, 1.77, 0.0, 0.0 };
+    const double bfm1[] = { 1.0, 1.0, 1.0, 1.0, 0.92, 1.0, 1.0 };
+    const double bfm2[] = { 0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 0.0 };
+    const double bfm3[] = { 0.0, 0.0, 0.0, 0.0, 1.77, 0.0, 0.0 };
 
-    double bfp1[] = { 1.0, 0.93, 1.0, 0.93, 0.93, 1.0, 1.0 };
-    double bfp2[] = { 0.0, 0.31, 0.0, 0.19, 0.31, 0.0, 0.0 };
-    double bfp3[] = { 0.0, 2.00, 0.0, 1.79, 2.00, 0.0, 0.0 };
+    const double bfp1[] = { 1.0, 0.93, 1.0, 0.93, 0.93, 1.0, 1.0 };
+    const double bfp2[] = { 0.0, 0.31, 0.0, 0.19, 0.31, 0.0, 0.0 };
+    const double bfp3[] = { 0.0, 2.00, 0.0, 1.79, 2.00, 0.0, 0.0 };
 
     double z_T = InverseComplementaryCumulativeDistributionFunction(time);
     double z_L = InverseComplementaryCumulativeDistributionFunction(location);

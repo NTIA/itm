@@ -131,8 +131,8 @@ int ITM_AREA_TLS_Ex(double h_tx__meter, double h_rx__meter, int tx_site_criteria
         rx_site_criteria != SITING_CRITERIA__VERY_CAREFUL)
         return ERROR__RX_SITING_CRITERIA;
 
-    int site_criteria[2] = { tx_site_criteria, rx_site_criteria };
-    double h__meter[2] = { h_tx__meter, h_rx__meter };
+    const int site_criteria[2] = { tx_site_criteria, rx_site_criteria };
+    const double h__meter[2] = { h_tx__meter, h_rx__meter };
     interValues->d__km = d__km;
 
     double theta_hzn[2];
