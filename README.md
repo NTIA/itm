@@ -112,4 +112,4 @@ The .NET support of ITM consists of a simple pass-through wrapper around the nat
 
 ## Contact ##
 
-For technical questions about ITM, contact Paul McKenna, (303) 497-3474, pmckenna@ntia.gov.
+For technical questions about ITM, contact Paul McKenna, pmckenna@ntia.gov.
