@@ -4,9 +4,11 @@
 #include "Labels.h"
 #include "Tags.h"
 #include "Reporting.h"
-#include "..\..\include\Enums.h"
-#include "..\..\include\Errors.h"
-#include "..\..\include\Warnings.h"
+#include "Common.h"
+
+#include "Enums.h"
+#include "Errors.h"
+#include "Warnings.h"
 
 int dllVerMajor = NOT_SET;
 int dllVerMinor = NOT_SET;
@@ -14,8 +16,7 @@ int drvrVerMajor = NOT_SET;
 int drvrVerMinor = NOT_SET;
 int drvrVerDrvr = NOT_SET;
 
-wchar_t buf[TIME_SIZE];
-
+char timebuf[TIME_SIZE];
 /*=============================================================================
  |
  |  Description:  Main function of the ITM driver executable
@@ -27,7 +28,27 @@ int main(int argc, char** argv) {
 
     // Get the time
     time_t t = time(NULL);
-    _wctime_s(buf, TIME_SIZE, &t);
+
+#ifdef _WIN32
+        //
+        // Originally, this code use _wctime_s to get the time in a wchar
+        // format. There are two problems:
+        //
+        // According to https://stackoverflow.com/questions/34343181/no-output-when-using-fprintf-after-fwprintf
+        // you can not mix wide/narrow output in the same file.
+        // Because of this, on Linux/MacOS a fwprintf produces
+        // no output. Thus, we convert to narrow for both platforms.
+        //
+        // second, _wctime_s is are wrappers for 
+        // 
+    wchar_t buf[TIME_SIZE];
+    _wctime64_s(buf, TIME_SIZE, &t);
+    std::mbstate_t state = std::mbstate_t();
+    const wchar_t *bufptr = buf;
+    wcsrtombs(timebuf, &bufptr, TIME_SIZE, &state);
+#else
+    strncpy(timebuf, ctime(&t), TIME_SIZE);
+#endif
 
     rtn = ParseArguments(argc, argv, &params);
     if (rtn == DRVR__RETURN_SUCCESS)
@@ -70,7 +91,12 @@ int main(int argc, char** argv) {
     
     // print results to file
     FILE* fp;
+#ifdef _WIN32
     int err = fopen_s(&fp, params.out_file, "w");
+#else
+    fp = fopen(params.out_file, "w");
+    int err = errno;
+#endif
     if (err != 0) {
         printf_s("Error opening output file.  Exiting.\n");
         return err;
@@ -78,7 +104,8 @@ int main(int argc, char** argv) {
     else {
         fprintf_s(fp, "itm.dll Version          v%i.%i\n", dllVerMajor, dllVerMinor);
         fprintf_s(fp, "ITMDrvr.exe Version      v%i.%i.%i\n", drvrVerMajor, drvrVerMinor, drvrVerDrvr);
-        fwprintf_s(fp, L"Date Generated           %s", buf);
+        fprintf(fp, "Date Generated           %s", timebuf);
+
         fprintf_s(fp, "Input Arguments          ");
         for (int i = 1; i < argc; i++) {
             fprintf_s(fp, "%s ", argv[i]);
@@ -103,7 +130,7 @@ int main(int argc, char** argv) {
         }
         else {
             fprintf_s(fp, "Results\n");
-            fprintf_s(fp, "ITM Warning Flags        0x%.4X       ", warnings);
+            fprintf_s(fp, "ITM Warning Flags        0x%.4X       ", (int) warnings);
             PrintWarningMessages(fp, warnings);
             fprintf_s(fp, "ITM Return Code          %-12i ", rtn);
             PrintErrorMsgLabel(fp, rtn);
@@ -198,15 +225,15 @@ int ParseArguments(int argc, char** argv, DrvrParams* params) {
         Lowercase(argv[i]);
 
         if (Match("-i", argv[i])) {
-            sprintf_s(params->in_file, "%s", argv[i + 1]);
+	    snprintf(params->in_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-o", argv[i])) {
-            sprintf_s(params->out_file, "%s", argv[i + 1]);
+	    snprintf(params->out_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-t", argv[i])) {
-            sprintf_s(params->terrain_file, "%s", argv[i + 1]);
+	    snprintf(params->terrain_file, DRVR_PARAMS_SIZE, "%s", argv[i + 1]);
             i++;
         }
         else if (Match("-mode", argv[i]))
@@ -310,7 +337,7 @@ void Version() {
     printf_s("Institute for Telecommunications Sciences - Boulder, CO\n");
     printf_s("\tITM Driver Version: %i.%i\n", drvrVerMajor, drvrVerMinor);
     printf_s("\tITM DLL Version: %i.%i\n", dllVerMajor, dllVerMinor);
-    wprintf_s(L"Time: %s", buf);
+    printf_s("Time: %s", timebuf);
     printf_s("*******************************************************\n");
 }
 
@@ -402,10 +429,14 @@ int Validate_RequiredErrMsgHelper(const char* opt, int err) {
  |
  *===========================================================================*/
 int LoadDLL() {
+#ifndef _WIN32
+    void *hLib = NULL;
+#else
     HINSTANCE hLib = LoadLibrary(TEXT("itm.dll"));
 
     if (hLib == NULL)
         return DRVRERR__DLL_LOADING;
+#endif
 
     GetDLLVersionInfo();
     GetDrvrVersionInfo();
@@ -434,6 +465,10 @@ int LoadDLL() {
  |
  *===========================================================================*/
 void GetDLLVersionInfo() {
+#ifndef _WIN32
+    sscanf(ITMLIB_VERSION, "%d.%d",
+        &dllVerMajor, &dllVerMinor);
+#else
     DWORD  verHandle = NULL;
     UINT   size = 0;
     LPBYTE lpBuffer = NULL;
@@ -461,7 +496,7 @@ void GetDLLVersionInfo() {
 
         delete[] verData;
     }
-
+#endif
     return;
 }
 
@@ -476,6 +511,10 @@ void GetDLLVersionInfo() {
  *===========================================================================*/
 void GetDrvrVersionInfo()
 {
+#ifndef _WIN32 
+    sscanf(ITMLIB_VERSION, "%d.%d.%d",
+        &drvrVerMajor, &drvrVerMinor, &drvrVerDrvr);
+#else
     DWORD  verHandle = NULL;
     UINT   size = 0;
     LPBYTE lpBuffer = NULL;
@@ -507,6 +546,6 @@ void GetDrvrVersionInfo()
 
         delete[] verData;
     }
-
+#endif
     return;
 }

@@ -1,0 +1,64 @@
+name: Compile and test Release & Debug builds
+# using https://levelup.gitconnected.com/utilizing-github-actions-to-build-and-test-on-multiple-platforms-a7fe3aa6ce2a
+
+on:
+  push:
+    branches: [ PR_cmake ]
+
+  pull_request:
+    branches: [ PR_cmake ]
+
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build_and_test:
+    name: >
+      Build and test a ${{ matrix.build }} version of ITM on
+      ${{ matrix.os }} with ${{ matrix.compiler }}.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        compiler: [ g++-10 ]
+        build: [Release]
+        include:
+          - os: ubuntu-latest
+            target: Linux
+          # - os: macos-latest
+          #   target: Macos
+          - os: windows-latest
+            compiler: cl
+            target: Windows
+            build: Release
+          # # - os: windows-latest
+          #   compiler: cl
+          #   target: Windows
+          #   build: Debug
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Linux/MacOS compile
+        if: ${{ matrix.os != 'windows-latest' }}
+        uses: lukka/run-cmake@v3
+        with:
+          cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+          buildDirectory: "${{ github.workspace }}/build"
+          buildWithCMake: true
+
+      - name: Add msbuild to PATH
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Compile for Windows
+        if: ${{ matrix.os == 'windows-latest' }}
+        uses: lukka/run-cmake@v3
+        with:
+          cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+          buildDirectory: "${{ github.workspace }}/build"
+          buildWithCMake: true

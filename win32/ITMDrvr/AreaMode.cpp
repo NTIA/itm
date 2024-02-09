@@ -5,13 +5,13 @@
 #include "Common.h"
 
 // ITM DLL Functions
-typedef int(__stdcall *itm_area_tls_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_area_tls_ex_func)(double h_tx__meter, double h_rx__meter,
     int tx_site_criteria, int rx_site_criteria, double d__km, double delta_h__meter,
     int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma,
     int mdvar, double time, double location, double situation, double *A__db,
     long *warnings, struct IntermediateValues *interValues);
 
-typedef int(__stdcall *itm_area_cr_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_area_cr_ex_func)(double h_tx__meter, double h_rx__meter,
     int tx_site_criteria, int rx_site_criteria, double d__km, double delta_h__meter,
     int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma,
     int mdvar, double confidence, double reliability, double *A__db,
@@ -130,6 +130,7 @@ int CallAreaMode(DrvrParams* params, AreaParams* area_params, IntermediateValues
  |      Returns:  rtn           - Return error code
  |
  *===========================================================================*/
+ #ifdef _WIN32
 int LoadAreaFunctions(HINSTANCE hLib) {
     itm_area_tls_ex = (itm_area_tls_ex_func)GetProcAddress((HMODULE)hLib, "ITM_AREA_TLS_Ex");
     if (itm_area_tls_ex == nullptr)
@@ -141,6 +142,13 @@ int LoadAreaFunctions(HINSTANCE hLib) {
 
     return SUCCESS;
 }
+#else
+int LoadAreaFunctions(void *) {
+    itm_area_tls_ex = (itm_area_tls_ex_func) &ITM_AREA_TLS_Ex;
+    itm_area_cr_ex = (itm_area_cr_ex_func) &ITM_AREA_CR_Ex;
+    return SUCCESS;
+}
+#endif
 
 /*=============================================================================
  |
@@ -167,22 +175,22 @@ int ParseAreaInputFile(const char* in_file, AreaParams* area_params) {
         transform(key.begin(), key.end(), key.begin(), ::tolower);
 
         if (key.compare(TAG__HTX) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->h_tx__meter) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->h_tx__meter) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_HTX, TAG__HTX);
             }
         }
         else if (key.compare(TAG__HRX) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->h_rx__meter) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->h_rx__meter) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_HRX, TAG__HRX);
             }
         }
         else if (key.compare(TAG__TX_SITE) == 0) {
-            if (ParseInteger(value.c_str(), &area_params->tx_site_criteria) == ERROR) {
+            if (ParseInteger(value.c_str(), &area_params->tx_site_criteria) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_TX_SITE, TAG__TX_SITE);
             }
         }
         else if (key.compare(TAG__RX_SITE) == 0) {
-            if (ParseInteger(value.c_str(), &area_params->rx_site_criteria) == ERROR) {
+            if (ParseInteger(value.c_str(), &area_params->rx_site_criteria) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_RX_SITE, TAG__RX_SITE);
             }
         }
@@ -193,7 +201,7 @@ int ParseAreaInputFile(const char* in_file, AreaParams* area_params) {
                 string str = value.substr(s, e);
 
                 double p;
-                if (ParseDouble(str.c_str(), &p) == ERROR) {
+                if (ParseDouble(str.c_str(), &p) == ITM_ERROR) {
                     return ParsingErrorHelper(DRVRERR__PARSE_DKM, TAG__DKM);
                 }
 
@@ -236,52 +244,52 @@ int ParseAreaInputFile(const char* in_file, AreaParams* area_params) {
             }
         }
         else if (key.compare(TAG__DELTAH) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->delta_h__meter) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->delta_h__meter) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_DELTAH, TAG__DELTAH);
             }
         }
         else if (key.compare(TAG__CLIMATE) == 0) {
-            if (ParseInteger(value.c_str(), &area_params->climate) == ERROR) {
+            if (ParseInteger(value.c_str(), &area_params->climate) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_CLIMATE, TAG__CLIMATE);
             }
         }
         else if (key.compare("n_0") == 0) {
-            if (ParseDouble(value.c_str(), &area_params->N_0) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->N_0) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_N0, TAG__N0);
             }
         }
         else if (key.compare(TAG__FREQ) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->f__mhz) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->f__mhz) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_FREQ, TAG__FREQ);
             }
         }
         else if (key.compare(TAG__POL) == 0) {
-            if (ParseInteger(value.c_str(), &area_params->pol) == ERROR) {
+            if (ParseInteger(value.c_str(), &area_params->pol) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_POL, TAG__POL);
             }
         }
         else if (key.compare(TAG__EPSILON) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->epsilon) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->epsilon) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_EPSILON, TAG__EPSILON);
             }
         }
         else if (key.compare(TAG__SIGMA) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->sigma) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->sigma) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_SIGMA, TAG__SIGMA);
             }
         }
         else if (key.compare(TAG__MDVAR) == 0) {
-            if (ParseInteger(value.c_str(), &area_params->mdvar) == ERROR) {
+            if (ParseInteger(value.c_str(), &area_params->mdvar) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_MDVAR, TAG__MDVAR);
             }
         }
         else if (key.compare(TAG__TIME) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->time) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->time) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_TIME, TAG__TIME);
             }
         }
         else if (key.compare(TAG__LOCATION) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->location) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->location) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_LOCATION, TAG__LOCATION);
             }
         }
@@ -292,7 +300,7 @@ int ParseAreaInputFile(const char* in_file, AreaParams* area_params) {
                 string str = value.substr(s, e);
 
                 double situation;
-                if (ParseDouble(str.c_str(), &situation) == ERROR) {
+                if (ParseDouble(str.c_str(), &situation) == ITM_ERROR) {
                     return ParsingErrorHelper(DRVRERR__PARSE_SITUATION, TAG__SITUATION);
                 }
 
@@ -307,7 +315,7 @@ int ParseAreaInputFile(const char* in_file, AreaParams* area_params) {
                 string str = value.substr(s, e);
 
                 double confidence;
-                if (ParseDouble(str.c_str(), &confidence) == ERROR) {
+                if (ParseDouble(str.c_str(), &confidence) == ITM_ERROR) {
                     return ParsingErrorHelper(DRVRERR__PARSE_CONFIDENCE, TAG__CONFIDENCE);
                 }
 
@@ -316,7 +324,7 @@ int ParseAreaInputFile(const char* in_file, AreaParams* area_params) {
             } while (e != value.npos);
         }
         else if (key.compare(TAG__RELIABILITY) == 0) {
-            if (ParseDouble(value.c_str(), &area_params->reliability) == ERROR) {
+            if (ParseDouble(value.c_str(), &area_params->reliability) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_RELIABILITY, TAG__RELIABILITY);
             }
         }

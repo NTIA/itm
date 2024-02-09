@@ -8,4 +8,9 @@ int ValidateAreaInputs(AreaParams* area_params);
 int CallAreaMode(DrvrParams* params, AreaParams* area_params, IntermediateValues* inter_vals, 
     vector<double>* A__db, vector<double>* A_fs__db, long* warnings);
 void WriteAreaInputs(FILE* fp, AreaParams* area_params);
+
+#ifdef _WIN32
 int LoadAreaFunctions(HINSTANCE hLib);
+#else
+int LoadAreaFunctions(void *);
+#endif

@@ -5,12 +5,12 @@
 #include "Common.h"
 
 // ITM DLL Functions
-typedef int(__stdcall *itm_p2p_tls_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_p2p_tls_ex_func)(double h_tx__meter, double h_rx__meter,
     double pfl[], int climate, double N_0, double f__mhz, int pol, double epsilon,
     double sigma, int mdvar, double time, double location, double situation,
     double *A__db, long *warnings, struct IntermediateValues *interValues);
 
-typedef int(__stdcall *itm_p2p_cr_ex_func)(double h_tx__meter, double h_rx__meter,
+typedef int(WIN32_STDCALL *itm_p2p_cr_ex_func)(double h_tx__meter, double h_rx__meter,
     double pfl[], int climate, double N_0, double f__mhz, int pol, double epsilon,
     double sigma, int mdvar, double confidence, double reliability,
     double *A__db, long *warnings, struct IntermediateValues *interValues);
@@ -111,6 +111,7 @@ int CallP2PMode(DrvrParams* params, P2PParams* p2p_params, IntermediateValues* i
  |      Returns:  rtn           - Return error code
  |
  *===========================================================================*/
+ #ifdef _WIN32
 int LoadP2PFunctions(HINSTANCE hLib) {
     itm_p2p_tls_ex = (itm_p2p_tls_ex_func)GetProcAddress((HMODULE)hLib, "ITM_P2P_TLS_Ex");
     if (itm_p2p_tls_ex == nullptr)
@@ -119,9 +120,15 @@ int LoadP2PFunctions(HINSTANCE hLib) {
     itm_p2p_cr_ex = (itm_p2p_cr_ex_func)GetProcAddress((HMODULE)hLib, "ITM_P2P_CR_Ex");
     if (itm_p2p_cr_ex == nullptr)
         return DRVRERR__GET_P2P_CR_FUNC_LOADING;
-
     return SUCCESS;
 }
+#else 
+int LoadP2PFunctions(void *) {
+    itm_p2p_tls_ex = (itm_p2p_tls_ex_func) &ITM_P2P_TLS_Ex;
+    itm_p2p_cr_ex = (itm_p2p_cr_ex_func) &ITM_P2P_CR_Ex;
+    return SUCCESS;
+}
+#endif
 
 /*=============================================================================
  |
@@ -148,62 +155,62 @@ int ParseP2PInputFile(const char* in_file, P2PParams *p2p_params) {
         transform(key.begin(), key.end(), key.begin(), ::tolower);
 
         if (key.compare(TAG__HTX) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->h_tx__meter) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->h_tx__meter) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_HTX, TAG__HTX);
             }
         }
         else if (key.compare(TAG__HRX) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->h_rx__meter) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->h_rx__meter) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_HRX, TAG__HRX);
             }
         }
         else if (key.compare(TAG__CLIMATE) == 0) {
-            if (ParseInteger(value.c_str(), &p2p_params->climate) == ERROR) {
+            if (ParseInteger(value.c_str(), &p2p_params->climate) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_CLIMATE, TAG__CLIMATE);
             }
         }
         else if (key.compare("n_0") == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->N_0) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->N_0) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_N0, TAG__N0);
             }
         }
         else if (key.compare(TAG__FREQ) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->f__mhz) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->f__mhz) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_FREQ, TAG__FREQ);
             }
         }
         else if (key.compare(TAG__POL) == 0) {
-            if (ParseInteger(value.c_str(), &p2p_params->pol) == ERROR) {
+            if (ParseInteger(value.c_str(), &p2p_params->pol) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_POL, TAG__POL);
             }
         }
         else if (key.compare(TAG__EPSILON) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->epsilon) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->epsilon) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_EPSILON, TAG__EPSILON);
             }
         }
         else if (key.compare(TAG__SIGMA) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->sigma) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->sigma) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_SIGMA, TAG__SIGMA);
             }
         }
         else if (key.compare(TAG__MDVAR) == 0) {
-            if (ParseInteger(value.c_str(), &p2p_params->mdvar) == ERROR) {
+            if (ParseInteger(value.c_str(), &p2p_params->mdvar) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_MDVAR, TAG__MDVAR);
             }
         }
         else if (key.compare(TAG__TIME) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->time) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->time) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_TIME, TAG__TIME);
             }
         }
         else if (key.compare(TAG__LOCATION) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->location) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->location) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_LOCATION, TAG__LOCATION);
             }
         }
         else if (key.compare(TAG__SITUATION) == 0) {
-            if (ParseDouble(value.c_str(), &p2p_params->situation) == ERROR) {
+            if (ParseDouble(value.c_str(), &p2p_params->situation) == ITM_ERROR) {
                 return ParsingErrorHelper(DRVRERR__PARSE_SITUATION, TAG__SITUATION);
             }
         }
@@ -214,7 +221,7 @@ int ParseP2PInputFile(const char* in_file, P2PParams *p2p_params) {
                 string str = value.substr(s, e);
 
                 double confidence;
-                if (ParseDouble(str.c_str(), &confidence) == ERROR) {
+                if (ParseDouble(str.c_str(), &confidence) == ITM_ERROR) {
                     return ParsingErrorHelper(DRVRERR__PARSE_CONFIDENCE, TAG__CONFIDENCE);
                 }
 
@@ -229,7 +236,7 @@ int ParseP2PInputFile(const char* in_file, P2PParams *p2p_params) {
                 string str = value.substr(s, e);
 
                 double reliability;
-                if (ParseDouble(str.c_str(), &reliability) == ERROR) {
+                if (ParseDouble(str.c_str(), &reliability) == ITM_ERROR) {
                     return ParsingErrorHelper(DRVRERR__PARSE_RELIABILITY, TAG__RELIABILITY);
                 }
 

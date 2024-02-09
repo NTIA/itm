@@ -1,6 +1,6 @@
-#include "..\include\itm.h"
-#include "..\include\Enums.h"
-#include "..\include\Warnings.h"
+#include "itm.h"
+#include "Enums.h"
+#include "Warnings.h"
 
 /*=============================================================================
  |

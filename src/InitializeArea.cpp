@@ -1,5 +1,5 @@
-#include "..\include\itm.h"
-#include "..\include\Enums.h"
+#include "itm.h"
+#include "Enums.h"
 
 /*=============================================================================
  |

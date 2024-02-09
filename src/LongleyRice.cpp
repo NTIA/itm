@@ -1,7 +1,7 @@
-#include "..\include\itm.h"
-#include "..\include\Enums.h"
-#include "..\include\Errors.h"
-#include "..\include\Warnings.h"
+#include "itm.h"
+#include "Enums.h"
+#include "Errors.h"
+#include "Warnings.h"
 
 /*=============================================================================
  |

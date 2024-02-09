@@ -19,12 +19,12 @@ int ParseInteger(const char* str, int* value) {
         *value = ::stoi(str, &t, 10);
     } catch (...) {
         // error parsing the input string value
-        return ERROR;
+        return ITM_ERROR;
     }
 
     // verify the entire string was parsed, and a trailing char wasn't omitted
     if (strlen(str) != t)
-        return ERROR;
+        return ITM_ERROR;
 
     return SUCCESS;
 }
@@ -46,7 +46,7 @@ int ParseDouble(const char* str, double* value) {
     }
     catch (...) {
         // error parsing the input string value
-        return ERROR;
+        return ITM_ERROR;
     }
 
     return SUCCESS;
