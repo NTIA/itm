@@ -15,8 +15,8 @@
 double H0Curve(int j, double r)
 {
     // values from [Algorithm, 6.13]
-    double a[] = { 25.0, 80.0, 177.0, 395.0, 705.0 };
-    double b[] = { 24.0, 45.0, 68.0, 80.0, 105.0 };
+    const double a[] = { 25.0, 80.0, 177.0, 395.0, 705.0 };
+    const double b[] = { 24.0, 45.0, 68.0, 80.0, 105.0 };
 
     return 10 * log10(1 + a[j] * pow(1 / r, 4) + b[j] * pow(1.0 / r, 2));    // related to TN101v2, Eqn III.49, but from [Algorithm, 6.13]
 }

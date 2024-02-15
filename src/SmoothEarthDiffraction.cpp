@@ -19,7 +19,7 @@
  |
  *===========================================================================*/
 double SmoothEarthDiffraction(double d__meter, double f__mhz, double a_e__meter, double theta_los, 
-    double d_hzn__meter[2], double h_e__meter[2], complex<double> Z_g)
+    const double d_hzn__meter[2], const double h_e__meter[2], complex<double> Z_g)
 {
     double a__meter[3];
     double d__km[3];

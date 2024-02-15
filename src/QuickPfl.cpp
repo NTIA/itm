@@ -17,7 +17,7 @@
  |      Returns:  [None]
  |
  *===========================================================================*/
-void QuickPfl(double pfl[], double gamma_e, double h__meter[2], double theta_hzn[2], 
+void QuickPfl(const double pfl[], double gamma_e, const double h__meter[2], double theta_hzn[2], 
     double d_hzn__meter[2], double h_e__meter[2], double *delta_h__meter, double *d__meter)
 {
     double fit_tx, fit_rx, q;
