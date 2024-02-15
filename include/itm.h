@@ -41,16 +41,16 @@ struct IntermediateValues
 /////////////////////////////
 // Main ITM Functions
 
-DLLEXPORT int ITM_P2P_TLS(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
+DLLEXPORT int ITM_P2P_TLS(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
     int pol, double epsilon, double sigma, int mdvar, double time, double location, double situation,
     double *A__db, long *warnings);
-DLLEXPORT int ITM_P2P_TLS_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
+DLLEXPORT int ITM_P2P_TLS_Ex(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
     int pol, double epsilon, double sigma, int mdvar, double time, double location, double situation,
     double *A__db, long *warnings, IntermediateValues *interValues);
-DLLEXPORT int ITM_P2P_CR(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
+DLLEXPORT int ITM_P2P_CR(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
     int pol, double epsilon, double sigma, int mdvar, double confidence, double reliability,
     double *A__db, long *warnings);
-DLLEXPORT int ITM_P2P_CR_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
+DLLEXPORT int ITM_P2P_CR_Ex(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
     int pol, double epsilon, double sigma, int mdvar, double confidence, double reliability,
     double *A__db, long *warnings, IntermediateValues *interValues);
 DLLEXPORT int ITM_AREA_TLS(double h_tx__meter, double h_rx__meter, int tx_site_criteria, int rx_site_criteria, double d__km,
@@ -69,11 +69,11 @@ DLLEXPORT int ITM_AREA_CR_Ex(double h_tx__meter, double h_rx__meter, int tx_site
 /////////////////////////////
 // ITM Helper Functions
 
-DLLEXPORT double ComputeDeltaH(double pfl[], double d_start__meter, double d_end__meter);
+DLLEXPORT double ComputeDeltaH(const double pfl[], double d_start__meter, double d_end__meter);
 DLLEXPORT double DiffractionLoss(double d__meter, double d_hzn__meter[2], double h_e__meter[2], complex<double> Z_g,
     double a_e__meter, double delta_h__meter, double h__meter[2], int mode, double theta_los, double d_sML__meter, double f__mhz);
 DLLEXPORT double FFunction(double td);
-DLLEXPORT void FindHorizons(double pfl[], double a_e__meter, double h__meter[2], double theta_hzn[2], double d_hzn__meter[2]);
+DLLEXPORT void FindHorizons(const double pfl[], double a_e__meter, double h__meter[2], double theta_hzn[2], double d_hzn__meter[2]);
 DLLEXPORT double FreeSpaceLoss(double d__meter, double f__mhz);
 DLLEXPORT double FresnelIntegral(double v2);
 DLLEXPORT double H0Function(double r, double eta_s);
@@ -84,13 +84,13 @@ DLLEXPORT void InitializePointToPoint(double f__mhz, double h_sys__meter, double
     double sigma, complex<double> *Z_g, double *gamma_e, double *N_s);
 DLLEXPORT double InverseComplementaryCumulativeDistributionFunction(double q);
 DLLEXPORT double KnifeEdgeDiffraction(double d__meter, double f__mhz, double a_e__meter, double theta_los, double d_hzn__meter[2]);
-DLLEXPORT void LinearLeastSquaresFit(double pfl[], double d_start, double d_end, double *fit_y1, double *fit_y2);
+DLLEXPORT void LinearLeastSquaresFit(const double pfl[], double d_start, double d_end, double *fit_y1, double *fit_y2);
 DLLEXPORT double LineOfSightLoss(double d__meter, double h_e__meter[2], complex<double> Z_g, double delta_h__meter,
     double M_d, double A_d0, double d_sML__meter, double f__mhz);
 DLLEXPORT int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double d_hzn__meter[2], double h_e__meter[2], 
     double gamma_e, double N_s, double delta_h__meter, double h__meter[2], double d__meter, int mode, double *A_ref__db, 
     long *warnings, int *propmode);
-DLLEXPORT void QuickPfl(double pfl[], double gamma_e, double h__meter[2], double theta_hzn[2], double d_hzn__meter[2], 
+DLLEXPORT void QuickPfl(const double pfl[], double gamma_e, double h__meter[2], double theta_hzn[2], double d_hzn__meter[2], 
     double h_e__meter[2], double *delta_h__meter, double *d__meter);
 DLLEXPORT double SigmaHFunction(double delta_h__meter);
 DLLEXPORT double SmoothEarthDiffraction(double d__meter, double f__mhz, double a_e__meter, double theta_los, 
