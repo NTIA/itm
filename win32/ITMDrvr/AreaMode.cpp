@@ -136,7 +136,7 @@ int LoadAreaFunctions(HINSTANCE hLib) {
         return DRVRERR__GET_AREA_TLS_FUNC_LOADING;
 
     itm_area_cr_ex = (itm_area_cr_ex_func)GetProcAddress((HMODULE)hLib, "ITM_AREA_CR_Ex");
-    if (itm_area_tls_ex == nullptr)
+    if (itm_area_cr_ex == nullptr)
         return DRVRERR__GET_AREA_CR_FUNC_LOADING;
 
     return SUCCESS;
