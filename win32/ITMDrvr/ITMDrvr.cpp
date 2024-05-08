@@ -8,11 +8,12 @@
 #include "..\..\include\Errors.h"
 #include "..\..\include\Warnings.h"
 
+// DLL and driver versions are written when loading the DLL
 int dllVerMajor = NOT_SET;
 int dllVerMinor = NOT_SET;
 int drvrVerMajor = NOT_SET;
 int drvrVerMinor = NOT_SET;
-int drvrVerDrvr = NOT_SET;
+int drvrVerPatch = NOT_SET;
 
 wchar_t buf[TIME_SIZE];
 
@@ -29,6 +30,12 @@ int main(int argc, char** argv) {
     time_t t = time(NULL);
     _wctime_s(buf, TIME_SIZE, &t);
 
+    // Load the DLL
+    rtn = LoadDLL();
+    if (rtn)
+        return rtn;
+
+    // Parse command line arguments
     rtn = ParseArguments(argc, argv, &params);
     if (rtn == DRVR__RETURN_SUCCESS)
         return SUCCESS;
@@ -45,11 +52,6 @@ int main(int argc, char** argv) {
         Help();
         return rtn;
     }
-
-    rtn = LoadDLL();
-    if (rtn)
-        return rtn;
-    
 
     // validate input file inputs
     vector<double> A__db;
@@ -77,7 +79,7 @@ int main(int argc, char** argv) {
     }
     else {
         fprintf_s(fp, "itm.dll Version          v%i.%i\n", dllVerMajor, dllVerMinor);
-        fprintf_s(fp, "ITMDrvr.exe Version      v%i.%i.%i\n", drvrVerMajor, drvrVerMinor, drvrVerDrvr);
+        fprintf_s(fp, "ITMDrvr.exe Version      v%i.%i.%i\n", drvrVerMajor, drvrVerMinor, drvrVerPatch);
         fwprintf_s(fp, L"Date Generated           %s", buf);
         fprintf_s(fp, "Input Arguments          ");
         for (int i = 1; i < argc; i++) {
@@ -308,7 +310,7 @@ void Help() {
 void Version() {
     printf_s("*******************************************************\n");
     printf_s("Institute for Telecommunications Sciences - Boulder, CO\n");
-    printf_s("\tITM Driver Version: %i.%i\n", drvrVerMajor, drvrVerMinor);
+    printf_s("\tITM Driver Version: %i.%i.%i\n", drvrVerMajor, drvrVerMinor, drvrVerPatch);
     printf_s("\tITM DLL Version: %i.%i\n", dllVerMajor, dllVerMinor);
     wprintf_s(L"Time: %s", buf);
     printf_s("*******************************************************\n");
@@ -499,7 +501,7 @@ void GetDrvrVersionInfo()
                     {
                         drvrVerMajor = (verInfo->dwFileVersionMS >> 16) & 0xffff;
                         drvrVerMinor = (verInfo->dwFileVersionMS >> 0) & 0xffff;
-                        drvrVerDrvr = (verInfo->dwFileVersionLS >> 16) & 0xffff;
+                        drvrVerPatch = (verInfo->dwFileVersionLS >> 16) & 0xffff;
                     }
                 }
             }
