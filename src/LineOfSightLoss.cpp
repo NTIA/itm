@@ -19,8 +19,8 @@
  |      Returns:  A_los__db         - Loss, in dB
  |
  *===========================================================================*/
-double LineOfSightLoss(double d__meter, const double h_e__meter[2], complex<double> Z_g, double delta_h__meter, 
-    double M_d, double A_d0, double d_sML__meter, double f__mhz)
+double LineOfSightLoss(const double d__meter, const double h_e__meter[2], const complex<double> Z_g, const double delta_h__meter, 
+    const double M_d, const double A_d0, const double d_sML__meter, const double f__mhz)
 {
     double delta_h_d__meter = TerrainRoughness(d__meter, delta_h__meter);
 

@@ -14,7 +14,7 @@
  |      Returns:  Curve value           - in dB
  |
  *===========================================================================*/
-double Curve(double c1, double c2, double x1, double x2, double x3, double d_e__meter)
+double Curve(const double c1, const double c2, const double x1, const double x2, const double x3, const double d_e__meter)
 {
     return (c1 + c2 / (1.0 + pow((d_e__meter - x2) / x3, 2))) * (pow(d_e__meter / x1, 2)) / (1.0 + (pow(d_e__meter / x1, 2)));
 }
@@ -46,8 +46,8 @@ double Curve(double c1, double c2, double x1, double x2, double x3, double d_e__
  |      Returns:  F()            - in dB
  |
  *===========================================================================*/
-double Variability(double time, double location, double situation, const double h_e__meter[2], double delta_h__meter, 
-    double f__mhz, double d__meter, double A_ref__db, int climate, int mdvar, long *warnings)
+double Variability(const double time, const double location, const double situation, const double h_e__meter[2], const double delta_h__meter, 
+    const double f__mhz, const double d__meter, const double A_ref__db, int climate, int mdvar, long *warnings)
 {
     // Asymptotic values from TN101, Fig 10.13
     // -> approximate to TN101v2 Eqn III.69 & III.70

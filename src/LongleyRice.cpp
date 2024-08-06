@@ -27,9 +27,9 @@
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double d_hzn__meter[2], 
-    double h_e__meter[2], double gamma_e, double N_s, double delta_h__meter, const double h__meter[2], 
-    double d__meter, int mode, double *A_ref__db, long *warnings, int *propmode)
+int LongleyRice(const double theta_hzn[2], const double f__mhz, const complex<double> Z_g, const double d_hzn__meter[2], 
+    const double h_e__meter[2], const double gamma_e, const double N_s, const double delta_h__meter, const double h__meter[2], 
+    const double d__meter, const int mode, double *A_ref__db, long *warnings, int *propmode)
 {
     // effective earth radius
     double a_e__meter = 1 / gamma_e;
