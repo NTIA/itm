@@ -1,0 +1,41 @@
+itm.dll Version          v1.4
+ITMDrvr.exe Version      v1.4.0
+Date Generated           Thu Jan 18 15:30:17 2024
+Input Arguments          -i i_areacr.txt -o o_areacr.txt -mode area -dbg 
+
+Inputs
+h_tx__meter              3            (meters)
+h_rx__meter              3            (meters)
+tx_site_criteria         0            [Random]
+rx_site_criteria         0            [Random]
+d__km                    1            (km)
+delta_h__meter           0            (meters)
+climate                  5            [Continental Temperate]
+N_0                      301.00       (N-Units)
+f__mhz                   10000.00     (MHz)
+pol                      1            [Vertical]
+epsilon                  15
+sigma                    0.005
+mdvar                    3            [Broadcast Mode]
+confidence               77
+reliability              90
+Mode                     Area
+
+Results
+ITM Warning Flags        0x0000       [No Warnings]
+ITM Return Code          0            [Success - No Errors]
+Basic Transmission Loss  118.3        (dB)
+
+Intermediate Values
+Free Space               112.5        (dB)
+d__km                    1.000        (km)
+theta_hzn_tx             -0.841       (mrad)
+theta_hzn_rx             -0.841       (mrad)
+d_hzn_tx__meter          7138         (meters)
+d_hzn_rx__meter          7138         (meters)
+h_e_tx__meter            3.0          (meters)
+h_e_rx__meter            3.0          (meters)
+N_s                      301.0        (N-Units)
+delta_h__meter           0.0          (meters)
+A_ref__db                0.0          (dB)
+Mode of Propagation      1            [Line of Sight]
