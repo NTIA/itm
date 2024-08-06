@@ -14,7 +14,7 @@
  |      Returns:  [None]
  |
  *===========================================================================*/
-void LinearLeastSquaresFit(const double pfl[], double d_start, double d_end, double *fit_y1, double *fit_y2)
+void LinearLeastSquaresFit(const double pfl[], const double d_start, const double d_end, double *fit_y1, double *fit_y2)
 {
     int np = (int)pfl[0];
 

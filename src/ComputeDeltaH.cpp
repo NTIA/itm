@@ -15,7 +15,7 @@
  |      Returns:  delta_h__meter - Terrain irregularity parameter, in meters
  |
  *===========================================================================*/
-double ComputeDeltaH(const double pfl[], double d_start__meter, double d_end__meter)
+double ComputeDeltaH(const double pfl[], const double d_start__meter, const double d_end__meter)
 {
     double s[247] = { 0 };                      // Temp pfl data array
 

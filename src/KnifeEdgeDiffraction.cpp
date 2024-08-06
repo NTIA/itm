@@ -15,7 +15,7 @@
  |      Returns:  A_k__db        - Knife-edge diffraction loss, in dB
  |
  *===========================================================================*/
-double KnifeEdgeDiffraction(double d__meter, double f__mhz, double a_e__meter, double theta_los, const double d_hzn__meter[2])
+double KnifeEdgeDiffraction(const double d__meter, const double f__mhz, const double a_e__meter, const double theta_los, const double d_hzn__meter[2])
 {
     double d_ML__meter = d_hzn__meter[0] + d_hzn__meter[1];                         // Maximum line-of-sight distance for actual path
     double theta_nlos = d__meter / a_e__meter - theta_los;                          // Angular distance of diffraction region [Algorithm, Eqn 4.12]

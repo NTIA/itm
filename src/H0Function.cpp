@@ -12,7 +12,7 @@
  |      Returns: H_01(r, j)      - in dB
  |
  *===========================================================================*/
-double H0Curve(int j, double r)
+double H0Curve(const int j, const double r)
 {
     // values from [Algorithm, 6.13]
     const double a[] = { 25.0, 80.0, 177.0, 395.0, 705.0 };
@@ -35,7 +35,7 @@ double H0Curve(int j, double r)
  |      Returns:  H_0()          - in dB
  |
  *===========================================================================*/
-double H0Function(double r, double eta_s)
+double H0Function(const double r, double eta_s)
 {
     eta_s = MIN(MAX(eta_s, 1), 5);  // range 1 <= eta_s <= 5
 

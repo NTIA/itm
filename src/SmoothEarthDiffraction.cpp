@@ -18,8 +18,8 @@
  |      Returns:  A_r__db           - Smooth-earth diffraction loss, in dB
  |
  *===========================================================================*/
-double SmoothEarthDiffraction(double d__meter, double f__mhz, double a_e__meter, double theta_los, 
-    const double d_hzn__meter[2], const double h_e__meter[2], complex<double> Z_g)
+double SmoothEarthDiffraction(const double d__meter, const double f__mhz, const double a_e__meter, const double theta_los, 
+    const double d_hzn__meter[2], const double h_e__meter[2], const complex<double> Z_g)
 {
     double a__meter[3];
     double d__km[3];
@@ -82,7 +82,7 @@ double SmoothEarthDiffraction(double d__meter, double f__mhz, double a_e__meter,
  |      Returns:  F(x, K)        - in dB
  |
  *===========================================================================*/
-double HeightFunction(double x__km, double K)
+double HeightFunction(const double x__km, const double K)
 {
     double w;
     double result;

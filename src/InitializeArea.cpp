@@ -20,7 +20,7 @@
  |      Returns:  [None]
  |
  *===========================================================================*/
-void InitializeArea(const int site_criteria[2], double gamma_e, double delta_h__meter,
+void InitializeArea(const int site_criteria[2], const double gamma_e, const double delta_h__meter,
     const double h__meter[2], double h_e__meter[2], double d_hzn__meter[2],  double theta_hzn[2])
 {
     for (int i = 0; i < 2; i++)

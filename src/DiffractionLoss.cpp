@@ -22,8 +22,8 @@
  |      Returns:  A_d__db        - Diffraction loss, in dB
  |
  *===========================================================================*/
-double DiffractionLoss(double d__meter, double d_hzn__meter[2], double h_e__meter[2], complex<double> Z_g, double a_e__meter, 
-    double delta_h__meter, const double h__meter[2], int mode, double theta_los, double d_sML__meter, double f__mhz)
+double DiffractionLoss(const double d__meter, const double d_hzn__meter[2], const double h_e__meter[2], const complex<double> Z_g, const double a_e__meter, 
+    const double delta_h__meter, const double h__meter[2], const int mode, const double theta_los, const double d_sML__meter, const double f__mhz)
 {
     double A_k__db = KnifeEdgeDiffraction(d__meter, f__mhz, a_e__meter, theta_los, d_hzn__meter);
 

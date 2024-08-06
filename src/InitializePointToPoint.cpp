@@ -22,8 +22,8 @@
  |      Returns:  [None]
  |
  *===========================================================================*/
-void InitializePointToPoint(double f__mhz, double h_sys__meter, double N_0, int pol, 
-    double epsilon, double sigma, complex<double> *Z_g, double *gamma_e, double *N_s)
+void InitializePointToPoint(const double f__mhz, const double h_sys__meter, const double N_0, const int pol, 
+    const double epsilon, const double sigma, complex<double> *Z_g, double *gamma_e, double *N_s)
 {
     // gamma_a is the curvature of the actual earth, ~1 / 6370 km
     double gamma_a = 157e-9;
