@@ -37,8 +37,8 @@
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_TLS(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double time, double location, double situation,
+int ITM_P2P_TLS(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, int mdvar, double time, double location, double situation,
     double *A__db, long *warnings)
 {
     IntermediateValues interValues;
@@ -81,8 +81,8 @@ int ITM_P2P_TLS(double h_tx__meter, double h_rx__meter, const double pfl[], int 
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_CR(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double confidence, double reliability,
+int ITM_P2P_CR(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, int mdvar, double confidence, double reliability,
     double *A__db, long *warnings)
 {
     IntermediateValues interValues;
@@ -134,8 +134,8 @@ int ITM_P2P_CR(double h_tx__meter, double h_rx__meter, const double pfl[], int c
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_CR_Ex(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double confidence, double reliability,
+int ITM_P2P_CR_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, int mdvar, double confidence, double reliability,
     double *A__db, long *warnings, IntermediateValues *interValues)
 {
     int rtn = ITM_P2P_TLS_Ex(h_tx__meter, h_rx__meter, pfl, climate, N_0, f__mhz, pol, epsilon, sigma, mdvar,
@@ -177,8 +177,8 @@ int ITM_P2P_CR_Ex(double h_tx__meter, double h_rx__meter, const double pfl[], in
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_TLS_Ex(double h_tx__meter, double h_rx__meter, const double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double time, double location, double situation,
+int ITM_P2P_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, int mdvar, double time, double location, double situation,
     double *A__db, long *warnings, IntermediateValues *interValues)
 {
     double N_s;                 // Surface refractivity, in N-Units
