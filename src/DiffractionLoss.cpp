@@ -55,7 +55,7 @@ double DiffractionLoss(const double d__meter, const double d_hzn__meter[2], cons
     if (mode == MODE__P2P)
         q += 10.0;
 
-    double term1 = sqrt(1.0 + qk / q);                              // square root term in [ERL 79-ITS 67, Eqn 2.23]
+    double term1 = sqrt(1.0 + qk / q);                              // square root term in [ERL 79-ITS 67, Eqn 3.23]
 
     double d_ML__meter = d_hzn__meter[0] + d_hzn__meter[1];         // Maximum line-of-sight distance for actual path
     q = (term1 + (-theta_los * a_e__meter + d_ML__meter) / d__meter) * MIN(delta_h_d__meter * f__mhz / 47.7, 6283.2);

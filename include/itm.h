@@ -78,10 +78,10 @@ DLLEXPORT double FreeSpaceLoss(const double d__meter, const double f__mhz);
 DLLEXPORT double FresnelIntegral(const double v2);
 DLLEXPORT double H0Curve(const int j, const double r);
 DLLEXPORT double H0Function(const double r, double eta_s);
-DLLEXPORT double HeightFunction(const double x__meter, const double K);
+DLLEXPORT double HeightFunction(const double x__km, const double K);
 DLLEXPORT void InitializeArea(const int site_criteria[2], const double gamma_e, const double delta_h__meter,
     const double h__meter[2], double h_e__meter[2], double d_hzn__meter[2], double theta_hzn[2]);
-DLLEXPORT void InitializePointToPoint(const double f__mhz, const double h_sys__meter, const double N_0, const int polarization, const double epsilon, 
+DLLEXPORT void InitializePointToPoint(const double f__mhz, const double h_sys__meter, const double N_0, const int pol, const double epsilon, 
     const double sigma, complex<double> *Z_g, double *gamma_e, double *N_s);
 DLLEXPORT double InverseComplementaryCumulativeDistributionFunction(const double q);
 DLLEXPORT double KnifeEdgeDiffraction(const double d__meter, const double f__mhz, const double a_e__meter, const double theta_los, const double d_hzn__meter[2]);
