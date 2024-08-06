@@ -77,7 +77,7 @@ DLLEXPORT void FindHorizons(double pfl[], double a_e__meter, double h__meter[2],
 DLLEXPORT double FreeSpaceLoss(double d__meter, double f__mhz);
 DLLEXPORT double FresnelIntegral(double v2);
 DLLEXPORT double H0Function(double r, double eta_s);
-DLLEXPORT double HeightFunction(double x__meter, double K);
+DLLEXPORT double HeightFunction(double x__km, double K);
 DLLEXPORT void InitializeArea(int site_criteria[2], double gamma_e, double delta_h__meter,
     double h__meter[2], double h_e__meter[2], double d_hzn__meter[2], double theta_hzn[2]);
 DLLEXPORT void InitializePointToPoint(double f__mhz, double h_sys__meter, double N_0, int polarization, double epsilon, 
