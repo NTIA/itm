@@ -15,14 +15,14 @@
  |      Returns:  Q_q            - Q(q)^-1
  |
  *===========================================================================*/
-double InverseComplementaryCumulativeDistributionFunction(double q)
+double InverseComplementaryCumulativeDistributionFunction(const double q)
 {
-    double C_0 = 2.515516;
-    double C_1 = 0.802853;
-    double C_2 = 0.010328;
-    double D_1 = 1.432788;
-    double D_2 = 0.189269;
-    double D_3 = 0.001308;
+    const double C_0 = 2.515516;
+    const double C_1 = 0.802853;
+    const double C_2 = 0.010328;
+    const double D_1 = 1.432788;
+    const double D_2 = 0.189269;
+    const double D_3 = 0.001308;
 
     double x = q;
     if (q > 0.5)
