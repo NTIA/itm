@@ -90,6 +90,7 @@ EXPORTED double FFunction(double td);
 EXPORTED void FindHorizons(double pfl[], double a_e__meter, double h__meter[2], double theta_hzn[2], double d_hzn__meter[2]);
 EXPORTED double FreeSpaceLoss(double d__meter, double f__mhz);
 EXPORTED double FresnelIntegral(double v2);
+EXPORTED double H0Curve(int j, double r);
 EXPORTED double H0Function(double r, double eta_s);
 EXPORTED double HeightFunction(double x__km, double K);
 EXPORTED void InitializeArea(int site_criteria[2], double gamma_e, double delta_h__meter,
