@@ -70,3 +70,12 @@ xcuserdata
 DerivedData
 *.xcuserstate
 
+###########
+## Doxygen
+###########
+docs/html
+
+###########
+## VS Code
+###########
+.vscode
