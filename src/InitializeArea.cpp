@@ -1,10 +1,14 @@
+/** @file InitializeArea.cpp
+ * Implements a function to initialize and validate parameters for
+ * area mode
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 #include "ITS.Propagation.ITM/Enums.h"
 
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Initialize area mode calculations

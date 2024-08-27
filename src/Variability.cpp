@@ -1,3 +1,6 @@
+/** @file Variability.cpp
+ * Implements functions for computing variability losses
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 #include "ITS.Propagation.ITM/Enums.h"
 #include "ITS.Propagation.ITM/Warnings.h"
@@ -5,7 +8,7 @@
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Curve helper function for TN101v2 Eqn III.69 & III.70

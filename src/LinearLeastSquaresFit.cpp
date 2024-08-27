@@ -1,3 +1,6 @@
+/** @file LinearLeastSquaresFit.cpp
+ * Implements a function to perform a least-squares fit to elevation data
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {

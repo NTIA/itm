@@ -1,9 +1,13 @@
+/** @file SmoothEarthDiffraction.cpp
+ * Implements functions for calculating smooth earth diffraction loss using
+ * Vogler's method
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Compute the smooth earth diffraction loss using the 

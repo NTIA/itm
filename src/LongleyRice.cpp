@@ -1,3 +1,6 @@
+/** @file LongleyRice.cpp
+ * Implements the Longley-Rice calculation of the reference attenuation.
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 #include "ITS.Propagation.ITM/Enums.h"
 #include "ITS.Propagation.ITM/Errors.h"
@@ -6,7 +9,7 @@
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Compute the reference attenuation, using the 

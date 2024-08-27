@@ -1,3 +1,7 @@
+/** @file FresnelIntegral.cpp
+ * Implements a function to approximate the Fresnel integral for diffraction
+ * calculations
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {

@@ -1,3 +1,6 @@
+/** @file ValidateInputs.cpp
+ * Implements functions to validate the setting of model inputs.
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 #include "ITS.Propagation.ITM/Enums.h"
 #include "ITS.Propagation.ITM/Errors.h"
@@ -6,7 +9,7 @@
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Perform input parameter validation.  This function only

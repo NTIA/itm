@@ -1,3 +1,6 @@
+/** @file Errors.h
+ * Contains return codes used by this software
+ */
 #ifndef __ITS_PROPAGATION_ITM_ERRORS__
 #define __ITS_PROPAGATION_ITM_ERRORS__
 

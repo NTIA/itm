@@ -1,3 +1,6 @@
+/** @file FreeSpaceLoss.cpp
+ * Implements a simple function to calculate free space basic transmission loss
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {

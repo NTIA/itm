@@ -1,3 +1,6 @@
+/** @file Enums.h
+ * Enumerated types used by this software
+ */
 #ifndef __ITS_PROPAGATION_ITM_ENUMS__
 #define __ITS_PROPAGATION_ITM_ENUMS__
 

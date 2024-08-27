@@ -1,3 +1,7 @@
+/** @file InitializePointToPoint.cpp
+ * Implements a function to initialize and validate parameters for
+ * point-to-point mode
+ */
 #include "ITS.Propagation.ITM/Enums.h"
 #include "ITS.Propagation.ITM/ITM.h"
 

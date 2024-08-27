@@ -1,9 +1,13 @@
+/** @file InverseComplementaryCumulativeDistributionFunction.cpp
+ * Implements an approximation to the inverse complementary cumulative
+ * distribution function
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  This function computes the inverse complementary

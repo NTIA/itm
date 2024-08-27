@@ -1,3 +1,6 @@
+/** @file Warnings.h
+ * Contains warning codes used by this software
+ */
 #ifndef __ITS_PROPAGATION_ITM_WARNINGS__
 #define __ITS_PROPAGATION_ITM_WARNINGS__
 

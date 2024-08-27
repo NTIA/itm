@@ -1,3 +1,6 @@
+/** @file ITM.h
+ * Interface header for this library
+ */
 #ifndef __ITS_PROPAGATION_ITM__
 #define __ITS_PROPAGATION_ITM__
 

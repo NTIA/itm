@@ -1,9 +1,13 @@
+/** @file QuickPfl.cpp
+ * Implements an optimized function to extract various parameters from a terrain
+ * profile
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Extract parameters from the terrain pfl

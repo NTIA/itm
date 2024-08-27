@@ -1,9 +1,12 @@
+/** @file TerrainRoughness.cpp
+ * Implements a function to calculate the terrain roughness
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Compute delta_h_d

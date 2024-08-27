@@ -1,3 +1,6 @@
+/** @file itm_p2p.cpp
+ * Implements the primary entry points to call the model in point-to-point mode
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 #include "ITS.Propagation.ITM/Enums.h"
 #include "ITS.Propagation.ITM/Errors.h"

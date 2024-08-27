@@ -1,3 +1,6 @@
+/** @file ComputeDeltaH.cpp
+ * Implements a function to compute the terrain irregularity parameter
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {

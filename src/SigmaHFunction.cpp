@@ -1,9 +1,12 @@
+/** @file SigmaHFunction.cpp
+ * Implements a function to compute @f$ \sigma_h @f$ per [ERL 79-ITS 67, 3.6a]
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Compute sigma_h

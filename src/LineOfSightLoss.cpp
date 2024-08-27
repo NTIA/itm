@@ -1,9 +1,12 @@
+/** @file LineOfSightLoss.cpp
+ * Implements functions to calculate loss in the line-of-sight region
+ */
 #include "ITS.Propagation.ITM/ITM.h"
 
 namespace ITS {
 namespace Propagation {
 namespace ITM {
-    
+
 /*=============================================================================
  |
  |  Description:  Compute the loss in the line-of-sight region
