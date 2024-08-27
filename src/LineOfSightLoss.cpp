@@ -1,6 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
-
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Compute the loss in the line-of-sight region
@@ -62,3 +65,7 @@ double LineOfSightLoss(double d__meter, double h_e__meter[2], complex<double> Z_
 
     return A_los__db;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

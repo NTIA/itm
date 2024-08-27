@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description:  Approximate to ideal knife edge diffraction loss
@@ -20,3 +24,7 @@ double FresnelIntegral(double v2)
     else
         return 12.953 + 10 * log10(v2);                 // [TN101v2, Eqn III.24c] and [ERL 79-ITS 67, Eqn 3.27a & 3.27b]
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

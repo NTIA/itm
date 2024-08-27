@@ -1,4 +1,8 @@
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 //
 // ENUMERATION VALUES
 ///////////////////////////////////////////////
@@ -37,3 +41,7 @@
 #define MDVAR__ACCIDENTAL_MODE                  1
 #define MDVAR__MOBILE_MODE                      2
 #define MDVAR__BROADCAST_MODE                   3
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

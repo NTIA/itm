@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Extract parameters from the terrain pfl
@@ -81,3 +85,7 @@ void QuickPfl(double pfl[], double gamma_e, double h__meter[2], double theta_hzn
         h_e__meter[1] = h__meter[1] + fdim(pfl[np + 2], fit_rx);
     }
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

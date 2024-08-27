@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Compute sigma_h
@@ -17,3 +21,7 @@ double SigmaHFunction(double delta_h__meter)
     // [ERL 79-ITS 67, Eqn 3.6a]
     return 0.78 * delta_h__meter * exp(-0.5 * pow(delta_h__meter, 0.25));
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

@@ -1,5 +1,8 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
 /*=============================================================================
  |
  |  Description:  The attenuation function, F(th * d)
@@ -114,3 +117,7 @@ double TroposcatterLoss(double d__meter, double theta_hzn[2], double d_hzn__mete
     double H__meter = 47.7;     // [Algorithm, 4.63]
     return FFunction(th * d__meter) + 10 * log10(wn * H__meter * pow(th, 4)) - 0.1 * (N_s - 301.0) * exp(-th * d__meter / D_0__meter) + H_0;    // [Algorithm, 4.63]
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

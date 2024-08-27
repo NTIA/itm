@@ -3,6 +3,10 @@
 #include "ITS.Propagation.ITM/Errors.h"
 #include "ITS.Propagation.ITM/Warnings.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Compute the reference attenuation, using the 
@@ -223,3 +227,7 @@ int LongleyRice(double theta_hzn[2], double f__mhz, complex<double> Z_g, double 
 
     return SUCCESS;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

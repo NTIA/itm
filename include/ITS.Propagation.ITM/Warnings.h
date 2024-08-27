@@ -1,4 +1,8 @@
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 ///////////////////////////////////////////////
 // WARNING FLAGS
 
@@ -17,3 +21,6 @@
 #define WARN__RX_HORIZON_DISTANCE_2             0x1000  // RX horizon distance is greater than 3 times the smooth earth horizon distance
 #define WARN__EXTREME_VARIABILITIES             0x2000  // One of the provided variabilities is located far in the tail of its distribution
 #define WARN__SURFACE_REFRACTIVITY              0x4000  // Internally computed surface refractivity value is small - care must be taken with result
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

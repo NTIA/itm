@@ -1,6 +1,10 @@
 #include "ITS.Propagation.ITM/ITM.h"
 #include "ITS.Propagation.ITM/Enums.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Initialize area mode calculations
@@ -53,3 +57,7 @@ void InitializeArea(int site_criteria[2], double gamma_e, double delta_h__meter,
         theta_hzn[i] = (0.65 * delta_h__meter * (d_Ls__meter / d_hzn__meter[i] - 1.0) - 2.0 * h_e__meter[i]) / d_Ls__meter;
     }
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

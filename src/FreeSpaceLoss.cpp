@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description:  Free space basic transmission loss equation
@@ -16,3 +20,7 @@ double FreeSpaceLoss(double d__meter, double f__mhz)
 {
     return 32.45 + 20.0 * log10(f__mhz) + 20.0 * log10(d__meter / 1000.0);
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

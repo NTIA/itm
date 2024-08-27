@@ -1,5 +1,8 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
 
 /*=============================================================================
  |
@@ -51,3 +54,7 @@ void LinearLeastSquaresFit(double pfl[], double d_start, double d_end, double *f
     *fit_y1 = sum_y - scaled_sum_y * mid_shifted_end;
     *fit_y2 = sum_y + scaled_sum_y * (np - mid_shifted_end);
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

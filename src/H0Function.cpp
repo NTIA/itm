@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description:  Curve fit helper function to approximate H_0()
@@ -49,3 +53,7 @@ double H0Function(double r, double eta_s)
 
     return result;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

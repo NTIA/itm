@@ -1,4 +1,8 @@
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 ///////////////////////////////////////////////
 // ERROR CODES
 
@@ -28,3 +32,6 @@
 #define ERROR__RX_SITING_CRITERIA               1020    // Invalid value for RX siting criteria
 #define ERROR__SURFACE_REFRACTIVITY_SMALL       1021    // Internally computed surface refractivity value is too small
 #define ERROR__SURFACE_REFRACTIVITY_LARGE       1022    // Internally computed surface refractivity value is too large
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

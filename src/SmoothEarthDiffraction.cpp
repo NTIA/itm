@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Compute the smooth earth diffraction loss using the 
@@ -114,3 +118,7 @@ double HeightFunction(double x__km, double K)
 
     return result;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

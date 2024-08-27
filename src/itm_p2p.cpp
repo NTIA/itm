@@ -2,6 +2,10 @@
 #include "ITS.Propagation.ITM/Enums.h"
 #include "ITS.Propagation.ITM/Errors.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description: The ITS Irregular Terrain Model (ITM).  This function
@@ -250,3 +254,7 @@ int ITM_P2P_TLS_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int cli
 
     return SUCCESS;
 };
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

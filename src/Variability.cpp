@@ -2,6 +2,10 @@
 #include "ITS.Propagation.ITM/Enums.h"
 #include "ITS.Propagation.ITM/Warnings.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Curve helper function for TN101v2 Eqn III.69 & III.70
@@ -218,3 +222,7 @@ double Variability(double time, double location, double situation, double h_e__m
 
     return result;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

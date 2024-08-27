@@ -4,6 +4,10 @@
 #include <stdlib.h>
 #include <vector>
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 using namespace std;
 
 // Export the DLL functions as "C" and not C++
@@ -103,3 +107,8 @@ DLLEXPORT int ValidateInputs(double h_tx__meter, double h_rx__meter, int climate
     double epsilon, double sigma, int mdvar, long *warnings);
 DLLEXPORT double Variability(double time, double location, double situation, double h_e__meter[2], double delta_h__meter,
     double f__mhz, double d__meter, double A_ref__db, int climate, int mdvar, long *warnings);
+
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

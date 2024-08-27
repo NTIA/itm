@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description:  Compute the radio horizon's of the terminals
@@ -59,3 +63,7 @@ void FindHorizons(double pfl[], double a_e__meter, double h__meter[2], double th
         }
     }
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  This function computes the inverse complementary
@@ -39,3 +43,7 @@ double InverseComplementaryCumulativeDistributionFunction(double q)
 
     return Q_q;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

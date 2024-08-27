@@ -1,5 +1,9 @@
-#include "ITS.Propagation.ITM/ITM.h"
 #include "ITS.Propagation.ITM/Enums.h"
+#include "ITS.Propagation.ITM/ITM.h"
+
+namespace ITS {
+namespace Propagation {
+namespace ITM {
 
 /*=============================================================================
  |
@@ -22,9 +26,17 @@
  |      Returns:  [None]
  |
  *===========================================================================*/
-void InitializePointToPoint(double f__mhz, double h_sys__meter, double N_0, int pol, 
-    double epsilon, double sigma, complex<double> *Z_g, double *gamma_e, double *N_s)
-{
+void InitializePointToPoint(
+    double f__mhz,
+    double h_sys__meter,
+    double N_0,
+    int pol,
+    double epsilon,
+    double sigma,
+    complex<double> *Z_g,
+    double *gamma_e,
+    double *N_s
+) {
     // gamma_a is the curvature of the actual earth, ~1 / 6370 km
     double gamma_a = 157e-9;
 
@@ -32,16 +44,22 @@ void InitializePointToPoint(double f__mhz, double h_sys__meter, double N_0, int 
     if (h_sys__meter == 0.0)
         *N_s = N_0;
     else
-        *N_s = N_0 * exp(-h_sys__meter / 9460.0);               // [TN101, Eq 4.3]
+        *N_s = N_0 * exp(-h_sys__meter / 9460.0);  // [TN101, Eq 4.3]
 
     // gamma_e is the curvature of the effective earth
-    *gamma_e = gamma_a * (1.0 - 0.04665 * exp(*N_s / 179.3));   // [TN101, Eq 4.4], reworked
+    *gamma_e
+        = gamma_a
+        * (1.0 - 0.04665 * exp(*N_s / 179.3));  // [TN101, Eq 4.4], reworked
 
     // complex relative permittivity
     complex<double> ep_r = complex<double>(epsilon, 18000 * sigma / f__mhz);
 
-    *Z_g = sqrt(ep_r - 1.0);                        // ground impedance (horizontal polarization)
+    *Z_g = sqrt(ep_r - 1.0);  // ground impedance (horizontal polarization)
 
-    if (pol == POLARIZATION__VERTICAL)              // adjust for vertical polarization
+    if (pol == POLARIZATION__VERTICAL)  // adjust for vertical polarization
         *Z_g = *Z_g / ep_r;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

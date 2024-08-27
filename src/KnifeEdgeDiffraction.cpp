@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description:  Compute the knife-edge diffraction loss
@@ -31,3 +35,7 @@ double KnifeEdgeDiffraction(double d__meter, double f__mhz, double a_e__meter, d
 
     return A_k__db;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

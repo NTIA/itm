@@ -3,6 +3,10 @@
 #include "ITS.Propagation.ITM/Errors.h"
 #include "ITS.Propagation.ITM/Warnings.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+    
 /*=============================================================================
  |
  |  Description:  Perform input parameter validation.  This function only
@@ -98,3 +102,7 @@ int ValidateInputs(double h_tx__meter, double h_rx__meter, int climate, double t
 
     return SUCCESS;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

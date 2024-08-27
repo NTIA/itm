@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description:  Compute the terrain irregularity parameter, delta_h
@@ -82,3 +86,7 @@ double ComputeDeltaH(double pfl[], double d_start__meter, double d_end__meter)
 
     return delta_h__meter;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS

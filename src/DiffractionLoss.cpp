@@ -1,5 +1,9 @@
 #include "ITS.Propagation.ITM/ITM.h"
 
+namespace ITS {
+namespace Propagation {
+namespace ITM {
+
 /*=============================================================================
  |
  |  Description:  Compute the diffraction loss at a specified distance
@@ -67,3 +71,7 @@ double DiffractionLoss(double d__meter, double d_hzn__meter[2], double h_e__mete
 
     return A_d__db;
 }
+
+}  // namespace ITM
+}  // namespace Propagation
+}  // namespace ITS
