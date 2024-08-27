@@ -30,7 +30,6 @@ add_library(
     "${PROJECT_HEADERS}/Enums.h"
     "${PROJECT_HEADERS}/Errors.h"
     "${PROJECT_HEADERS}/${LIB_NAME}.h"
-    "${PROJECT_HEADERS}/Structs.h"
     "${PROJECT_HEADERS}/Warnings.h"
 )
 
