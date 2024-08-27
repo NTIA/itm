@@ -1,3 +1,5 @@
+#ifndef __ITS_PROPAGATION_ITM_WARNINGS__
+#define __ITS_PROPAGATION_ITM_WARNINGS__
 
 namespace ITS {
 namespace Propagation {
@@ -24,3 +26,5 @@ namespace ITM {
 }  // namespace ITM
 }  // namespace Propagation
 }  // namespace ITS
+
+#endif

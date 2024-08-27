@@ -1,3 +1,5 @@
+#ifndef __ITS_PROPAGATION_ITM_ERRORS__
+#define __ITS_PROPAGATION_ITM_ERRORS__
 
 namespace ITS {
 namespace Propagation {
@@ -35,3 +37,5 @@ namespace ITM {
 }  // namespace ITM
 }  // namespace Propagation
 }  // namespace ITS
+
+#endif

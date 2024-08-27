@@ -1,3 +1,6 @@
+#ifndef __ITS_PROPAGATION_ITM__
+#define __ITS_PROPAGATION_ITM__
+
 #include <complex>
 #include <math.h>
 #include <algorithm>
@@ -112,3 +115,5 @@ DLLEXPORT double Variability(double time, double location, double situation, dou
 }  // namespace ITM
 }  // namespace Propagation
 }  // namespace ITS
+
+#endif
