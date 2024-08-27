@@ -1,5 +1,5 @@
-#include "..\include\itm.h"
-#include "..\include\Enums.h"
+#include "ITS.Propagation.ITM/ITM.h"
+#include "ITS.Propagation.ITM/Enums.h"
 
 /*=============================================================================
  |

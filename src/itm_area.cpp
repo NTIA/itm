@@ -1,6 +1,6 @@
-#include "..\include\itm.h"
-#include "..\include\Enums.h"
-#include "..\include\Errors.h"
+#include "ITS.Propagation.ITM/ITM.h"
+#include "ITS.Propagation.ITM/Enums.h"
+#include "ITS.Propagation.ITM/Errors.h"
 
 /*=============================================================================
  |
