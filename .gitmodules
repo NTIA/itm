@@ -2,3 +2,7 @@
 	path = extern/googletest
 	url = https://github.com/google/googletest
 	branch = v1.12.x
+[submodule "extern/doxygen-awesome-css"]
+	path = extern/doxygen-awesome-css
+	url = https://github.com/jothepro/doxygen-awesome-css
+	branch = 40e9b25b6174dd3b472d8868f63323a870dfeeb8
