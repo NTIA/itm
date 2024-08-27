@@ -1,0 +1,44 @@
+.footer-content {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  justify-content: space-between; /* Center the flex items horizontally */
+  max-width: 1040px; /* Optional: Set a max-width for the container */
+  margin: 0 auto; /* Auto margin horizontally centers the container */
+  padding: 0px; /* Optional: Add padding around the container */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.footer-column-left,
+.footer-column-right {
+  width: calc(
+    50% - 10px
+  ); /* Each column takes up 50% of the container width minus padding */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+  padding: 20px; /* Example padding for columns */
+
+  h2,
+  p {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+}
+
+.footer-column-right {
+  text-align: right; /* Align text to the right within elements in the right column */
+  h2 {
+    text-align: right;
+    margin-right: 0;
+  }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+  }
+  .footer-column-left,
+  .footer-column-right {
+    width: 100%; /* Each column takes up 100% of the container width (stacked vertically) */
+    padding: 20px; /* Reset padding for mobile layout */
+  }
+}
