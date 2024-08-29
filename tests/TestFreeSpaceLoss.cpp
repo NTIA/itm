@@ -4,7 +4,7 @@ TEST(TestFreeSpaceLoss, BasicTest) {
     const double d_meter = 1000.0;
     const double f_mhz = 1000.0;
     const double expected_loss
-        = 20.0 * (log10(f_mhz) + log10(d_meter)) - 27.5522;
+        = 32.45 + 20.0 * log10(f_mhz) + 20.0 * log10(d_meter / 1000.0);
     ASSERT_DOUBLE_EQ(FreeSpaceLoss(d_meter, f_mhz), expected_loss);
 }
 
@@ -46,6 +46,6 @@ TEST(TestFreeSpaceLoss, LargeValuesTest) {
     const double d_meter = 1e9;
     const double f_mhz = 1e9;
     const double expected_loss
-        = 20.0 * (log10(f_mhz) + log10(d_meter)) - 27.5522;
+        = 32.45 + 20.0 * log10(f_mhz) + 20.0 * log10(d_meter / 1000.0);
     ASSERT_DOUBLE_EQ(FreeSpaceLoss(d_meter, f_mhz), expected_loss);
 }
