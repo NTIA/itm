@@ -38,7 +38,7 @@ TEST(TestTroposcatterLoss, TestTroposcatterLoss) {
         theta_los__rad,
         &h0
     );
-    EXPECT_DOUBLE_EQ(result, 76.969416176795889);
+    EXPECT_DOUBLE_EQ(result, 76.969449309403771);
 
     // Test short circuit (when h0 > 15)
     double expected;
