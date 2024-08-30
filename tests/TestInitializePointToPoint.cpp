@@ -1,3 +1,4 @@
+#include "ITS.Propagation.ITM/Enums.h"
 #include "TestUtils.h"
 
 class TestInitializePointToPoint: public testing::Test {
@@ -6,7 +7,7 @@ protected:
     double f__mhz = 3500.0;
     double h_sys__meter = 0.0;
     double N_0 = 301.0;
-    int pol = 1;
+    int pol = POLARIZATION__VERTICAL;
     double epsilon = 15.0;
     double sigma = 0.005;
     // Outputs
@@ -40,7 +41,7 @@ TEST_F(TestInitializePointToPoint, TestSetRefractivity) {
 
 TEST_F(TestInitializePointToPoint, TestSetGroundImpedance) {
     // Case 1: horizontal polarization
-    pol = 0;
+    pol = POLARIZATION__HORIZONTAL;
     sigma = f__mhz / 18000;  // Simplifies expression; sets ep_r.imag to 1
     InitializePointToPoint(
         f__mhz, h_sys__meter, N_0, pol, epsilon, sigma, &Z_g, &gamma_e, &N_s
@@ -50,7 +51,7 @@ TEST_F(TestInitializePointToPoint, TestSetGroundImpedance) {
     EXPECT_DOUBLE_EQ(Z_g.real(), expected.real());
     EXPECT_DOUBLE_EQ(Z_g.imag(), expected.imag());
     // Case 2: horizontal polarization
-    pol = 1;
+    pol = POLARIZATION__VERTICAL;
     expected /= ep_r;
     InitializePointToPoint(
         f__mhz, h_sys__meter, N_0, pol, epsilon, sigma, &Z_g, &gamma_e, &N_s
