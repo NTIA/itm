@@ -38,26 +38,6 @@ typedef int(__stdcall *itm_p2p_tls_func)(
     double *A__db,
     long *warnings
 );
-typedef int(__stdcall *itm_area_tls_func)(
-    double h_tx__meter,
-    double h_rx__meter,
-    int tx_site_criteria,
-    int rx_site_criteria,
-    double d__km,
-    double delta_h__meter,
-    int climate,
-    double N_0,
-    double f__mhz,
-    int pol,
-    double epsilon,
-    double sigma,
-    int mdvar,
-    double time,
-    double location,
-    double situation,
-    double *A__db,
-    long *warnings
-);
 
 struct TestParameters {
     int profile_idx;
