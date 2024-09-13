@@ -26,9 +26,9 @@ void QuickPfl(const double pfl[], const double gamma_e, const double h__meter[2]
 
     *d__meter = pfl[0] * pfl[1];
 
-    int np = int(pfl[0]);
+    const int np = int(pfl[0]);
 
-    double a_e__meter = 1 / gamma_e;        // effective earth radius
+    const double a_e__meter = 1 / gamma_e;        // effective earth radius
 
     FindHorizons(pfl, a_e__meter, h__meter, theta_hzn, d_hzn__meter);
 
@@ -52,7 +52,7 @@ void QuickPfl(const double pfl[], const double gamma_e, const double h__meter[2]
         for (int i = 0; i < 2; i++)
             d_hzn__meter[i] = sqrt(2.0 * h_e__meter[i] * a_e__meter) * exp(-0.07 * sqrt(*delta_h__meter / MAX(h_e__meter[i], 5.0)));
 
-        double combined_horizons__meter = d_hzn__meter[0] + d_hzn__meter[1];
+        const double combined_horizons__meter = d_hzn__meter[0] + d_hzn__meter[1];
         if (combined_horizons__meter <= *d__meter)
         {
             q = pow(*d__meter / combined_horizons__meter, 2);
