@@ -42,29 +42,29 @@ struct IntermediateValues
 // Main ITM Functions
 
 DLLEXPORT int ITM_P2P_TLS(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
-    const int pol, const double epsilon, const double sigma, int mdvar, const double time, const double location, const double situation,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double time, const double location, const double situation,
     double *A__db, long *warnings);
 DLLEXPORT int ITM_P2P_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
-    const int pol, const double epsilon, const double sigma, int mdvar, const double time, const double location, const double situation,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double time, const double location, const double situation,
     double *A__db, long *warnings, IntermediateValues *interValues);
 DLLEXPORT int ITM_P2P_CR(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
-    const int pol, const double epsilon, const double sigma, int mdvar, const double confidence, const double reliability,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double confidence, const double reliability,
     double *A__db, long *warnings);
 DLLEXPORT int ITM_P2P_CR_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
-    const int pol, const double epsilon, const double sigma, int mdvar, const double confidence, const double reliability,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double confidence, const double reliability,
     double *A__db, long *warnings, IntermediateValues *interValues);
 DLLEXPORT int ITM_AREA_TLS(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
     const double delta_h__meter, const int climate, const double N_0, double f__mhz, const int pol, const double epsilon, const double sigma,
-    int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings);
+    const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings);
 DLLEXPORT int ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
     const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
-    int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings, IntermediateValues *interValues);
+    const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings, IntermediateValues *interValues);
 DLLEXPORT int ITM_AREA_CR(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
     const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
-    int mdvar, const double confidence, const double reliability, double *A__db, long *warnings);
+    const int mdvar, const double confidence, const double reliability, double *A__db, long *warnings);
 DLLEXPORT int ITM_AREA_CR_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
     const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
-    int mdvar, const double confidence, const double reliability, double *A__db, long *warnings, IntermediateValues *interValues);
+    const int mdvar, const double confidence, const double reliability, double *A__db, long *warnings, IntermediateValues *interValues);
 
 /////////////////////////////
 // ITM Helper Functions
@@ -102,4 +102,4 @@ DLLEXPORT int ValidateInputs(const double h_tx__meter, const double h_rx__meter,
     const double location, const double situation, const double N_0, const double f__mhz, const int pol,
     const double epsilon, const double sigma, const int mdvar, long *warnings);
 DLLEXPORT double Variability(const double time, const double location, const double situation, const double h_e__meter[2], const double delta_h__meter,
-    const double f__mhz, const double d__meter, const double A_ref__db, const int climate, int mdvar, long *warnings);
+    const double f__mhz, const double d__meter, const double A_ref__db, const int climate, const int mdvar, long *warnings);
