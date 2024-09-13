@@ -47,7 +47,7 @@
  |
  *===========================================================================*/
 int ITM_AREA_TLS(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
-    const double delta_h__meter, int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
     const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings)
 {
     IntermediateValues interValues;
@@ -102,7 +102,7 @@ int ITM_AREA_TLS(const double h_tx__meter, const double h_rx__meter, const int t
  |
  *===========================================================================*/
 int ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km, 
-    const double delta_h__meter, int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma, 
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma, 
     const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings, IntermediateValues *interValues)
 {
     *warnings = NO_WARNINGS;
@@ -216,7 +216,7 @@ int ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const in
  |
  *===========================================================================*/
 int ITM_AREA_CR(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
-    const double delta_h__meter, int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
     const int mdvar, const double confidence, const double reliability, double *A__db, long *warnings)
 {
     IntermediateValues interValues;
@@ -279,7 +279,7 @@ int ITM_AREA_CR(const double h_tx__meter, const double h_rx__meter, const int tx
  |
  *===========================================================================*/
 int ITM_AREA_CR_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
-    const double delta_h__meter, int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
     const int mdvar, const double confidence, const double reliability, double *A__db, long *warnings, IntermediateValues *interValues)
 {
     int rtn = ITM_AREA_TLS_Ex(h_tx__meter, h_rx__meter, tx_site_criteria, rx_site_criteria, d__km,

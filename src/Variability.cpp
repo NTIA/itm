@@ -47,7 +47,7 @@ double Curve(const double c1, const double c2, const double x1, const double x2,
  |
  *===========================================================================*/
 double Variability(const double time, const double location, const double situation, const double h_e__meter[2], const double delta_h__meter, 
-    const double f__mhz, const double d__meter, const double A_ref__db, int climate, const int mdvar, long *warnings)
+    const double f__mhz, const double d__meter, const double A_ref__db, const int climate, const int mdvar, long *warnings)
 {
     // Asymptotic values from TN101, Fig 10.13
     // -> approximate to TN101v2 Eqn III.69 & III.70
@@ -88,7 +88,8 @@ double Variability(const double time, const double location, const double situat
     double z_L = InverseComplementaryCumulativeDistributionFunction(location / 100);
     const double z_S = InverseComplementaryCumulativeDistributionFunction(situation / 100);
 
-    climate--; // 0-based indexes
+    int climate_idx = climate; // Create an internal copy for modification
+    climate_idx--; // 0-based indexes
 
     const double wn = f__mhz / 47.7;
 
@@ -129,7 +130,7 @@ double Variability(const double time, const double location, const double situat
     if (plus10)
         mdvar_internal -= 10;
 
-    const double V_med__db = Curve(all_year[0][climate], all_year[1][climate], all_year[2][climate], all_year[3][climate], all_year[4][climate], d_e__meter);
+    const double V_med__db = Curve(all_year[0][climate_idx], all_year[1][climate_idx], all_year[2][climate_idx], all_year[3][climate_idx], all_year[4][climate_idx], d_e__meter);
 
     if (mdvar_internal == SINGLE_MESSAGE_MODE)
     {
@@ -166,19 +167,19 @@ double Variability(const double time, const double location, const double situat
     // time variability calcs
 
     const double q = log(0.133 * wn);
-    const double g_minus = bfm1[climate] + bfm2[climate] / (pow(bfm3[climate] * q, 2) + 1.0);
-    const double g_plus = bfp1[climate] + bfp2[climate] / (pow(bfp3[climate] * q, 2) + 1.0);
+    const double g_minus = bfm1[climate_idx] + bfm2[climate_idx] / (pow(bfm3[climate_idx] * q, 2) + 1.0);
+    const double g_plus = bfp1[climate_idx] + bfp2[climate_idx] / (pow(bfp3[climate_idx] * q, 2) + 1.0);
 
-    const double sigma_T_minus = Curve(bsm1[climate], bsm2[climate], xsm1[climate], xsm2[climate], xsm3[climate], d_e__meter) * g_minus;
-    const double sigma_T_plus = Curve(bsp1[climate], bsp2[climate], xsp1[climate], xsp2[climate], xsp3[climate], d_e__meter) * g_plus;
+    const double sigma_T_minus = Curve(bsm1[climate_idx], bsm2[climate_idx], xsm1[climate_idx], xsm2[climate_idx], xsm3[climate_idx], d_e__meter) * g_minus;
+    const double sigma_T_plus = Curve(bsp1[climate_idx], bsp2[climate_idx], xsp1[climate_idx], xsp2[climate_idx], xsp3[climate_idx], d_e__meter) * g_plus;
 
-    const double sigma_TD = C_D[climate] * sigma_T_plus;
-    const double tgtd = (sigma_T_plus - sigma_TD) * z_D[climate];
+    const double sigma_TD = C_D[climate_idx] * sigma_T_plus;
+    const double tgtd = (sigma_T_plus - sigma_TD) * z_D[climate_idx];
 
     double sigma_T;
     if (z_T < 0.0)
         sigma_T = sigma_T_minus;
-    else if (z_T <= z_D[climate])
+    else if (z_T <= z_D[climate_idx])
         sigma_T = sigma_T_plus;
     else
         sigma_T = sigma_TD + tgtd / z_T;

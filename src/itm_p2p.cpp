@@ -37,7 +37,7 @@
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_TLS(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+int ITM_P2P_TLS(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
     const int pol, const double epsilon, const double sigma, const int mdvar, const double time, const double location, const double situation,
     double *A__db, long *warnings)
 {
@@ -81,7 +81,7 @@ int ITM_P2P_TLS(const double h_tx__meter, const double h_rx__meter, const double
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_CR(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+int ITM_P2P_CR(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
     const int pol, const double epsilon, const double sigma, const int mdvar, const double confidence, const double reliability,
     double *A__db, long *warnings)
 {
@@ -134,7 +134,7 @@ int ITM_P2P_CR(const double h_tx__meter, const double h_rx__meter, const double 
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_CR_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+int ITM_P2P_CR_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
     const int pol, const double epsilon, const double sigma, const int mdvar, const double confidence, const double reliability,
     double *A__db, long *warnings, IntermediateValues *interValues)
 {
@@ -177,7 +177,7 @@ int ITM_P2P_CR_Ex(const double h_tx__meter, const double h_rx__meter, const doub
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], int climate, const double N_0, const double f__mhz,
+int ITM_P2P_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
     const int pol, const double epsilon, const double sigma, const int mdvar, const double time, const double location, const double situation,
     double *A__db, long *warnings, IntermediateValues *interValues)
 {
