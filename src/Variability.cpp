@@ -84,9 +84,9 @@ double Variability(const double time, const double location, const double situat
     const double bfp2[] = { 0.0, 0.31, 0.0, 0.19, 0.31, 0.0, 0.0 };
     const double bfp3[] = { 0.0, 2.00, 0.0, 1.79, 2.00, 0.0, 0.0 };
 
-    double z_T = InverseComplementaryCumulativeDistributionFunction(time);
-    double z_L = InverseComplementaryCumulativeDistributionFunction(location);
-    double z_S = InverseComplementaryCumulativeDistributionFunction(situation);
+    double z_T = InverseComplementaryCumulativeDistributionFunction(time / 100);
+    double z_L = InverseComplementaryCumulativeDistributionFunction(location / 100);
+    double z_S = InverseComplementaryCumulativeDistributionFunction(situation / 100);
 
     climate--; // 0-based indexes
 
