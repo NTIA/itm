@@ -47,7 +47,7 @@ double Curve(const double c1, const double c2, const double x1, const double x2,
  |
  *===========================================================================*/
 double Variability(const double time, const double location, const double situation, const double h_e__meter[2], const double delta_h__meter, 
-    const double f__mhz, const double d__meter, const double A_ref__db, int climate, int mdvar, long *warnings)
+    const double f__mhz, const double d__meter, const double A_ref__db, int climate, const int mdvar, long *warnings)
 {
     // Asymptotic values from TN101, Fig 10.13
     // -> approximate to TN101v2 Eqn III.69 & III.70
@@ -107,9 +107,10 @@ double Variability(const double time, const double location, const double situat
     // if mdvar >= 20, then "Direct situation variability is to be eliminated as it should when
     //                       considering interference problems.  Note that there may still be a 
     //                       small residual situation variability" [Hufford, 1982]
-    const bool plus20 = mdvar >= 20;
+    int mdvar_internal = mdvar;  // Create an internal copy to modify
+    const bool plus20 = mdvar_internal >= 20;
     if (plus20)
-        mdvar -= 20;
+        mdvar_internal -= 20;
 
     double sigma_S;
     if (plus20)
@@ -124,20 +125,20 @@ double Variability(const double time, const double location, const double situat
     //////////////////////////////////
 
     
-    const bool plus10 = mdvar >= 10;
+    const bool plus10 = mdvar_internal >= 10;
     if (plus10)
-        mdvar -= 10;
+        mdvar_internal -= 10;
 
     const double V_med__db = Curve(all_year[0][climate], all_year[1][climate], all_year[2][climate], all_year[3][climate], all_year[4][climate], d_e__meter);
 
-    if (mdvar == SINGLE_MESSAGE_MODE)
+    if (mdvar_internal == SINGLE_MESSAGE_MODE)
     {
         z_T = z_S;
         z_L = z_S;
     }
-    else if (mdvar == ACCIDENTAL_MODE)
+    else if (mdvar_internal == ACCIDENTAL_MODE)
         z_L = z_S;
-    else if (mdvar == MOBILE_MODE)
+    else if (mdvar_internal == MOBILE_MODE)
         z_L = z_T;
     // else using Broadcast Mode (no additional operations)
 
@@ -189,17 +190,17 @@ double Variability(const double time, const double location, const double situat
     const double Y_S_temp = pow(sigma_S, 2) + pow(Y_T, 2) / (7.8 + pow(z_S, 2)) + pow(Y_L, 2) / (24.0 + pow(z_S, 2));  // Part of [Algorithm, Eqn 5.11]
 
     double Y_R, Y_S;
-    if (mdvar == SINGLE_MESSAGE_MODE)
+    if (mdvar_internal == SINGLE_MESSAGE_MODE)
     {
         Y_R = 0.0;
         Y_S = sqrt(pow(sigma_T, 2) + pow(sigma_L, 2) + Y_S_temp) * z_S;
     }
-    else if (mdvar == ACCIDENTAL_MODE)
+    else if (mdvar_internal == ACCIDENTAL_MODE)
     {
         Y_R = Y_T;
         Y_S = sqrt(pow(sigma_L, 2) + Y_S_temp) * z_S;
     }
-    else if (mdvar == MOBILE_MODE)
+    else if (mdvar_internal == MOBILE_MODE)
     {
         Y_R = sqrt(pow(sigma_T, 2) + pow(sigma_L, 2)) * z_T;
         Y_S = sqrt(Y_S_temp) * z_S;
