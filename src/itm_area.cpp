@@ -142,7 +142,7 @@ int ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const in
 
     InitializeArea(site_criteria, gamma_e, delta_h__meter, h__meter, h_e__meter, d_hzn__meter, theta_hzn);
 
-    double d__meter = d__km * 1000;
+    const double d__meter = d__km * 1000;
     int propmode = MODE__NOT_SET;
     rtn = LongleyRice(theta_hzn, f__mhz, Z_g, d_hzn__meter, h_e__meter, gamma_e, N_s, delta_h__meter, h__meter, d__meter, MODE__AREA, 
         &A_ref__db, warnings, &propmode);
