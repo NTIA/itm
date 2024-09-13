@@ -16,14 +16,14 @@
  *===========================================================================*/
 void FindHorizons(const double pfl[], const double a_e__meter, const double h__meter[2], double theta_hzn[2], double d_hzn__meter[2])
 {
-    int np = int(pfl[0]);
-    double xi = pfl[1];
+    const int np = int(pfl[0]);
+    const double xi = pfl[1];
 
-    double d__meter = pfl[0] * pfl[1];
+    const double d__meter = pfl[0] * pfl[1];
 
     // compute radials (ignore radius of earth since it cancels out in the later math)
-    double z_tx__meter = pfl[2] + h__meter[0];
-    double z_rx__meter = pfl[np + 2] + h__meter[1];
+    const double z_tx__meter = pfl[2] + h__meter[0];
+    const double z_rx__meter = pfl[np + 2] + h__meter[1];
 
     // set the terminal horizon angles as if the terminals are line-of-sight
     // [TN101, Eq 6.15]
