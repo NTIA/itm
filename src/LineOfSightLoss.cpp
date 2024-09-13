@@ -22,21 +22,21 @@
 double LineOfSightLoss(const double d__meter, const double h_e__meter[2], const complex<double> Z_g, const double delta_h__meter, 
     const double M_d, const double A_d0, const double d_sML__meter, const double f__mhz)
 {
-    double delta_h_d__meter = TerrainRoughness(d__meter, delta_h__meter);
+    const double delta_h_d__meter = TerrainRoughness(d__meter, delta_h__meter);
 
-    double sigma_h_d__meter = SigmaHFunction(delta_h_d__meter);
+    const double sigma_h_d__meter = SigmaHFunction(delta_h_d__meter);
 
     // wavenumber, k
-    double wn = f__mhz / 47.7;
+    const double wn = f__mhz / 47.7;
 
     // [Algorithm, Eqn 4.46]
-    double sin_psi = (h_e__meter[0] + h_e__meter[1]) / sqrt(pow(d__meter, 2) + pow(h_e__meter[0] + h_e__meter[1], 2));
+    const double sin_psi = (h_e__meter[0] + h_e__meter[1]) / sqrt(pow(d__meter, 2) + pow(h_e__meter[0] + h_e__meter[1], 2));
 
     // [Algorithm, Eqn 4.47]
     complex<double> R_e = (sin_psi - Z_g) / (sin_psi + Z_g) * exp(-MIN(10.0, wn * sigma_h_d__meter * sin_psi));
 
     // q = Magnitude of R_e', [Algorithm, Eqn 4.48]
-    double q = pow(R_e.real(), 2) + pow(R_e.imag(), 2);
+    const double q = pow(R_e.real(), 2) + pow(R_e.imag(), 2);
     if (q < 0.25 || q < sin_psi)
         R_e = R_e * sqrt(sin_psi / q);
 
@@ -48,16 +48,16 @@ double LineOfSightLoss(const double d__meter, const double h_e__meter[2], const 
         delta_phi = PI - pow(PI / 2.0, 2) / delta_phi;
 
     // Two-ray attenuation
-    complex<double> rr = complex<double>(cos(delta_phi), -sin(delta_phi)) + R_e;
-    double A_t__db = -10 * log10(pow(rr.real(), 2) + pow(rr.imag(), 2));
+    const complex<double> rr = complex<double>(cos(delta_phi), -sin(delta_phi)) + R_e;
+    const double A_t__db = -10 * log10(pow(rr.real(), 2) + pow(rr.imag(), 2));
 
     // Extended diffraction attenuation
-    double A_d__db = M_d * d__meter + A_d0;
+    const double A_d__db = M_d * d__meter + A_d0;
 
     // weighting factor
-    double w = 1 / (1 + f__mhz * delta_h__meter / MAX(10e3, d_sML__meter));
+    const double w = 1 / (1 + f__mhz * delta_h__meter / MAX(10e3, d_sML__meter));
 
-    double A_los__db = w * A_t__db + (1 - w) * A_d__db;
+    const double A_los__db = w * A_t__db + (1 - w) * A_d__db;
 
     return A_los__db;
 }
