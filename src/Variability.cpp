@@ -52,7 +52,7 @@ double Variability(const double time, const double location, const double situat
     // Asymptotic values from TN101, Fig 10.13
     // -> approximate to TN101v2 Eqn III.69 & III.70
     // -> to describe the curves for each climate
-    const double all_year[5][7] =
+    constexpr double all_year[5][7] =
     {
         {  -9.67,   -0.62,    1.26,   -9.21,   -0.62,   -0.39,      3.15 },
         {  12.7,     9.19,   15.5,     9.05,    9.19,    2.86,   857.9   },
@@ -61,39 +61,39 @@ double Variability(const double time, const double location, const double situat
         { 133.8e3, 143.6e3,  99.8e3,  98.6e3, 143.6e3, 167.4e3,  116.3e3 }
     };
 
-    const double bsm1[] = { 2.13,      2.66,    6.11,     1.98,   2.68,    6.86,    8.51 };
-    const double bsm2[] = { 159.5,     7.67,    6.65,    13.11,   7.16,   10.38,  169.8 };
-    const double xsm1[] = { 762.2e3, 100.4e3, 138.2e3, 139.1e3,  93.7e3, 187.8e3, 609.8e3 };
-    const double xsm2[] = { 123.6e3, 172.5e3, 242.2e3, 132.7e3, 186.8e3, 169.6e3, 119.9e3 };
-    const double xsm3[] = { 94.5e3,  136.4e3, 178.6e3, 193.5e3, 133.5e3, 108.9e3, 106.6e3 };
+    constexpr double bsm1[] = { 2.13,      2.66,    6.11,     1.98,   2.68,    6.86,    8.51 };
+    constexpr double bsm2[] = { 159.5,     7.67,    6.65,    13.11,   7.16,   10.38,  169.8 };
+    constexpr double xsm1[] = { 762.2e3, 100.4e3, 138.2e3, 139.1e3,  93.7e3, 187.8e3, 609.8e3 };
+    constexpr double xsm2[] = { 123.6e3, 172.5e3, 242.2e3, 132.7e3, 186.8e3, 169.6e3, 119.9e3 };
+    constexpr double xsm3[] = { 94.5e3,  136.4e3, 178.6e3, 193.5e3, 133.5e3, 108.9e3, 106.6e3 };
 
-    const double bsp1[] = { 2.11, 6.87, 10.08, 3.68, 4.75, 8.58, 8.43 };
-    const double bsp2[] = { 102.3, 15.53, 9.60, 159.3, 8.12, 13.97, 8.19 };
-    const double xsp1[] = { 636.9e3, 138.7e3, 165.3e3, 464.4e3, 93.2e3, 216.0e3, 136.2e3 };
-    const double xsp2[] = { 134.8e3, 143.7e3, 225.7e3, 93.1e3, 135.9e3, 152.0e3, 188.5e3 };
-    const double xsp3[] = { 95.6e3, 98.6e3, 129.7e3, 94.2e3, 113.4e3, 122.7e3, 122.9e3 };
+    constexpr double bsp1[] = { 2.11, 6.87, 10.08, 3.68, 4.75, 8.58, 8.43 };
+    constexpr double bsp2[] = { 102.3, 15.53, 9.60, 159.3, 8.12, 13.97, 8.19 };
+    constexpr double xsp1[] = { 636.9e3, 138.7e3, 165.3e3, 464.4e3, 93.2e3, 216.0e3, 136.2e3 };
+    constexpr double xsp2[] = { 134.8e3, 143.7e3, 225.7e3, 93.1e3, 135.9e3, 152.0e3, 188.5e3 };
+    constexpr double xsp3[] = { 95.6e3, 98.6e3, 129.7e3, 94.2e3, 113.4e3, 122.7e3, 122.9e3 };
 
-    const double C_D[] = { 1.224, 0.801, 1.380, 1.000, 1.224, 1.518, 1.518 };	    // [Algorithm, Table 5.1], C_d
-    const double z_D[] = { 1.282, 2.161, 1.282, 20.0, 1.282, 1.282, 1.282 };		// [Algorithm, Table 5.1], z_d
+    constexpr double C_D[] = { 1.224, 0.801, 1.380, 1.000, 1.224, 1.518, 1.518 };	// [Algorithm, Table 5.1], C_d
+    constexpr double z_D[] = { 1.282, 2.161, 1.282, 20.0, 1.282, 1.282, 1.282 };	// [Algorithm, Table 5.1], z_d
 
-    const double bfm1[] = { 1.0, 1.0, 1.0, 1.0, 0.92, 1.0, 1.0 };
-    const double bfm2[] = { 0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 0.0 };
-    const double bfm3[] = { 0.0, 0.0, 0.0, 0.0, 1.77, 0.0, 0.0 };
+    constexpr double bfm1[] = { 1.0, 1.0, 1.0, 1.0, 0.92, 1.0, 1.0 };
+    constexpr double bfm2[] = { 0.0, 0.0, 0.0, 0.0, 0.25, 0.0, 0.0 };
+    constexpr double bfm3[] = { 0.0, 0.0, 0.0, 0.0, 1.77, 0.0, 0.0 };
 
-    const double bfp1[] = { 1.0, 0.93, 1.0, 0.93, 0.93, 1.0, 1.0 };
-    const double bfp2[] = { 0.0, 0.31, 0.0, 0.19, 0.31, 0.0, 0.0 };
-    const double bfp3[] = { 0.0, 2.00, 0.0, 1.79, 2.00, 0.0, 0.0 };
+    constexpr double bfp1[] = { 1.0, 0.93, 1.0, 0.93, 0.93, 1.0, 1.0 };
+    constexpr double bfp2[] = { 0.0, 0.31, 0.0, 0.19, 0.31, 0.0, 0.0 };
+    constexpr double bfp3[] = { 0.0, 2.00, 0.0, 1.79, 2.00, 0.0, 0.0 };
 
     double z_T = InverseComplementaryCumulativeDistributionFunction(time / 100);
     double z_L = InverseComplementaryCumulativeDistributionFunction(location / 100);
-    double z_S = InverseComplementaryCumulativeDistributionFunction(situation / 100);
+    const double z_S = InverseComplementaryCumulativeDistributionFunction(situation / 100);
 
     climate--; // 0-based indexes
 
-    double wn = f__mhz / 47.7;
+    const double wn = f__mhz / 47.7;
 
     // compute the effective distance
-    double d_ex__meter = sqrt(2 * a_9000__meter * h_e__meter[0]) + sqrt(2 * a_9000__meter * h_e__meter[1]) + pow((575.7e12 / wn), THIRD);		// [Algorithm, Eqn 5.3]
+    const double d_ex__meter = sqrt(2 * a_9000__meter * h_e__meter[0]) + sqrt(2 * a_9000__meter * h_e__meter[1]) + pow((575.7e12 / wn), THIRD);  // [Algorithm, Eqn 5.3]
 
     double d_e__meter;
     if (d__meter < d_ex__meter)
@@ -107,7 +107,7 @@ double Variability(const double time, const double location, const double situat
     // if mdvar >= 20, then "Direct situation variability is to be eliminated as it should when
     //                       considering interference problems.  Note that there may still be a 
     //                       small residual situation variability" [Hufford, 1982]
-    bool plus20 = mdvar >= 20;
+    const bool plus20 = mdvar >= 20;
     if (plus20)
         mdvar -= 20;
 
@@ -124,11 +124,11 @@ double Variability(const double time, const double location, const double situat
     //////////////////////////////////
 
     
-    bool plus10 = mdvar >= 10;
+    const bool plus10 = mdvar >= 10;
     if (plus10)
         mdvar -= 10;
 
-    double V_med__db = Curve(all_year[0][climate], all_year[1][climate], all_year[2][climate], all_year[3][climate], all_year[4][climate], d_e__meter);
+    const double V_med__db = Curve(all_year[0][climate], all_year[1][climate], all_year[2][climate], all_year[3][climate], all_year[4][climate], d_e__meter);
 
     if (mdvar == SINGLE_MESSAGE_MODE)
     {
@@ -152,11 +152,11 @@ double Variability(const double time, const double location, const double situat
         sigma_L = 0.0;
     else
     {
-        double delta_h_d__meter = TerrainRoughness(d__meter, delta_h__meter);
+        const double delta_h_d__meter = TerrainRoughness(d__meter, delta_h__meter);
 
         sigma_L = 10.0 * wn * delta_h_d__meter / (wn * delta_h_d__meter + 13.0);    // Context of [Algorithm, Eqn 5.9]
     }
-    double Y_L = sigma_L * z_L;
+    const double Y_L = sigma_L * z_L;
 
     //
     //////////////////////////////////
@@ -164,15 +164,15 @@ double Variability(const double time, const double location, const double situat
     //////////////////////////////////
     // time variability calcs
 
-    double q = log(0.133 * wn);
-    double g_minus = bfm1[climate] + bfm2[climate] / (pow(bfm3[climate] * q, 2) + 1.0);
-    double g_plus = bfp1[climate] + bfp2[climate] / (pow(bfp3[climate] * q, 2) + 1.0);
+    const double q = log(0.133 * wn);
+    const double g_minus = bfm1[climate] + bfm2[climate] / (pow(bfm3[climate] * q, 2) + 1.0);
+    const double g_plus = bfp1[climate] + bfp2[climate] / (pow(bfp3[climate] * q, 2) + 1.0);
 
-    double sigma_T_minus = Curve(bsm1[climate], bsm2[climate], xsm1[climate], xsm2[climate], xsm3[climate], d_e__meter) * g_minus;
-    double sigma_T_plus = Curve(bsp1[climate], bsp2[climate], xsp1[climate], xsp2[climate], xsp3[climate], d_e__meter) * g_plus;
+    const double sigma_T_minus = Curve(bsm1[climate], bsm2[climate], xsm1[climate], xsm2[climate], xsm3[climate], d_e__meter) * g_minus;
+    const double sigma_T_plus = Curve(bsp1[climate], bsp2[climate], xsp1[climate], xsp2[climate], xsp3[climate], d_e__meter) * g_plus;
 
-    double sigma_TD = C_D[climate] * sigma_T_plus;
-    double tgtd = (sigma_T_plus - sigma_TD) * z_D[climate];
+    const double sigma_TD = C_D[climate] * sigma_T_plus;
+    const double tgtd = (sigma_T_plus - sigma_TD) * z_D[climate];
 
     double sigma_T;
     if (z_T < 0.0)
@@ -181,12 +181,12 @@ double Variability(const double time, const double location, const double situat
         sigma_T = sigma_T_plus;
     else
         sigma_T = sigma_TD + tgtd / z_T;
-    double Y_T = sigma_T * z_T;
+    const double Y_T = sigma_T * z_T;
 
     //
     /////////////////////////////////
 
-    double Y_S_temp = pow(sigma_S, 2) + pow(Y_T, 2) / (7.8 + pow(z_S, 2)) + pow(Y_L, 2) / (24.0 + pow(z_S, 2));   // Part of [Algorithm, Eqn 5.11]
+    const double Y_S_temp = pow(sigma_S, 2) + pow(Y_T, 2) / (7.8 + pow(z_S, 2)) + pow(Y_L, 2) / (24.0 + pow(z_S, 2));  // Part of [Algorithm, Eqn 5.11]
 
     double Y_R, Y_S;
     if (mdvar == SINGLE_MESSAGE_MODE)
