@@ -39,8 +39,8 @@ double H0Function(const double r, double eta_s)
 {
     eta_s = MIN(MAX(eta_s, 1), 5);  // range 1 <= eta_s <= 5
 
-    int i = int(eta_s);             // integer part of eta_s
-    double q = eta_s - i;           // decimal part of eta_s
+    const int i = int(eta_s);       // integer part of eta_s
+    const double q = eta_s - i;     // decimal part of eta_s
 
     double result = H0Curve(i - 1, r);
 
