@@ -199,7 +199,7 @@ int ITM_P2P_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const dou
 
     interValues->d__km = (pfl[0] * pfl[1]) / 1000;
 
-    int np = int(pfl[0]);       // number of points in the pfl
+    const int np = int(pfl[0]); // number of points in the pfl
 
     // compute the average path height, ignoring first and last 10%
     int p10 = int(0.1 * np);    // 10% of np
