@@ -16,7 +16,7 @@
  *===========================================================================*/
 void LinearLeastSquaresFit(const double pfl[], const double d_start, const double d_end, double *fit_y1, double *fit_y2)
 {
-    int np = (int)pfl[0];
+    const int np = (int)pfl[0];
 
     int i_start = int(fdim(d_start / pfl[1], 0.0));
     int i_end = np - int(fdim(np, d_end / pfl[1]));
@@ -27,10 +27,10 @@ void LinearLeastSquaresFit(const double pfl[], const double d_start, const doubl
         i_end = np - (int)fdim(np, i_end + 1.0);
     }
 
-    double x_length = i_end - i_start;
+    const double x_length = i_end - i_start;
 
     double mid_shifted_index = -0.5 * x_length;
-    double mid_shifted_end = i_end + mid_shifted_index;
+    const double mid_shifted_end = i_end + mid_shifted_index;
 
     double sum_y = 0.5 * (pfl[i_start + 2] + pfl[i_end + 2]);
     double scaled_sum_y = 0.5 * (pfl[i_start + 2] - pfl[i_end + 2]) * mid_shifted_index;
