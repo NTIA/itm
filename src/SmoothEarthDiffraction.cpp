@@ -29,8 +29,8 @@ double SmoothEarthDiffraction(const double d__meter, const double f__mhz, const 
     double x__km[3];
     double C_0[3];
 
-    double theta_nlos = d__meter / a_e__meter - theta_los;                          // [Algorithm, Eqn 4.12]
-    double d_ML__meter = d_hzn__meter[0] + d_hzn__meter[1];                         // Maximum line-of-sight distance for actual path
+    const double theta_nlos = d__meter / a_e__meter - theta_los;                    // [Algorithm, Eqn 4.12]
+    const double d_ML__meter = d_hzn__meter[0] + d_hzn__meter[1];                   // Maximum line-of-sight distance for actual path
 
     // compute 3 radii
     a__meter[0] = (d__meter - d_ML__meter) / (d__meter / a_e__meter - theta_los);   // which is a_e__meter when theta_los = d_ML__meter / a_e__meter
@@ -65,7 +65,7 @@ double SmoothEarthDiffraction(const double d__meter, const double f__mhz, const 
     F_x__db[1] = HeightFunction(x__km[2], K[2]);
 
     // compute distance function
-    double G_x__db = 0.05751 * x__km[0] - 10.0 * log10(x__km[0]);                   // [TN101, Eqn 8.4] & [Volger 1964, Eqn 13]
+    const double G_x__db = 0.05751 * x__km[0] - 10.0 * log10(x__km[0]);             // [TN101, Eqn 8.4] & [Volger 1964, Eqn 13]
 
     return G_x__db - F_x__db[0] - F_x__db[1] - 20;                                  // [Algorithm, Eqn 4.20] & [Volger 1964]
 }
