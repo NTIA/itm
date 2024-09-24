@@ -96,7 +96,7 @@ Most IDEs support this type of file, which can and should be used to apply unifo
 code styling to C++ source and header files.
 - _For Python wrapper repositories_, a `.pre-commit-config.yaml` file is included
 in the root directory. This file implements multiple hooks for the [pre-commit](https://pre-commit.com/)
-tool, which apply automated formatting to files when they are commited to Git.
+tool, which apply automated formatting to files when they are committed to Git.
 It is recommended to use this tool to autoformat Python code when checked in.
 
 ## Project Structure and CMake
@@ -172,7 +172,7 @@ the Debug configuration will attempt to pass debug flags to the compiler.
 The provided `CMakeLists.txt` and `CMakePresets.json` files aim to be flexible
 for development from the platform of your choosing. The approach taken is to make
 few assumptions about your toolchain to implicitly enable cross-platform and
-multi-environment development as much as possible. However, we cannnot guarantee
+multi-environment development as much as possible. However, we cannot guarantee
 that all compilers, tools, and platforms will work without requiring some additional
 configuration which is not documented here. If you find an issue or would like to
 see a change to support your chosen platform or tools, open an issue or create a
@@ -186,7 +186,7 @@ The C++ source code is documented with Doxygen. A GitHub Action is configured to
 build and deploy the documentation using GitHub Pages. This action will ensure
 that any new code has been accompanied by Doxygen-formatted documentation. Code
 will not be merged until and unless it is completely documented using Doxygen,
-and the GitHub action succesfully generates the documentation site. Below is an
+and the GitHub action successfully generates the documentation site. Below is an
 example showing the expected documentation formats.
 
 ```cpp
