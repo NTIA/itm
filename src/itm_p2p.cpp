@@ -37,8 +37,8 @@
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_TLS(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double time, double location, double situation,
+int ITM_P2P_TLS(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double time, const double location, const double situation,
     double *A__db, long *warnings)
 {
     IntermediateValues interValues;
@@ -81,8 +81,8 @@ int ITM_P2P_TLS(double h_tx__meter, double h_rx__meter, double pfl[], int climat
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_CR(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double confidence, double reliability,
+int ITM_P2P_CR(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double confidence, const double reliability,
     double *A__db, long *warnings)
 {
     IntermediateValues interValues;
@@ -134,8 +134,8 @@ int ITM_P2P_CR(double h_tx__meter, double h_rx__meter, double pfl[], int climate
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_CR_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double confidence, double reliability,
+int ITM_P2P_CR_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double confidence, const double reliability,
     double *A__db, long *warnings, IntermediateValues *interValues)
 {
     int rtn = ITM_P2P_TLS_Ex(h_tx__meter, h_rx__meter, pfl, climate, N_0, f__mhz, pol, epsilon, sigma, mdvar,
@@ -177,8 +177,8 @@ int ITM_P2P_CR_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int clim
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_P2P_TLS_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int climate, double N_0, double f__mhz,
-    int pol, double epsilon, double sigma, int mdvar, double time, double location, double situation,
+int ITM_P2P_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const double pfl[], const int climate, const double N_0, const double f__mhz,
+    const int pol, const double epsilon, const double sigma, const int mdvar, const double time, const double location, const double situation,
     double *A__db, long *warnings, IntermediateValues *interValues)
 {
     double N_s;                 // Surface refractivity, in N-Units
@@ -199,16 +199,11 @@ int ITM_P2P_TLS_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int cli
 
     interValues->d__km = (pfl[0] * pfl[1]) / 1000;
 
-    int np = int(pfl[0]);       // number of points in the pfl
-
-    // switch from percentages to ratios
-    time /= 100;
-    location /= 100;
-    situation /= 100;
+    const int np = int(pfl[0]);     // number of points in the pfl
 
     // compute the average path height, ignoring first and last 10%
-    int p10 = int(0.1 * np);    // 10% of np
-    double h_sys__meter = 0;    // Height of the system above mean sea level
+    const int p10 = int(0.1 * np);  // 10% of np
+    double h_sys__meter = 0;        // Height of the system above mean sea level
 
     for (int i = p10; i <= np - p10; i++)
         h_sys__meter += pfl[i + 2];
@@ -217,7 +212,7 @@ int ITM_P2P_TLS_Ex(double h_tx__meter, double h_rx__meter, double pfl[], int cli
 
     InitializePointToPoint(f__mhz, h_sys__meter, N_0, pol, epsilon, sigma, &Z_g, &gamma_e, &N_s);
 
-    double h__meter[2] = { h_tx__meter, h_rx__meter };
+    const double h__meter[2] = { h_tx__meter, h_rx__meter };
     QuickPfl(pfl, gamma_e, h__meter, theta_hzn, d_hzn__meter, h_e__meter, &delta_h__meter, &d__meter);
 
     // Reference attenuation, in dB

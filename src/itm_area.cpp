@@ -46,9 +46,9 @@
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_AREA_TLS(double h_tx__meter, double h_rx__meter, int tx_site_criteria, int rx_site_criteria, double d__km,
-    double delta_h__meter, int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma,
-    int mdvar, double time, double location, double situation, double *A__db, long *warnings)
+int ITM_AREA_TLS(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
+    const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings)
 {
     IntermediateValues interValues;
 
@@ -101,9 +101,9 @@ int ITM_AREA_TLS(double h_tx__meter, double h_rx__meter, int tx_site_criteria, i
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_AREA_TLS_Ex(double h_tx__meter, double h_rx__meter, int tx_site_criteria, int rx_site_criteria, double d__km, 
-    double delta_h__meter, int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma, 
-    int mdvar, double time, double location, double situation, double *A__db, long *warnings, IntermediateValues *interValues)
+int ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km, 
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma, 
+    const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings, IntermediateValues *interValues)
 {
     *warnings = NO_WARNINGS;
 
@@ -111,11 +111,6 @@ int ITM_AREA_TLS_Ex(double h_tx__meter, double h_rx__meter, int tx_site_criteria
     int rtn = ValidateInputs(h_tx__meter, h_rx__meter, climate, time, location, situation, N_0, f__mhz, pol, epsilon, sigma, mdvar, warnings);
     if (rtn != SUCCESS)
         return rtn;
-
-    // switch from percentages to ratios
-    time /= 100;
-    location /= 100;
-    situation /= 100;
 
     // additional area mode parameter validation checks
     if (d__km <= 0)
@@ -131,8 +126,8 @@ int ITM_AREA_TLS_Ex(double h_tx__meter, double h_rx__meter, int tx_site_criteria
         rx_site_criteria != SITING_CRITERIA__VERY_CAREFUL)
         return ERROR__RX_SITING_CRITERIA;
 
-    int site_criteria[2] = { tx_site_criteria, rx_site_criteria };
-    double h__meter[2] = { h_tx__meter, h_rx__meter };
+    const int site_criteria[2] = { tx_site_criteria, rx_site_criteria };
+    const double h__meter[2] = { h_tx__meter, h_rx__meter };
     interValues->d__km = d__km;
 
     double theta_hzn[2];
@@ -147,7 +142,7 @@ int ITM_AREA_TLS_Ex(double h_tx__meter, double h_rx__meter, int tx_site_criteria
 
     InitializeArea(site_criteria, gamma_e, delta_h__meter, h__meter, h_e__meter, d_hzn__meter, theta_hzn);
 
-    double d__meter = d__km * 1000;
+    const double d__meter = d__km * 1000;
     int propmode = MODE__NOT_SET;
     rtn = LongleyRice(theta_hzn, f__mhz, Z_g, d_hzn__meter, h_e__meter, gamma_e, N_s, delta_h__meter, h__meter, d__meter, MODE__AREA, 
         &A_ref__db, warnings, &propmode);
@@ -220,9 +215,9 @@ int ITM_AREA_TLS_Ex(double h_tx__meter, double h_rx__meter, int tx_site_criteria
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_AREA_CR(double h_tx__meter, double h_rx__meter, int tx_site_criteria, int rx_site_criteria, double d__km,
-    double delta_h__meter, int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma,
-    int mdvar, double confidence, double reliability, double *A__db, long *warnings)
+int ITM_AREA_CR(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
+    const int mdvar, const double confidence, const double reliability, double *A__db, long *warnings)
 {
     IntermediateValues interValues;
 
@@ -283,9 +278,9 @@ int ITM_AREA_CR(double h_tx__meter, double h_rx__meter, int tx_site_criteria, in
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_AREA_CR_Ex(double h_tx__meter, double h_rx__meter, int tx_site_criteria, int rx_site_criteria, double d__km,
-    double delta_h__meter, int climate, double N_0, double f__mhz, int pol, double epsilon, double sigma,
-    int mdvar, double confidence, double reliability, double *A__db, long *warnings, IntermediateValues *interValues)
+int ITM_AREA_CR_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
+    const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
+    const int mdvar, const double confidence, const double reliability, double *A__db, long *warnings, IntermediateValues *interValues)
 {
     int rtn = ITM_AREA_TLS_Ex(h_tx__meter, h_rx__meter, tx_site_criteria, rx_site_criteria, d__km,
         delta_h__meter, climate, N_0, f__mhz, pol, epsilon, sigma,

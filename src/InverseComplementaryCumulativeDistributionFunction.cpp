@@ -15,22 +15,22 @@
  |      Returns:  Q_q            - Q(q)^-1
  |
  *===========================================================================*/
-double InverseComplementaryCumulativeDistributionFunction(double q)
+double InverseComplementaryCumulativeDistributionFunction(const double q)
 {
-    double C_0 = 2.515516;
-    double C_1 = 0.802853;
-    double C_2 = 0.010328;
-    double D_1 = 1.432788;
-    double D_2 = 0.189269;
-    double D_3 = 0.001308;
+    constexpr double C_0 = 2.515516;
+    constexpr double C_1 = 0.802853;
+    constexpr double C_2 = 0.010328;
+    constexpr double D_1 = 1.432788;
+    constexpr double D_2 = 0.189269;
+    constexpr double D_3 = 0.001308;
 
     double x = q;
     if (q > 0.5)
         x = 1.0 - x;
 
-    double T_x = sqrt(-2.0 * log(x));
+    const double T_x = sqrt(-2.0 * log(x));
 
-    double zeta_x = ((C_2 * T_x + C_1) * T_x + C_0) / (((D_3 * T_x + D_2) * T_x + D_1) * T_x + 1.0);
+    const double zeta_x = ((C_2 * T_x + C_1) * T_x + C_0) / (((D_3 * T_x + D_2) * T_x + D_1) * T_x + 1.0);
 
     double Q_q = T_x - zeta_x;
 

@@ -12,11 +12,11 @@
  |      Returns: H_01(r, j)      - in dB
  |
  *===========================================================================*/
-double H0Curve(int j, double r)
+double H0Curve(const int j, const double r)
 {
     // values from [Algorithm, 6.13]
-    double a[] = { 25.0, 80.0, 177.0, 395.0, 705.0 };
-    double b[] = { 24.0, 45.0, 68.0, 80.0, 105.0 };
+    const double a[] = { 25.0, 80.0, 177.0, 395.0, 705.0 };
+    const double b[] = { 24.0, 45.0, 68.0, 80.0, 105.0 };
 
     return 10 * log10(1 + a[j] * pow(1 / r, 4) + b[j] * pow(1.0 / r, 2));    // related to TN101v2, Eqn III.49, but from [Algorithm, 6.13]
 }
@@ -35,12 +35,12 @@ double H0Curve(int j, double r)
  |      Returns:  H_0()          - in dB
  |
  *===========================================================================*/
-double H0Function(double r, double eta_s)
+double H0Function(const double r, double eta_s)
 {
     eta_s = MIN(MAX(eta_s, 1), 5);  // range 1 <= eta_s <= 5
 
-    int i = int(eta_s);             // integer part of eta_s
-    double q = eta_s - i;           // decimal part of eta_s
+    const int i = int(eta_s);       // integer part of eta_s
+    const double q = eta_s - i;     // decimal part of eta_s
 
     double result = H0Curve(i - 1, r);
 
