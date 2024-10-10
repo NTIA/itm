@@ -31,18 +31,18 @@ namespace ITM {
  |
  *===========================================================================*/
 void InitializePointToPoint(
-    double f__mhz,
-    double h_sys__meter,
-    double N_0,
-    int pol,
-    double epsilon,
-    double sigma,
+    const double f__mhz,
+    const double h_sys__meter,
+    const double N_0,
+    const int pol,
+    const double epsilon,
+    const double sigma,
     complex<double> *Z_g,
     double *gamma_e,
     double *N_s
 ) {
     // gamma_a is the curvature of the actual earth, ~1 / 6370 km
-    double gamma_a = 157e-9;
+    constexpr double gamma_a = 157e-9;
 
     // scale the refractivity based on the elevation above mean sea level
     if (h_sys__meter == 0.0)
@@ -56,7 +56,7 @@ void InitializePointToPoint(
         * (1.0 - 0.04665 * exp(*N_s / 179.3));  // [TN101, Eq 4.4], reworked
 
     // complex relative permittivity
-    complex<double> ep_r = complex<double>(epsilon, 18000 * sigma / f__mhz);
+    const complex<double> ep_r = complex<double>(epsilon, 18000 * sigma / f__mhz);
 
     *Z_g = sqrt(ep_r - 1.0);  // ground impedance (horizontal polarization)
 
