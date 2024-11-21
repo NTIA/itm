@@ -18,13 +18,13 @@ void LinearLeastSquaresFit(const double pfl[], const double d_start, const doubl
 {
     const int np = (int)pfl[0];
 
-    int i_start = int(fdim(d_start / pfl[1], 0.0));
-    int i_end = np - int(fdim(np, d_end / pfl[1]));
+    int i_start = int(round(fdim(d_start / pfl[1], 0.0)));
+    int i_end = np - int(round(fdim(np, d_end / pfl[1])));
 
     if (i_end <= i_start)
     {
-        i_start = (int)fdim(i_start, 1.0);
-        i_end = np - (int)fdim(np, i_end + 1.0);
+        i_start = (int)round(fdim(i_start, 1.0));
+        i_end = np - (int)round(fdim(np, i_end + 1.0));
     }
 
     const double x_length = i_end - i_start;
