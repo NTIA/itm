@@ -1,9 +1,62 @@
-# ITS Irregular Terrain Model (ITM) #
+# Irregular Terrain Model (ITM) #
 
-This code repository contains the ITS Irregular Terrain Model (ITM). ITM predicts terrestrial radiowave propagation for frequencies between 20 MHz and 20 GHz based on electromagnetic theory and empirical models developed by Anita Longley and Phil Rice. Propagation mechanisms considered include free space loss, diffraction, and troposcatter. Specifically, ITM predicts attenuation as a function of distance (greater than 1 km), terminal heights, meteorological conditions, terrain effects, and the variability of the signal in time and in space.
+[![NTIA/ITS PropLib][proplib-badge]][proplib-link]
+[![GitHub Release][gh-releases-badge]][gh-releases-link]
+[![GitHub Actions Unit Test Status][gh-actions-test-badge]][gh-actions-test-link]
+[![C++ API Reference][gh-actions-docs-badge]][gh-pages-docs-link]
+[![GitHub Issues][gh-issues-badge]][gh-issues-link]
+[![DOI][doi-badge]][doi-link]
 
-**Note**: Version 1.3 of this code base is functionally identical to version 1.2.2 of the FORTRAN source, which has been archived [here](https://github.com/NTIA/itm-longley-rice).  ITS plans to apply all future ITM updates to this C++ code base.
+[proplib-badge]: https://img.shields.io/badge/PropLib-badge?label=%F0%9F%87%BA%F0%9F%87%B8%20NTIA%2FITS&labelColor=162E51&color=D63E04
+[proplib-link]: https://ntia.github.io/propagation-library-wiki
+[gh-actions-test-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/itm/ctest.yml?branch=master&logo=cmake&label=Build%2FTests&labelColor=162E51
+[gh-actions-test-link]: https://github.com/NTIA/itm/actions/workflows/ctest.yml
+[gh-actions-docs-badge]: https://img.shields.io/github/actions/workflow/status/NTIA/itm/doxygen.yml?branch=master&logo=c%2B%2B&label=Docs&labelColor=162E51
+[gh-pages-docs-link]: https://ntia.github.io/ITM
+[gh-releases-badge]: https://img.shields.io/github/v/release/NTIA/ITM?logo=github&label=Release&labelColor=162E51&color=D63E04
+[gh-releases-link]: https://github.com/NTIA/ITM/releases
+[gh-issues-badge]: https://img.shields.io/github/issues/NTIA/ITM?logo=github&label=Issues&labelColor=162E51
+[gh-issues-link]: https://github.com/NTIA/ITM/issues
+[doi-badge]: https://zenodo.org/badge/218981682.svg
+[doi-link]: https://zenodo.org/badge/latestdoi/218981682
 
+This repository contains the NTIA/ITS implementation of the Irregular Terrain Model (ITM).
+ITM predicts terrestrial radiowave propagation for frequencies between 20 MHz and 20 GHz based on
+electromagnetic theory and empirical models developed by Anita Longley and Phil Rice. Propagation
+mechanisms considered include free space loss, diffraction, and troposcatter. Specifically, ITM
+predicts attenuation as a function of distance (greater than 1 km), terminal heights, meteorological
+conditions, terrain effects, and the variability of the signal in time and in space.
+
+Additional bindings to the shared library built from this repository are provided
+for .NET, MATLAB®, and Python® in the following repositories:
+
+* [NTIA/ITM-dotnet](https://github.com/NTIA/itm-dotnet)
+* [NTIA/ITM-matlab](https://github.com/NTIA/itm-matlab)
+* [NTIA/ITM-python](https://github.com/NTIA/itm-python)
+
+**Note**: Version 1.5 of this code base is functionally identical to version 1.2.2 of the FORTRAN
+source, which has been archived [here](https://github.com/NTIA/itm-longley-rice). ITS plans to apply
+all future ITM updates to this C++ code base.
+
+## Getting Started ##
+
+To get started using this library, refer to
+[its page on the **NTIA/ITS Propagation Library Wiki**](https://ntia.github.io/propagation-library-wiki/models/ITM/).
+There, you will find installation instructions, usage information, and code
+examples for all supported languages.
+
+An executable is also provided which can be used to run the functions provided
+by this library using plain text input and output files. Installation and usage
+details for the command-line driver are also provided on
+[the wiki](https://ntia.github.io/propagation-library-wiki/models/ITM/driver).
+
+If you're a developer and would like to contribute to or extend this repository,
+you will find comprehensive documentation of this C++ code
+[here](https://ntia.github.io/ITM), and a guide for contributors
+[here](CONTRIBUTING.md).
+
+<!-- TODO: Old README information is commented below. This should be migrated to the PropLib Wiki -->
+<!-- 
 ## Quick Start ##
 
 Users of ITM have two options to immediately begin using ITM:
@@ -82,34 +135,78 @@ Internal intermediate values can be extracted from ITM via functions that are su
 | `d__km`          | double    | km          | Path distance |
 | `mode`           | int       |             | Mode of propagation <ul><li>1 = Line of Sight</li><li>2 = Diffraction</li><li>3 = Troposcatter</li></ul>|
 
-## Error Codes and Warning Flags ##
-
-ITM supports a defined list of error codes and warning flags.  A complete list can be found [here](ERRORS_AND_WARNINGS.md).
-
-## Notes on Code Style ##
-
-* In general, variables follow the naming convention in which a single underscore denotes a subscript (pseudo-LaTeX format), and where a double underscore is followed by the units, i.e. h_tx__meter.
-* Variables are named to match their corresponding mathematical variables in the underlying references.
-* Wherever possible, equation numbers and source documentation are provided.
+-->
 
 ## Configure and Build ##
 
-### C++ Software ###
+The software is designed to be built into a DLL (or corresponding `.so` or `.dylib`
+library for non-Windows systems). A CMake build configuration and presets are
+provided for cross-platform builds. Presets provide default sets of compiler flags,
+and additional set default CMake options to control which parts of the project are
+build. Below are a few examples of how this project can be built using provided presets.
 
-The software is designed to be built into a DLL (or corresponding library for non-Windows systems).  The source code can be built for any OS that supports the standard C++ libraries.  A Visual Studio 2019 project file is provided for Windows users to support the build process and configuration.
+```cmd
+# From this repository's root directory, try one of the following command pairs:
 
-### C#/.NET Wrapper Software ###
+# "Release" configurations compile the library and driver, build docs, and configure tests:
+cmake --preset release64
+cmake --build --preset release64
 
-The .NET support of ITM consists of a simple pass-through wrapper around the native DLL.  It is compiled to target .NET Framework 4.7.2.
+# "Debug" configurations skip building the docs, driver, and driver tests:
+cmake --preset debug64
+cmake --build --preset debug64
+
+# Additional options can override presets:
+cmake --preset debug64 -DBUILD_DRIVER=ON
+
+# "DocsOnly" configurations only build the docs:
+cmake --preset docsOnly
+cmake --build --preset docsOnly
+```
+
+Note that this repository makes use of several
+[Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules)
+to reference dependencies used for running unit tests and building documentation.
+In order to do either, ensure the required submodules are cloned by running:
+
+```cmd
+# From this repository's root directory
+git submodule init
+git submodule update
+```
+
+## Running Tests ##
+
+If you've configured tests when building the project, for example by using one of
+the "Release" or "Debug" CMake presets, you can run the included unit tests as follows:
+
+```cmd
+ctest --preset release64
+```
 
 ## References ##
 
+* [ITS Propagation Library Wiki](https://ntia.github.io/propagation-library-wiki)
+* [`ITS.Propagation.ITM` C++ API Reference](https://ntia.github.io/ITM)
 * G.A. Hufford, A.G. Longley, W.A. Kissick, [A Guide to the Use of the ITS Irregular Terrain Model in the Area Prediction Mode](https://www.its.bldrdoc.gov/publications/details.aspx?pub=2091), NTIA Technical Report TR-82-100, April 1982.
 * G.A. Hufford, [The ITS Irregular Terrain Model, version 1.2.2 Algorithm](https://www.its.bldrdoc.gov/media/50676/itm_alg.pdf).
 * G.A. Hufford, [1985 ITM Memo](https://www.its.bldrdoc.gov/media/50675/Hufford_1985_Memo.pdf), Dr. George Hufford's 1985 Memo describing the changes to ITM version 1.2.1 (dated April, 1979) in ITM version 1.2.2 (dated September, 1984)
 * G.A. Hufford, [The Irregular Terrain Model](https://www.its.bldrdoc.gov/media/50674/itm.pdf), The "definitive" representation of the ITS Irregular Terrain Model. It contains both the source code and rather extensive documentation.
 * A.G. Longley and P.L. Rice, [Prediction of Tropospheric Radio Transmission Loss Over Irregular Terrain: A Computer Method - 1968](https://www.its.bldrdoc.gov/publications/details.aspx?pub=2784), NTIA Technical Report ERL 79-ITS 67, July 1968.
 
+## License ##
+
+See [`LICENSE.md`](./LICENSE.md).
+
+MATLAB is a registered trademark of The MathWorks, Inc. See
+[mathworks.com/trademarks](https://mathworks.com/trademarks) for a list of additional trademarks.
+
+"Python" and the Python logos are trademarks or registered trademarks of the Python Software Foundation, used by the National Telecommunications and Information Administration with permission from the Foundation.
+
 ## Contact ##
 
-For technical questions about ITM, contact Paul McKenna, pmckenna@ntia.gov.
+For technical questions, contact <code@ntia.gov>.
+
+## Disclaimer ##
+
+Certain commercial equipment, instruments, or materials are identified in this project were used for the convenience of the developers. In no case does such identification imply recommendation or endorsement by the National Telecommunications and Information Administration, nor does it imply that the material or equipment identified is necessarily the best available for the purpose.

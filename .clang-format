@@ -1,7 +1,6 @@
 # NTIA/ITS C++ Clang-Format Style Options
-# Updated 7/16/2024
+# Updated 9/25/2024
 ---
-AccessModifierOffset: -4
 AlignAfterOpenBracket: BlockIndent
 AlignOperands: AlignAfterOperator
 AlignTrailingComments: true
@@ -22,7 +21,7 @@ BasedOnStyle: WebKit
 BinPackArguments: false
 BinPackParameters: false
 BitFieldColonSpacing: After
-BraceWrapping: 
+BraceWrapping:
   AfterCaseLabel: false
   AfterClass: false
   AfterControlStatement: false
@@ -49,13 +48,14 @@ BreakConstructorInitializers: AfterColon
 BreakStringLiterals: true
 ColumnLimit: 80
 CompactNamespaces: false
-ConstructorInitializerIndentWidth : 4
+ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
 EmptyLineBeforeAccessModifier: Never
 FixNamespaceComments: true
 IncludeBlocks: Regroup
+IndentAccessModifiers: true
 IndentCaseBlocks: true
 IndentCaseLabels: true
 IndentExternBlock: Indent
@@ -101,4 +101,3 @@ SpacesInSquareBrackets: false
 Standard: c++14
 TabWidth: 4
 UseTab: Never
-...

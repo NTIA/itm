@@ -1,0 +1,86 @@
+# This action compiles multi-platform binaries for a release.
+# It is triggered when a new tag is made with a version number starting with "v"
+name: Create Release Artifacts
+
+on:
+  push:
+    tags: ['v[0-9]+.*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create_release_artifacts:
+    name: 'Create Release: ${{ matrix.relName}}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            architecture: x64
+            relName: Windows x64
+          - os: windows-latest
+            architecture: x86
+            relName: Windows x86
+          - os: macos-latest
+            architecture: arm64
+            relName: macOS Universal
+          - os: ubuntu-latest
+            architecture: x64
+            relName: Linux x64
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+  
+      - name: Install CMake # (latest stable version)
+        uses: lukka/get-cmake@latest
+  
+      - name: "CMake: Build (64-bit)"
+        if: matrix.architecture != 'x86'
+        uses: lukka/run-cmake@v10
+        with:
+          configurePreset: release64
+          configurePresetAdditionalArgs: "['-DBUILD_DOCS=OFF', '-DRUN_TESTS=OFF', '-DRUN_DRIVER_TESTS=OFF']"
+          buildPreset: release64
+
+      - name: "CMake: Build (32-bit)"
+        if: matrix.architecture == 'x86'
+        uses: lukka/run-cmake@v10
+        with:
+          configurePreset: release32
+          configurePresetAdditionalArgs: "['-DBUILD_DOCS=OFF', '-DRUN_TESTS=OFF', '-DRUN_DRIVER_TESTS=OFF', '-A', 'Win32']"
+          buildPreset: release32
+    
+      - name: Upload release artifacts (binaries)
+        if: runner.os != 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ github.event.repository.name }}-release-${{ runner.os }}"
+          path: |
+            ${{ github.workspace }}/bin/*-universal.dylib
+            ${{ github.workspace }}/bin/*-x86_64.so
+            ${{ github.workspace }}/bin/*Driver*-*-Darwin-universal
+            ${{ github.workspace }}/bin/*Driver*-*-Linux-x86_64
+          if-no-files-found: error
+          overwrite: true
+
+      - name: Upload release artifact (Windows)
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ github.event.repository.name }}-release-${{ runner.os }}-${{ matrix.architecture }}"
+          path: |
+            ${{ github.workspace }}\bin\Release\*.dll
+            ${{ github.workspace }}\bin\Release\*Driver-*.exe
+          if-no-files-found: error
+          overwrite: true
+      
+      - name: Upload release artifact (C++ Header)  # TODO-TEMPLATE: Specify the correct header below
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: "${{ github.event.repository.name }}-release-cpp-header"
+          path: ${{ github.workspace }}/include/PropLibTemplate.h
+          if-no-files-found: error
+          overwrite: true

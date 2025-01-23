@@ -1,0 +1,50 @@
+{
+    "upload_type": "software",
+    "publication_date": "TODO-TEMPLATE",
+    "title": "TODO-TEMPLATE",
+    "creators": [
+        {
+            "name": "TODO-TEMPLATE",
+            "affiliation": "U.S. Department of Commerce, National Telecommunications and Information Administration, Institute for Telecommunication Sciences",
+            "orcid": "TODO-TEMPLATE"
+        }
+    ],
+    "description": "TODO-TEMPLATE. Make this the same as the abstract.",
+    "keywords": [
+        "TODO-TEMPLATE",
+        "TODO-TEMPLATE"
+    ],
+    "related_identifiers": [
+        {
+            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-dotnet",
+            "relation": "isSupplementedBy",
+            "resource_type": "software"
+        },
+        {
+            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-matlab",
+            "relation": "isSupplementedBy",
+            "resource_type": "software"
+        },
+        {
+            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-python",
+            "relation": "isSupplementedBy",
+            "resource_type": "software"
+        },
+        {
+            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-test-data",
+            "relation": "isSupplementedBy",
+            "resource_type": "dataset"
+        },
+        {
+            "identifier": "https://ntia.github.io/TODO-TEMPLATE/",
+            "relation": "isDocumentedBy",
+            "resource_type": "publication-softwaredocumentation"
+        },
+        {
+            "identifier": "https://ntia.github.io/propagation-library-wiki/models/TODO-TEMPLATE/",
+            "relation": "isDocumentedBy",
+            "resource_type": "publication-softwaredocumentation"
+        }
+    ],
+    "version": "TODO-TEMPLATE"
+}

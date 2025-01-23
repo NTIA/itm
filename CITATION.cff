@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+title: >-
+  TODO-TEMPLATE
+message: Please cite this software using these metadata.
+type: software
+authors:
+  - given-names: TODO-TEMPLATE
+    family-names: TODO-TEMPLATE
+    email: TODO-TEMPLATE@ntia.gov
+    affiliation: >-
+      U.S. Department of Commerce, National
+      Telecommunications and Information Administration,
+      Institute for Telecommunication Sciences
+    orcid: 'https://orcid.org/0000-0000-0000-0000'
+  - name: >-
+      U.S. Department of Commerce, National
+      Telecommunications and Information Administration,
+      Institute for Telecommunication Sciences
+    address: 325 Broadway
+    city: Boulder
+    country: US
+    post-code: '80305'
+    region: Colorado
+    alias: NTIA/ITS
+    email: code@ntia.gov
+    website: 'https://its.ntia.gov'
+repository-code: 'https://github.com/NTIA/TODO-TEMPLATE'
+url: 'https://ntia.github.io/propagation-library-wiki/models/TODO-TEMPLATE/'
+keywords:
+  - propagation
+  - TODO-TEMPLATE
+  - TODO-TEMPLATE-UPDATE-VERSION-BELOW
+version: 1.1

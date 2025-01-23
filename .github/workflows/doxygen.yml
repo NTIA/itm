@@ -1,0 +1,72 @@
+# This action builds **AND DEPLOYS** Doxygen documentation to GitHub Pages
+# Doxygen site is DEPLOYED if this action is triggered by publishing a release.
+# Doxygen site is NOT DEPLOYED (only built) when triggered by pull request or dispatched. 
+name: C++ Docs
+
+on:
+  release:
+    types: ["published"]
+  pull_request:
+    branches: ["main", "dev"]
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+
+        - name: Clone doxygen-awesome-css submodule
+          run: |
+            git submodule init extern/doxygen-awesome-css
+            git submodule update
+
+        - name: Install Doxygen
+          uses: ssciwr/doxygen-install@v1
+          with:
+            version: "1.12.0"
+
+        - name: Setup GitHub Pages
+          if: ${{ github.event_name == 'release' }}
+          id: pages
+          uses: actions/configure-pages@v5
+
+        - name: Install CMake
+          uses: lukka/get-cmake@latest
+
+        - name: Build documentation with Doxygen
+          uses: lukka/run-cmake@v10
+          with:
+            configurePreset: docsOnly
+            buildPreset: docsOnly
+          
+        - name: Upload GitHub Pages artifact
+          uses: actions/upload-pages-artifact@v3
+          if: ${{ github.event_name == 'release' }}
+          with:
+            path: ./docs/html/
+
+  deploy:
+    if: ${{ github.event_name == 'release' }}
+    needs: build
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

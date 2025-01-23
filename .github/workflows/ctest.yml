@@ -1,0 +1,74 @@
+# This action compiles the library and driver and runs all unit tests using an OS and CMake matrix
+name: Unit Tests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main", "dev"]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+# Define the matrix for different operating systems
+jobs:
+  build-and-test:
+    name: ${{ matrix.os }} / ${{ matrix.architecture }} / CMake ${{ matrix.cmakeVersion }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest  # Apple
+          - macos-13      # Intel
+          - windows-latest
+        architecture: [arm64, x64, x86]
+        cmakeVersion: ["3.21", latest] # CMake >= 3.21 is required to use "--preset <presetName>" and discover generators
+        exclude:
+          - os: macos-latest
+            architecture: x86
+          - os: macos-latest
+            architecture: x64
+          - os: macos-13
+            architecture: x86
+          - os: macos-13
+            architecture: arm64
+          - os: windows-latest
+            architecture: arm64
+          - os: ubuntu-latest
+            architecture: arm64
+          - os: ubuntu-latest
+            architecture: x86
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Clone required submodules # TODO-TEMPLATE: Add test-data submodule here, if needed
+      run: |
+        git submodule init extern/googletest
+        git submodule update
+
+    - name: Install CMake
+      uses: lukka/get-cmake@latest
+      with:
+        cmakeVersion: ${{ matrix.cmakeVersion }}
+
+    - name: "CMake: Build and Test (64-bit)"
+      if: matrix.architecture != 'x86'
+      uses: lukka/run-cmake@v10
+      with:
+        configurePreset: release64
+        configurePresetAdditionalArgs: "['-DBUILD_DOCS=OFF']"
+        buildPreset: release64
+        testPreset: release64
+
+    - name: "CMake: Build and Test (32-bit)"
+      if: matrix.architecture == 'x86'
+      uses: lukka/run-cmake@v10
+      with:
+        configurePreset: release32
+        configurePresetAdditionalArgs: "['-DBUILD_DOCS=OFF']"
+        buildPreset: release32
+        testPreset: release32

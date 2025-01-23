@@ -11,7 +11,8 @@ set(EXTRA_STYLESHEET "${PROJECT_SOURCE_DIR}/extern/doxygen-awesome-css/doxygen-a
 if (NOT EXISTS ${EXTRA_STYLESHEET})
     message(FATAL_ERROR
         "External Doxygen stylesheet is missing! "
-        "Run `git submodule init extern/doxygen-awesome-css` and try again."
+        "Run `git submodule init extern/doxygen-awesome-css`, then "
+        "`git submodule update` and try again."
     )
 endif ()
 
@@ -41,7 +42,7 @@ set(DOXYGEN_JAVADOC_BANNER "YES")
 set(DOXYGEN_OUTPUT_DIRECTORY "${DOCS_DIR}")
 set(DOXYGEN_PREDEFINED "DOXYGEN_SHOULD_SKIP")
 set(DOXYGEN_PROJECT_BRIEF "Part of the NTIA/ITS Propagation Library")
-set(DOXYGEN_PROJECT_LOGO "${DOCS_DIR}/images/ntia-logo-300px.png")
+set(DOXYGEN_PROJECT_LOGO "${DOCS_DIR}/images/ntia-logo-400px.png")
 set(DOXYGEN_REPEAT_BRIEF "YES")
 set(DOXYGEN_SHOW_INCLUDE_FILES "NO")
 set(DOXYGEN_USE_MATHJAX "YES")
@@ -56,7 +57,9 @@ set(DOXYGEN_EXTRACT_PRIVATE "YES")
 set(DOXYGEN_INTERNAL_DOCS "YES")
 
 doxygen_add_docs(
-    "${CMAKE_PROJECT_NAME}-Docs"
+    "${LIB_NAME}Docs"
+    "${PROJECT_SOURCE_DIR}/app/src"
+    "${PROJECT_SOURCE_DIR}/app/include"
     "${PROJECT_SOURCE_DIR}/src"
     "${PROJECT_SOURCE_DIR}/include"
     "${DOCS_DIR}/doxy_mainpage.md"

@@ -1,6 +1,19 @@
+/** @file TestUtils.cpp
+ * Primary implementations for fixtures or common functions used by unit tests.
+ */
 #include "TestUtils.h"
 
-void appendDirectorySep(std::string &str) {
+#include <string>  // for std::string
+
+// TODO-TEMPLATE: populate this file with common utilities for tests
+
+/*******************************************************************************
+ * Append a directory separator ('/' or '\') to a string, based on the
+ * current operating system.
+ *
+ *  @param[in, out] str  String to which the character will be appended.
+ *****************************************************************************/
+void AppendDirectorySep(std::string &str) {
 #ifdef _WIN32
     str += "\\";
 #else
@@ -8,18 +21,27 @@ void appendDirectorySep(std::string &str) {
 #endif
 }
 
-std::string getDataDirectory() {
+/******************************************************************************
+ * Get the full path of the directory containing test data files.
+ * 
+ * @return The path of the test data directory.
+ *****************************************************************************/
+std::string GetDataDirectory() {
     std::string dataDir(__FILE__);
     dataDir.resize(dataDir.find_last_of("/\\"));
-    appendDirectorySep(dataDir);
-    dataDir += "data";
-    appendDirectorySep(dataDir);
+    dataDir.resize(dataDir.find_last_of("/\\"));
+    AppendDirectorySep(dataDir);
+    dataDir += "extern";
+    AppendDirectorySep(dataDir);
+    dataDir
+        += "test-data";  // Name of data directory as cloned in the `extern` directory
+    AppendDirectorySep(dataDir);
     return dataDir;
 }
 
 std::vector<TestParameters> readTestParameters(const std::string &filename) {
     std::vector<TestParameters> testParams;
-    std::string dataDir = getDataDirectory();
+    std::string dataDir = GetDataDirectory();
     std::ifstream file(dataDir + filename);
     std::string line;
     TestParameters d;  // struct to store data from a single line of CSV
@@ -39,7 +61,7 @@ std::vector<TestParameters> readTestParameters(const std::string &filename) {
 
 std::vector<std::vector<double>> readProfiles(const std::string &filename) {
     std::vector<std::vector<double>> profiles;
-    std::string dataDir = getDataDirectory();
+    std::string dataDir = GetDataDirectory();
     std::ifstream file(dataDir + filename);
     std::string line;
 

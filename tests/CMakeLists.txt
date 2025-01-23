@@ -1,9 +1,9 @@
 ############################################
 ## CONFIGURE UNIT TESTS
 ############################################
-set(TEST_NAME "Test${LIB_NAME}")
+set(TEST_NAME "${LIB_NAME}Test")
+proplib_message("Configuring library tests ${TEST_NAME}")
 
-# Add all unit test files here
 add_executable(
     ${TEST_NAME}
     "TestComputeDeltaH.cpp"
@@ -31,18 +31,15 @@ add_executable(
     "TestUtils.h"
 )
 
+# Set PropLib compiler option defaults
+configure_proplib_target(${TEST_NAME})
+
 ###########################################
 ## SET UP AND DISCOVER TESTS
 ###########################################
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-add_subdirectory("${PROJECT_SOURCE_DIR}/extern/googletest" "extern/googletest")
-include(GoogleTest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-set_target_properties(
-    ${TEST_NAME} PROPERTIES
-    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin"
-    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin"
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin"
-)
 target_link_libraries(${TEST_NAME} ${LIB_NAME} GTest::gtest_main)
+include(GoogleTest)
 gtest_discover_tests(${TEST_NAME})
+
+proplib_message("Done configuring library tests ${TEST_NAME}")
