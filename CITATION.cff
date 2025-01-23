@@ -1,17 +1,26 @@
 cff-version: 1.2.0
 title: >-
-  TODO-TEMPLATE
+  Irregular Terrain Model
 message: Please cite this software using these metadata.
 type: software
 authors:
-  - given-names: TODO-TEMPLATE
-    family-names: TODO-TEMPLATE
-    email: TODO-TEMPLATE@ntia.gov
+  - given-names: William
+    family-names: Kozma
+    name-suffix: Jr.
+    email: wkozma@ntia.gov
     affiliation: >-
       U.S. Department of Commerce, National
       Telecommunications and Information Administration,
       Institute for Telecommunication Sciences
-    orcid: 'https://orcid.org/0000-0000-0000-0000'
+    orcid: 'https://orcid.org/0000-0002-7417-4009'
+  - given-names: Anthony W.
+    family-names: Romaniello
+    email: aromaniello@ntia.gov
+    affiliation: >-
+      U.S. Department of Commerce, National
+      Telecommunications and Information Administration,
+      Institute for Telecommunication Sciences
+    orcid: 'https://orcid.org/0000-0001-8437-6504'
   - name: >-
       U.S. Department of Commerce, National
       Telecommunications and Information Administration,
@@ -24,10 +33,13 @@ authors:
     alias: NTIA/ITS
     email: code@ntia.gov
     website: 'https://its.ntia.gov'
-repository-code: 'https://github.com/NTIA/TODO-TEMPLATE'
-url: 'https://ntia.github.io/propagation-library-wiki/models/TODO-TEMPLATE/'
+repository-code: 'https://github.com/NTIA/ITM'
+url: 'https://ntia.github.io/propagation-library-wiki/models/ITM/'
 keywords:
   - propagation
-  - TODO-TEMPLATE
-  - TODO-TEMPLATE-UPDATE-VERSION-BELOW
-version: 1.1
+  - longley
+  - rice
+  - troposcatter
+  - diffraction
+  - spectrum
+version: 1.5

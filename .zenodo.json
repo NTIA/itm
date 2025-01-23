@@ -1,50 +1,60 @@
 {
     "upload_type": "software",
     "publication_date": "TODO-TEMPLATE",
-    "title": "TODO-TEMPLATE",
+    "title": "Irregular Terrain Model",
     "creators": [
         {
-            "name": "TODO-TEMPLATE",
+            "name": "Kozma Jr., William",
             "affiliation": "U.S. Department of Commerce, National Telecommunications and Information Administration, Institute for Telecommunication Sciences",
-            "orcid": "TODO-TEMPLATE"
+            "orcid": "0000-0002-7417-4009"
+        },
+        {
+            "name": "Romaniello, Anthony W.",
+            "affiliation": "U.S. Department of Commerce, National Telecommunications and Information Administration, Institute for Telecommunication Sciences",
+            "orcid": "0000-0001-8437-6504"
         }
     ],
-    "description": "TODO-TEMPLATE. Make this the same as the abstract.",
+    "description": "This repository contains the NTIA/ITS implementation of the Irregular Terrain Model (ITM). ITM predicts terrestrial radiowave propagation for frequencies between 20 MHz and 20 GHz based on electromagnetic theory and empirical models developed by Anita Longley and Phil Rice. Propagation mechanisms considered include free space loss, diffraction, and troposcatter. Specifically, ITM predicts attenuation as a function of distance (greater than 1 km), terminal heights, meteorological conditions, terrain effects, and the variability of the signal in time and in space.",
     "keywords": [
-        "TODO-TEMPLATE",
-        "TODO-TEMPLATE"
+        "propagation",
+        "diffraction",
+        "troposcatter",
+        "spectrum",
+        "NTIA",
+        "longley",
+        "rice"
     ],
     "related_identifiers": [
         {
-            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-dotnet",
+            "identifier": "https://github.com/NTIA/ITM-dotnet",
             "relation": "isSupplementedBy",
             "resource_type": "software"
         },
         {
-            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-matlab",
+            "identifier": "https://github.com/NTIA/ITM-matlab",
             "relation": "isSupplementedBy",
             "resource_type": "software"
         },
         {
-            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-python",
+            "identifier": "https://github.com/NTIA/ITM-python",
             "relation": "isSupplementedBy",
             "resource_type": "software"
         },
         {
-            "identifier": "https://github.com/NTIA/TODO-TEMPLATE-test-data",
+            "identifier": "https://github.com/NTIA/ITM-test-data",
             "relation": "isSupplementedBy",
             "resource_type": "dataset"
         },
         {
-            "identifier": "https://ntia.github.io/TODO-TEMPLATE/",
+            "identifier": "https://ntia.github.io/ITM/",
             "relation": "isDocumentedBy",
             "resource_type": "publication-softwaredocumentation"
         },
         {
-            "identifier": "https://ntia.github.io/propagation-library-wiki/models/TODO-TEMPLATE/",
+            "identifier": "https://ntia.github.io/propagation-library-wiki/models/ITM/",
             "relation": "isDocumentedBy",
             "resource_type": "publication-softwaredocumentation"
         }
     ],
-    "version": "TODO-TEMPLATE"
+    "version": "1.5"
 }

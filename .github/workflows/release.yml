@@ -76,11 +76,11 @@ jobs:
           if-no-files-found: error
           overwrite: true
       
-      - name: Upload release artifact (C++ Header)  # TODO-TEMPLATE: Specify the correct header below
+      - name: Upload release artifact (C++ Header)
         if: runner.os == 'Linux'
         uses: actions/upload-artifact@v4
         with:
           name: "${{ github.event.repository.name }}-release-cpp-header"
-          path: ${{ github.workspace }}/include/PropLibTemplate.h
+          path: ${{ github.workspace }}/include/ITM.h
           if-no-files-found: error
           overwrite: true

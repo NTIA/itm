@@ -7,8 +7,7 @@
 #include "ReturnCodes.h"
 #include "Structs.h"
 
-// TODO-TEMPLATE: Include your library's main interface header
-#include "PropLibTemplate.h"
+#include "ITM.h"
 
 #include <iomanip>   // for std::left, std::setw
 #include <iostream>  // for std::cout
@@ -25,8 +24,7 @@
 
 //////////////////////////////
 // Library Namespace
-// TODO-TEMPLATE: use the namespace of your library
-using namespace ITS;
+using namespace ITS::Propagation::ITM;
 
 /////////////////////////////
 // Functions

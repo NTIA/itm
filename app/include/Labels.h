@@ -1,6 +1,13 @@
+/** @file Labels.h
+ * Defines text labels for errors, warnings, and enums
+ */
+#pragma once
 
-///////////////////////////////////////////////
-// LABELS
+// clang-format off
+
+// TODO handle warnings with enum
+
+#ifndef DOXYGEN_SHOULD_SKIP
 
 #define LBL__SUCCESS                                "Success - No Errors"
 #define LBL__SUCCESS_WITH_WARNINGS                  "Success - but with warnings"
@@ -76,3 +83,7 @@
 #define LBL__WARN_RX_HORIZON_DISTANCE_2             "RX horizon distance is greater than 3 times the smooth earth horizon distance"
 #define LBL__WARN_EXTREME_VARIABILITIES             "One of the provided variabilities is located far in the tail of its distribution"
 #define LBL__WARN_SURFACE_REFRACTIVITY              "Internally computed surface refractivity value is small - care must be taken with result"
+
+#endif
+
+//clang-format on

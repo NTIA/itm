@@ -2,8 +2,7 @@
  * Maps status messages to library return codes
  */
 
-// TODO-TEMPLATE include your primary library header
-#include "PropLibTemplate.h"
+#include "ITM.h"
 
 #ifdef _WIN32
     // Ensure strcpy_s is available on Windows
@@ -20,8 +19,8 @@
 #include <unordered_map>  // for std::unordered_map
 
 namespace ITS {
-// TODO-TEMPLATE: put these functions in this software's namespace
-
+namespace Propagation {
+namespace ITM {
 /*******************************************************************************
  * Get an error message string from a return code.
  * 
@@ -29,10 +28,38 @@ namespace ITS {
  * @return          A status message corresponding to the input code.
  ******************************************************************************/
 std::string GetReturnStatus(int code) {
-    static const std::unordered_map<ReturnCode, std::string> messages = {
-        {SUCCESS, "Successful execution"}
-        // TODO-TEMPLATE: Add messages corresponding to all return codes here
-    };
+    static const std::unordered_map<ReturnCode, std::string> messages
+        = {{SUCCESS, "Successful execution without warnings"},
+           {SUCCESS_WITH_WARNINGS, "Successful execution with warnings"},
+           {ERROR__TX_TERMINAL_HEIGHT, "TX terminal height is out of range"},
+           {ERROR__RX_TERMINAL_HEIGHT, "RX terminal height is out of range"},
+           {ERROR__INVALID_RADIO_CLIMATE, "Invalid value for radio climate"},
+           {ERROR__INVALID_TIME, "Time percentage is out of range"},
+           {ERROR__INVALID_LOCATION, "Location percentage is out of range"},
+           {ERROR__INVALID_SITUATION, "Situation percentage is out of range"},
+           {ERROR__INVALID_CONFIDENCE, "Confidence percentage is out of range"},
+           {ERROR__INVALID_RELIABILITY, "Reliability percentage is out of range"
+           },
+           {ERROR__REFRACTIVITY, "Refractivity is out of range"},
+           {ERROR__FREQUENCY, "Frequency is out of range"},
+           {ERROR__POLARIZATION, "Invalid value for polarization"},
+           {ERROR__EPSILON, "Epsilon is out of range"},
+           {ERROR__SIGMA, "Sigma is out of range"},
+           {ERROR__GROUND_IMPEDANCE,
+            "The imaginary portion of the complex impedance is larger than the "
+            "real portion"},
+           {ERROR__MDVAR, "Invalid value for mode of variability"},
+           {ERROR__EFFECTIVE_EARTH,
+            "Internally computed effective earth radius is invalid"},
+           {ERROR__PATH_DISTANCE, "Path distance is out of range"},
+           {ERROR__DELTA_H,
+            "Delta H (terrain irregularity parameter) is out of range"},
+           {ERROR__TX_SITING_CRITERIA, "Invalid value for TX siting criteria"},
+           {ERROR__RX_SITING_CRITERIA, "Invalid value for RX siting criteria"},
+           {ERROR__SURFACE_REFRACTIVITY_SMALL,
+            "Internally computed surface refractivity value is too small"},
+           {ERROR__SURFACE_REFRACTIVITY_LARGE,
+            "Internally computed surface refractivity value is too large"}};
     // Construct status message
     std::string msg = LIBRARY_NAME;
     msg += " v";
@@ -78,4 +105,6 @@ void FreeReturnStatusCharArray(char *c_msg) {
     delete[] c_msg;
 }
 
+}  // namespace ITM
+}  // namespace Propagation
 }  // namespace ITS

@@ -2,7 +2,7 @@
 
 **Project Name:** NTIA/OSM Research and Development - Propagation Library
 
-**Software Name:** TODO-TEMPLATE
+**Software Name:** Irregular Terrain Model (ITM)
 
 The project identified above, which is contained within the repository this
 document is stored in, has met the following criteria for public release:
@@ -28,5 +28,5 @@ your version of this Markdown document to that branch, and then create a pull re
 for that branch. The following must log in to GitHub and approve that pull request
 before the pull request can be merged and this repo made public:
 
-* Project Lead: TODO-TEMPLATE
-* Supervising Division Chief or Release Authority: TODO-TEMPLATE
+* Project Lead: William Kozma, Jr.
+* Supervising Division Chief or Release Authority: Chris Anderson
