@@ -1,16 +1,19 @@
 ###########################################
 ## BUILD THE DRIVER
 ###########################################
-## TODO-TEMPLATE: Include source AND header files here. Do not include
-## source/header files already included in `add_library()` in `src/CMakeLists.txt`
 add_executable(
     ${DRIVER_NAME}
+    "AreaMode.cpp"
     "CommaSeparatedIterator.cpp"
     "Driver.cpp"
     "DriverUtils.cpp"
+    "PointToPointMode.cpp"
+    "Reporting.cpp"
     "ReturnCodes.cpp"
     "${DRIVER_HEADERS}/CommaSeparatedIterator.h"
     "${DRIVER_HEADERS}/Driver.h"
+    "${DRIVER_HEADERS}/Enums.h"
+    "${DRIVER_HEADERS}/Labels.h"
     "${DRIVER_HEADERS}/ReturnCodes.h"
     "${DRIVER_HEADERS}/Structs.h"
 )

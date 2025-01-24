@@ -4,6 +4,7 @@
 #pragma once
 
 #include "ITM.h"
+#include "Enums.h"
 
 #include <string>  // for std::string
 
@@ -14,7 +15,7 @@
 struct DrvrParams {
         std::string in_file = "";  /**< Input file */
         std::string out_file = ""; /**< Output file */
-        std::string mode = "";     /**< Model prediction mode */
+        ITS::Propagation::ITM::PropagationMode mode = "";     /**< Model prediction mode */
         bool DBG = false;          /**< Dump intermediate values to file? */
 };
 

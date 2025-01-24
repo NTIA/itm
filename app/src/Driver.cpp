@@ -86,9 +86,8 @@ int main(int argc, char **argv) {
  * @return             Return code
  ******************************************************************************/
 DrvrReturnCode ParseArguments(int argc, char **argv, DrvrParams &params) {
-    // TODO-TEMPLATE: Populate vector with all valid arguments
     const std::vector<std::string> validArgs
-        = {"-i", "-o", "-dbg", "-h", "--help", "-v", "--version"};
+        = {"-i", "-o", "-t", "-mode", "-dbg", "-h", "--help", "-v", "--version"};
 
     for (int i = 1; i < argc; i++) {
         // Parse arg to lowercase string
