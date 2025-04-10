@@ -1,7 +1,7 @@
 /** @file TerrainRoughness.cpp
  * Implements a function to calculate the terrain roughness
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

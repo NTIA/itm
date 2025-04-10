@@ -2,7 +2,7 @@
  * Implements an approximation to the inverse complementary cumulative
  * distribution function
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

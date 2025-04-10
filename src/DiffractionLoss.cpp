@@ -1,7 +1,7 @@
 /** @file DiffractionLoss.cpp
  * Implements the primary diffraction loss calculation routine
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

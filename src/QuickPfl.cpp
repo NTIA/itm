@@ -2,7 +2,7 @@
  * Implements an optimized function to extract various parameters from a terrain
  * profile
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

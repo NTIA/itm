@@ -1,7 +1,7 @@
 /** @file FindHorizons.cpp
  * Implements a function to identify the radio horizons
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

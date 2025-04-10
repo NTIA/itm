@@ -27,7 +27,7 @@ namespace ITM {
  * @param[in] code  Integer return code.
  * @return          A status message corresponding to the input code.
  ******************************************************************************/
-std::string GetReturnStatus(int code) {
+std::string GetReturnStatus(ReturnCode code) {
     static const std::unordered_map<ReturnCode, std::string> messages
         = {{SUCCESS, "Successful execution without warnings"},
            {SUCCESS_WITH_WARNINGS, "Successful execution with warnings"},
@@ -85,7 +85,7 @@ std::string GetReturnStatus(int code) {
  * @param[in] code  Integer return code.
  * @return          A status message corresponding to the input code.
  ******************************************************************************/
-char *GetReturnStatusCharArray(const int code) {
+char *GetReturnStatusCharArray(const ReturnCode code) {
     const std::string msg = GetReturnStatus(code);
     char *c_msg = new char[msg.size() + 1];
 #ifdef _WIN32

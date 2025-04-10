@@ -1,7 +1,8 @@
 /** @file ComputeDeltaH.cpp
  * Implements a function to compute the terrain irregularity parameter
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include <algorithm>
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {
@@ -35,7 +36,7 @@ double ComputeDeltaH(const double pfl[], const double d_start__meter, const doub
         return 0;
 
     int p10 = (int)(0.1 * (x_end - x_start + 8.0));
-    p10 = MIN(MAX(4, p10), 25);                 // 10% index
+    p10 = std::min(std::max(4, p10), 25);                 // 10% index
 
     const int n = 10 * p10 - 5;
     int p90 = n - p10;                         // 90% index

@@ -2,8 +2,7 @@
  * Implements a function to initialize and validate parameters for
  * area mode
  */
-#include "ITS.Propagation.ITM/ITM.h"
-#include "ITS.Propagation.ITM/Enums.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {
@@ -48,14 +47,14 @@ void InitializeArea(const int site_criteria[2], const double gamma_e, const doub
                 B = B * sin(0.1 * PI * h__meter[i]);
 
             // [Algorithm, Eqn 3.2]
-            h_e__meter[i] = h__meter[i] + (1.0 + B) * exp(-MIN(20.0, 2.0 * h__meter[i] / MAX(1e-3, delta_h__meter)));
+            h_e__meter[i] = h__meter[i] + (1.0 + B) * exp(-std::min(20.0, 2.0 * h__meter[i] / std::max(1e-3, delta_h__meter)));
         }
 
         const double d_Ls__meter = sqrt(2.0 * h_e__meter[i] / gamma_e);
 
         // [Algorithm, Eqn 3.3]
         constexpr double H_3__meter = 5;
-        d_hzn__meter[i] = d_Ls__meter * exp(-0.07 * sqrt(delta_h__meter / MAX(h_e__meter[i], H_3__meter)));
+        d_hzn__meter[i] = d_Ls__meter * exp(-0.07 * sqrt(delta_h__meter / std::max(h_e__meter[i], H_3__meter)));
 
         // [Algorithm, Eqn 3.4]
         theta_hzn[i] = (0.65 * delta_h__meter * (d_Ls__meter / d_hzn__meter[i] - 1.0) - 2.0 * h_e__meter[i]) / d_Ls__meter;

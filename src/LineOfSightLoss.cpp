@@ -1,7 +1,7 @@
 /** @file LineOfSightLoss.cpp
  * Implements functions to calculate loss in the line-of-sight region
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

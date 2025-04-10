@@ -1,9 +1,8 @@
 /** @file itm_area.cpp
  * Implements the primary entry points to call the model in area mode
  */
-#include "ITS.Propagation.ITM/ITM.h"
-#include "ITS.Propagation.ITM/Enums.h"
-#include "ITS.Propagation.ITM/Errors.h"
+#include "ITM.h"
+#include <complex>
 
 namespace ITS {
 namespace Propagation {
@@ -53,7 +52,7 @@ namespace ITM {
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_AREA_TLS(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
+ReturnCode ITM_AREA_TLS(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km,
     const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
     const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings)
 {
@@ -108,14 +107,14 @@ int ITM_AREA_TLS(const double h_tx__meter, const double h_rx__meter, const int t
  |      Returns:  error             - Error code
  |
  *===========================================================================*/
-int ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km, 
+ReturnCode ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const int tx_site_criteria, const int rx_site_criteria, const double d__km, 
     const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma, 
     const int mdvar, const double time, const double location, const double situation, double *A__db, long *warnings, IntermediateValues *interValues)
 {
     *warnings = NO_WARNINGS;
 
     // inital input validation check - some validation occurs later in calculations
-    int rtn = ValidateInputs(h_tx__meter, h_rx__meter, climate, time, location, situation, N_0, f__mhz, pol, epsilon, sigma, mdvar, warnings);
+    ReturnCode rtn = ValidateInputs(h_tx__meter, h_rx__meter, climate, time, location, situation, N_0, f__mhz, pol, epsilon, sigma, mdvar, warnings);
     if (rtn != SUCCESS)
         return rtn;
 
@@ -140,7 +139,7 @@ int ITM_AREA_TLS_Ex(const double h_tx__meter, const double h_rx__meter, const in
     double theta_hzn[2];
     double d_hzn__meter[2];
     double h_e__meter[2];
-    complex<double> Z_g;
+    std::complex<double> Z_g;
     double N_s;
     double gamma_e;
     double A_ref__db = 0;
@@ -228,7 +227,7 @@ int ITM_AREA_CR(const double h_tx__meter, const double h_rx__meter, const int tx
 {
     IntermediateValues interValues;
 
-    int rtn = ITM_AREA_TLS_Ex(h_tx__meter, h_rx__meter, tx_site_criteria, rx_site_criteria, d__km,
+    ReturnCode rtn = ITM_AREA_TLS_Ex(h_tx__meter, h_rx__meter, tx_site_criteria, rx_site_criteria, d__km,
         delta_h__meter, climate, N_0, f__mhz, pol, epsilon, sigma,
         mdvar, reliability, 50, confidence, A__db, warnings, &interValues);
 
@@ -289,7 +288,7 @@ int ITM_AREA_CR_Ex(const double h_tx__meter, const double h_rx__meter, const int
     const double delta_h__meter, const int climate, const double N_0, const double f__mhz, const int pol, const double epsilon, const double sigma,
     const int mdvar, const double confidence, const double reliability, double *A__db, long *warnings, IntermediateValues *interValues)
 {
-    int rtn = ITM_AREA_TLS_Ex(h_tx__meter, h_rx__meter, tx_site_criteria, rx_site_criteria, d__km,
+    ReturnCode rtn = ITM_AREA_TLS_Ex(h_tx__meter, h_rx__meter, tx_site_criteria, rx_site_criteria, d__km,
         delta_h__meter, climate, N_0, f__mhz, pol, epsilon, sigma,
         mdvar, reliability, 50, confidence, A__db, warnings, interValues);
 

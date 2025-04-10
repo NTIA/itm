@@ -1,7 +1,7 @@
 /** @file H0Function.cpp
  * Implements functions to calculate the troposcatter frequency gain function
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

@@ -1,10 +1,7 @@
 /** @file ValidateInputs.cpp
  * Implements functions to validate the setting of model inputs.
  */
-#include "ITS.Propagation.ITM/ITM.h"
-#include "ITS.Propagation.ITM/Enums.h"
-#include "ITS.Propagation.ITM/Errors.h"
-#include "ITS.Propagation.ITM/Warnings.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {
@@ -43,7 +40,7 @@ namespace ITM {
  |      Returns:  [None]
  |
  *===========================================================================*/
-int ValidateInputs(const double h_tx__meter, const double h_rx__meter, const int climate, const double time,
+ReturnCode ValidateInputs(const double h_tx__meter, const double h_rx__meter, const int climate, const double time,
     const double location, const double situation, const double N_0, const double f__mhz, const int pol,
     const double epsilon, const double sigma, const int mdvar, long *warnings)
 {

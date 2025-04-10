@@ -1,7 +1,7 @@
 /** @file KnifeEdgeDiffraction.cpp
  * Implements a function to compute the knife-edge diffraction loss
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

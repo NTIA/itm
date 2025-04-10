@@ -2,7 +2,7 @@
  * Implements a function to approximate the Fresnel integral for diffraction
  * calculations
  */
-#include "ITS.Propagation.ITM/ITM.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {

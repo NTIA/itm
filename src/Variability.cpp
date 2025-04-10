@@ -1,9 +1,7 @@
 /** @file Variability.cpp
  * Implements functions for computing variability losses
  */
-#include "ITS.Propagation.ITM/ITM.h"
-#include "ITS.Propagation.ITM/Enums.h"
-#include "ITS.Propagation.ITM/Warnings.h"
+#include "ITM.h"
 
 namespace ITS {
 namespace Propagation {
