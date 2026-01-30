@@ -1,8 +1,8 @@
 #include "Reporting.h"
 #include "Labels.h"
-#include "..\..\include\Enums.h"
-#include "..\..\include\Errors.h"
-#include "..\..\include\Warnings.h"
+#include "../../include/Enums.h"
+#include "../../include/Errors.h"
+#include "../../include/Warnings.h"
 
 bool need_buffer = false;
 

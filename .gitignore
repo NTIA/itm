@@ -1,3 +1,10 @@
+################
+## WebAssembly
+################
+
+# Wasm
+dist
+
 ############
 ## Windows
 ############
@@ -70,3 +77,6 @@ xcuserdata
 DerivedData
 *.xcuserstate
 
+### vscode ###
+.vscode
+test_libitm

@@ -1,0 +1,24 @@
+{
+  "name": "itm-wasm",
+  "version": "1.4.0",
+  "description": "ITM (Irregular Terrain Model) compiled to WebAssembly with Embind",
+  "type": "module",
+  "main": "itm.js",
+  "files": [
+    "itm.js",
+    "itm.wasm",
+    "README.md"
+  ],
+  "keywords": [
+    "itm",
+    "irregular-terrain-model",
+    "longley-rice",
+    "radio-propagation",
+    "rf-propagation",
+    "webassembly",
+    "wasm",
+    "embind"
+  ],
+  "author": "ITS/NTIA",
+  "license": "SEE LICENSE IN ../LICENSE"
+}

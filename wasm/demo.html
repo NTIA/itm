@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITM WebAssembly Demo</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            max-width: 900px; 
+            margin: 50px auto; 
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; margin-top: 0; }
+        .input-group { 
+            margin: 15px 0; 
+            display: flex; 
+            align-items: center; 
+        }
+        label { 
+            display: inline-block; 
+            width: 200px; 
+            font-weight: 500;
+        }
+        input, select { 
+            flex: 1;
+            padding: 8px 12px; 
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button { 
+            margin-top: 20px; 
+            padding: 12px 30px; 
+            background: #0066cc; 
+            color: white; 
+            border: none; 
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        button:hover { background: #0052a3; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        #result { 
+            margin-top: 30px; 
+            padding: 20px; 
+            background: #f8f9fa; 
+            border-radius: 5px;
+            border-left: 4px solid #0066cc;
+        }
+        .status { 
+            padding: 10px; 
+            margin: 15px 0; 
+            border-radius: 4px; 
+        }
+        .status.loading { background: #fff3cd; color: #856404; }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        pre { 
+            background: #f4f4f4; 
+            padding: 10px; 
+            border-radius: 4px; 
+            overflow-x: auto; 
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 ITM WebAssembly Demo</h1>
+        <p>Irregular Terrain Model - Radio Wave Propagation Calculator</p>
+        
+        <div id="status" class="status loading">
+            Loading ITM module...
+        </div>
+        
+        <div id="calculator" style="display: none;">
+            <h3>Area Prediction Mode</h3>
+            
+            <div class="input-group">
+                <label>TX Height (meters):</label>
+                <input type="number" id="h_tx" value="30" min="0.5" max="3000">
+            </div>
+            
+            <div class="input-group">
+                <label>RX Height (meters):</label>
+                <input type="number" id="h_rx" value="3" min="0.5" max="3000">
+            </div>
+            
+            <div class="input-group">
+                <label>Distance (km):</label>
+                <input type="number" id="distance" value="50" min="1">
+            </div>
+            
+            <div class="input-group">
+                <label>Frequency (MHz):</label>
+                <input type="number" id="frequency" value="1000" min="20" max="20000">
+            </div>
+            
+            <div class="input-group">
+                <label>Climate:</label>
+                <select id="climate">
+                    <option value="1">Equatorial</option>
+                    <option value="2">Continental Subtropical</option>
+                    <option value="3">Maritime Subtropical</option>
+                    <option value="4">Desert</option>
+                    <option value="5" selected>Continental Temperate</option>
+                    <option value="6">Maritime Temperate Over Land</option>
+                    <option value="7">Maritime Temperate Over Sea</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Polarization:</label>
+                <select id="pol">
+                    <option value="0">Horizontal</option>
+                    <option value="1" selected>Vertical</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Surface Refractivity:</label>
+                <input type="number" id="N_0" value="301" min="250" max="400">
+            </div>
+            
+            <div class="input-group">
+                <label>Terrain Irregularity (m):</label>
+                <input type="number" id="delta_h" value="90" min="0">
+            </div>
+            
+            <button id="calcBtn" onclick="calculate()">Calculate Propagation Loss</button>
+            
+            <div id="result" style="display: none;"></div>
+        </div>
+    </div>
+    
+    <script src="./itm.js"></script>
+    <script>
+        let itmModule = null;
+        const statusDiv = document.getElementById('status');
+        const calculatorDiv = document.getElementById('calculator');
+        
+        // Initialize the module using the global ITM function
+        (async () => {
+            try {
+                // ITM is now globally available from the script tag
+                itmModule = await ITM();
+                
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = '✓ ITM Module loaded successfully! Ready to calculate.';
+                calculatorDiv.style.display = 'block';
+                
+                console.log('ITM Module loaded');
+                console.log('Available ITM functions:', 
+                    Object.keys(itmModule)
+                        .filter(k => typeof itmModule[k] === 'function' && k.startsWith('ITM_'))
+                        .join(', '));
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '✗ Failed to load module: ' + error.message;
+                console.error('Load error:', error);
+            }
+        })();
+        
+        // Calculate function
+        async function calculate() {
+            if (!itmModule) {
+                alert('Module not loaded yet. Please wait...');
+                return;
+            }
+            
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                // Get input values
+                const h_tx = parseFloat(document.getElementById('h_tx').value);
+                const h_rx = parseFloat(document.getElementById('h_rx').value);
+                const d_km = parseFloat(document.getElementById('distance').value);
+                const f_mhz = parseFloat(document.getElementById('frequency').value);
+                const climate = parseInt(document.getElementById('climate').value);
+                const pol = parseInt(document.getElementById('pol').value);
+                const N_0 = parseFloat(document.getElementById('N_0').value);
+                const delta_h = parseFloat(document.getElementById('delta_h').value);
+                
+                // Area mode parameters
+                const epsilon = 15.0;  // Relative permittivity
+                const sigma = 0.005;   // Conductivity
+                const mdvar = 3;       // Broadcast mode
+                const time = 50;       // Time variability (%)
+                const location = 50;   // Location variability (%)
+                const situation = 50;  // Situation variability (%)
+                
+                console.log('Calling ITM_AREA_TLS_r with parameters:', {
+                    h_tx, h_rx, d_km, f_mhz, climate, pol, N_0, delta_h
+                });
+                
+                // Call the _r version which returns a result object directly
+                const result = itmModule.ITM_AREA_TLS_r(
+                    h_tx, h_rx,
+                    0, 0,  // siting criteria (random)
+                    d_km,
+                    delta_h,
+                    climate,
+                    N_0,
+                    f_mhz,
+                    pol,
+                    epsilon,
+                    sigma,
+                    mdvar,
+                    time,
+                    location,
+                    situation
+                );
+                
+                console.log('ITM Result:', result);
+                console.log('Result type:', typeof result);
+                console.log('Result properties:', result ? Object.keys(result) : 'null');
+                
+                // Build result HTML based on what's actually available
+                let resultHTML = '<h3>📊 Propagation Results</h3>';
+                
+                if (result && typeof result === 'object') {
+                    // Show all available properties
+                    const props = Object.keys(result);
+                    
+                    if (props.length > 0) {
+                        resultHTML += '<h4>Calculated Values:</h4><pre>';
+                        
+                        props.forEach(prop => {
+                            const value = result[prop];
+                            if (typeof value === 'number') {
+                                resultHTML += `${prop}: ${value.toFixed(4)}\n`;
+                            } else if (typeof value === 'object' && value !== null) {
+                                resultHTML += `${prop}: ${JSON.stringify(value)}\n`;
+                            } else {
+                                resultHTML += `${prop}: ${value}\n`;
+                            }
+                        });
+                        
+                        resultHTML += '</pre>';
+                        
+                        // Try to display key values if they exist
+                        if (typeof result.A__db !== 'undefined') {
+                            resultHTML = `
+                                <h3>📊 Propagation Results</h3>
+                                <p><strong>Basic Transmission Loss:</strong> 
+                                    <span style="font-size: 1.5em; color: #0066cc;">${result.A__db.toFixed(2)} dB</span>
+                                </p>
+                            `;
+                            
+                            if (typeof result.A_fs__db !== 'undefined') {
+                                resultHTML += `<p><strong>Free Space Loss:</strong> ${result.A_fs__db.toFixed(2)} dB</p>`;
+                            }
+                            if (typeof result.mode !== 'undefined') {
+                                resultHTML += `<p><strong>Mode of Propagation:</strong> ${getModeDescription(result.mode)}</p>`;
+                            }
+                            if (typeof result.warnings !== 'undefined') {
+                                resultHTML += `<p><strong>Warning Flags:</strong> ${result.warnings === 0 ? '✓ None' : '⚠ 0x' + result.warnings.toString(16)}</p>`;
+                            }
+                            
+                            resultHTML += '<h4>All Result Properties:</h4><pre>';
+                            props.forEach(prop => {
+                                const value = result[prop];
+                                if (typeof value === 'number') {
+                                    resultHTML += `${prop}: ${value.toFixed(4)}\n`;
+                                } else {
+                                    resultHTML += `${prop}: ${value}\n`;
+                                }
+                            });
+                            resultHTML += '</pre>';
+                        }
+                    } else {
+                        resultHTML += '<p>Result object is empty.</p>';
+                    }
+                } else {
+                    resultHTML += `<p>Unexpected result type: ${typeof result}</p><pre>${JSON.stringify(result, null, 2)}</pre>`;
+                }
+                
+                // Add input parameters
+                resultHTML += `
+                    <h4>Input Parameters:</h4>
+                    <pre>TX Height: ${h_tx} m
+RX Height: ${h_rx} m
+Distance: ${d_km} km
+Frequency: ${f_mhz} MHz
+Climate: ${getClimateDescription(climate)}
+Polarization: ${pol === 0 ? 'Horizontal' : 'Vertical'}
+Surface Refractivity: ${N_0} N-Units
+Terrain Irregularity: ${delta_h} m</pre>
+                    
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                        <em>The ITM predicts radio wave propagation loss based on terrain, atmospheric conditions, and system parameters.</em>
+                    </p>
+                `;
+                
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = resultHTML;
+                
+            } catch (error) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `<p style="color: red;"><strong>Error:</strong> ${error.message}</p>
+                    <pre style="color: red; font-size: 0.9em;">${error.stack || ''}</pre>`;
+                console.error('Calculation error:', error);
+            }
+        }
+        
+        function getModeDescription(mode) {
+            const modes = {
+                1: 'Line of Sight',
+                2: 'Diffraction',
+                3: 'Troposcatter'
+            };
+            return modes[mode] || 'Unknown';
+        }
+        
+        function getClimateDescription(climate) {
+            const climates = {
+                1: 'Equatorial',
+                2: 'Continental Subtropical',
+                3: 'Maritime Subtropical',
+                4: 'Desert',
+                5: 'Continental Temperate',
+                6: 'Maritime Temperate Over Land',
+                7: 'Maritime Temperate Over Sea'
+            };
+            return climates[climate] || 'Unknown';
+        }
+    </script>
+</body>
+</html>

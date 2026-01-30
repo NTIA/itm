@@ -4,6 +4,14 @@ This code repository contains the ITS Irregular Terrain Model (ITM). ITM predict
 
 **Note**: Version 1.3 of this code base is functionally identical to version 1.2.2 of the FORTRAN source, which has been archived [here](https://github.com/NTIA/itm-longley-rice).  ITS plans to apply all future ITM updates to this C++ code base.
 
+## WebAssembly Build ##
+Assume u already installed emsdk and emcc / em++ is working. Output to directory: `itm_wasm/dist`
+```sh
+# 
+cd itm_wasm/wasm
+./build.sh
+```
+
 ## Quick Start ##
 
 Users of ITM have two options to immediately begin using ITM:
@@ -96,11 +104,70 @@ ITM supports a defined list of error codes and warning flags.  A complete list c
 
 ### C++ Software ###
 
-The software is designed to be built into a DLL (or corresponding library for non-Windows systems).  The source code can be built for any OS that supports the standard C++ libraries.  A Visual Studio 2019 project file is provided for Windows users to support the build process and configuration.
+The software is built as a native library:
+- Windows: DLL (`itm.dll`)
+- Linux: shared object (`libitm.so`)
+- macOS: dynamic library (`libitm.dylib`)
+
+A Visual Studio solution is provided for Windows users; a Makefile is provided for Unix-like systems (Linux/macOS).
+
+Linux and macOS build instructions
+
+- Prerequisites: `g++` (supporting C++11), `make` and standard development tools.
+- From the repository root, run:
+
+```sh
+make
+```
+
+This builds the shared library:
+- Linux: `bin/libitm.so`
+- macOS: `bin/libitm.dylib`
+
+The Makefile automatically detects your operating system and builds the appropriate library format.
+
+- For a debug build with symbols:
+
+```sh
+make debug
+```
+
+- Install to system locations (requires sudo):
+
+```sh
+sudo make install
+```
+
+- Clean build artifacts:
+
+```sh
+make clean
+```
+
+- Test the library:
+
+```sh
+g++ -o test_libitm test/test_libitm.c -ldl  # Linux
+g++ -o test_libitm test/test_libitm.c        # macOS
+./test_libitm
+```
+
+Built artifacts
+
+- Linux: `bin/libitm.so` — the shared library for linking into other applications
+- macOS: `bin/libitm.dylib` — the dynamic library for linking into other applications
+
+**Note**: The command-line driver `ITMDrvr` requires Windows-specific APIs and is not currently supported on Linux/macOS. Users on these platforms should link against the shared library directly in their applications.
+
+Windows build instructions
+
+For Windows developers a Visual Studio 2019 solution is provided. Open [win32/itm.sln](win32/itm.sln) in Visual Studio and build:
+- The `itm` project to produce the DLL
+- The `ITMDrvr` project to build the command-line driver (see [cmdREADME.md](cmdREADME.md) for usage)
 
 ### C#/.NET Wrapper Software ###
 
-The .NET support of ITM consists of a simple pass-through wrapper around the native DLL.  It is compiled to target .NET Framework 4.7.2.
+The .NET support of ITM consists of a simple pass-through wrapper around the native library.  The wrapper targets .NET Framework 4.7.2 and can be found in the `dotnet/` directory.
 
 ## References ##
 

@@ -4,9 +4,9 @@
 #include "Labels.h"
 #include "Tags.h"
 #include "Reporting.h"
-#include "..\..\include\Enums.h"
-#include "..\..\include\Errors.h"
-#include "..\..\include\Warnings.h"
+#include "../../include/Enums.h"
+#include "../../include/Errors.h"
+#include "../../include/Warnings.h"
 
 // DLL and driver versions are written when loading the DLL
 int dllVerMajor = NOT_SET;
