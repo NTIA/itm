@@ -1,0 +1,8 @@
+[package]
+name = "itm-cli"
+version = "1.4.0"
+edition = "2021"
+description = "CLI for the ITS Irregular Terrain Model (ITM)"
+
+[dependencies]
+itm = { path = "../itm" }
