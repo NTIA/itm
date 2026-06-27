@@ -1,0 +1,3 @@
+[workspace]
+members = ["itm", "itm-cli"]
+resolver = "2"

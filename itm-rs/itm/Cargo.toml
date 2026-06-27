@@ -1,0 +1,5 @@
+[package]
+name = "itm"
+version = "1.4.0"
+edition = "2021"
+description = "ITS Irregular Terrain Model (ITM) — pure Rust implementation"
